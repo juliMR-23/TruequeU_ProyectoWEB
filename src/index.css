@@ -1,7 +1,24 @@
 @import "tailwindcss";
 
-body {
-  margin: 0;
+@theme {
+  --color-eia-azul: #002D54;
+  --color-eia-azul-claro: #005596;
+  --color-eia-fondo: #F2F4F7;
+  --color-eia-gris: #64748B;
+
+  --color-success: #10B981;
+  --color-warning: #F59E0B; 
+  --color-danger: #EF4444;
+  
+  --color-tx-oscuro: #1E293B;
+  --color-tx-suave: #64748B;
+  
+  --font-sans: "Inter", "system-ui", "sans-serif";
+}
+
+:root {
+  background-color: var(--color-eia-fondo);
+  color: var(--color-tx-oscuro);
 }
 /*
 :root {
