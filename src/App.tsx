@@ -3,18 +3,27 @@ import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import Navbar from './components/layout/Navbar'
 import HomePage from './pages/homePage'
+import LoginPage from './pages/loginPage'
+import SignUpPage from './pages/signUpPage'
 import NotFoundPage from './pages/notFoundPage'
+import Footer from './components/layout/footer'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className='min-h-screen bg-eia-fondo'>
+    <div className='flex flex-col min-h-screen bg-eia-fondo'>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<HomePage/>}></Route>
-        <Route path="*" element={<NotFoundPage />}></Route>
-      </Routes>
+      <div className="flex-grow">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </div>
+
+      <Footer />
     </div>
   )
 }
