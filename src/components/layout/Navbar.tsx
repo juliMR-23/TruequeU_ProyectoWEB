@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { FiHome, FiList, FiUser, FiMenu, FiX } from "react-icons/fi";
+import { FiHome, FiList, FiStar, FiUser, FiMenu, FiX } from "react-icons/fi";
 import logo from '../../assets/logo.svg';
 
 export default function Navbar() {
@@ -59,7 +59,9 @@ export default function Navbar() {
                     >
                         <FiList /> <span>Publicaciones</span>
                     </NavLink>
-
+                    <NavLink to={"/favoritos"} onClick={closeMenu} className={({ isActive }) => isActive ? `${linkBase} ${activeClass}` : linkBase}>
+                        <FiStar /> <span>Favoritos</span>
+                    </NavLink>
                     <NavLink 
                         to={"/perfil"} 
                         onClick={closeMenu}
