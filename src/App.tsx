@@ -8,6 +8,7 @@ import LoginPage from './pages/loginPage'
 import SignUpPage from './pages/signUpPage'
 import NotFoundPage from './pages/notFoundPage'
 import PublicationPage from './pages/publicationPage'
+import AddListingPage from './pages/addListingPage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -20,7 +21,8 @@ function App() {
           <Route path="/" element={<HomePage/>} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage/>} />
-          <Route path='/publicaciones' element={<PublicationPage/>}/>
+          <Route path="/publicaciones" element={<PublicationPage/>}/>
+          <Route path="/crearListing" element={<AddListingPage/>}/>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
