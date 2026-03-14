@@ -11,13 +11,14 @@ type Props = {
 }
 
 export default function ListingCard({ listing }: Props) {
-    const isSold: boolean = listing.status === ListingStatusEnum.sold;
+    const isSold: boolean = listing.status.toUpperCase() === ListingStatusEnum.sold;
+    const isReserved: boolean = listing.status.toUpperCase() === ListingStatusEnum.reserved
     const { isFavorite, toggle } = useFavorites();
     // toma la primera imagen de la clase Listing, para poderla mostrar
     const coverImage = listing.images.find(img => img.order === 0) ?? listing.images[0];
 
     return (
-        <article className="rounded-card border border-border bg-surface p-4 shadow-card rounded-2xl flex flex-col">
+        <article className="rounded-card border border-border bg-surface p-4 shadow-card rounded-2xl flex flex-col transition-all duration-200 hover:shadow-lg hover:-translate-y-3">
             <div className="relative mb-4">
                 <img
                     src={coverImage.url}
@@ -25,8 +26,14 @@ export default function ListingCard({ listing }: Props) {
                     className="w-full h-48 object-cover rounded-2xl"
                 />
                 <div className="absolute top-2 right-2">
-                    <Badge variant={isSold ? "danger" : "success"}>
-                        {isSold ? ListingStatusEnum.sold : ListingStatusEnum.available}
+                    <Badge variant={
+                        isSold
+                            ? "danger"
+                            : isReserved
+                                ? "info"
+                                : "success"
+                    }>
+                        {listing.status.toUpperCase()}
                     </Badge>
                 </div>
             </div>

@@ -12,7 +12,7 @@ export default function ListingDetailPage() {
     const navigate = useNavigate();
     const { listing, loading, notFound } = useListingDetail(Number(id));
     const { isFavorite, toggle } = useFavorites();
-    
+
 
     if (loading) return (
         <div className="flex justify-center items-center h-64 text-muted">
@@ -29,7 +29,8 @@ export default function ListingDetailPage() {
         </div>
     );
 
-    const isSold = listing.status === ListingStatusEnum.sold;
+    const isSold = listing.status.toUpperCase() === ListingStatusEnum.sold;
+    const isReserved = listing.status.toUpperCase() === ListingStatusEnum.reserved;
 
     return (
         <main className="max-w-2xl mx-auto px-4 py-8">
@@ -56,8 +57,14 @@ export default function ListingDetailPage() {
             {/* Info principal */}
             <div className="mt-6 flex items-start justify-between gap-4">
                 <h1 className="text-2xl font-bold text-text">{listing.title}</h1>
-                <Badge variant={isSold ? "danger" : "success"}>
-                    {isSold ? ListingStatusEnum.sold : ListingStatusEnum.available}
+                <Badge variant={
+                    isSold
+                        ? "danger"
+                        : isReserved
+                            ? "info"
+                            : "success"
+                }>
+                    {listing.status.toUpperCase()}
                 </Badge>
             </div>
             {/* Precio */}
@@ -87,11 +94,15 @@ export default function ListingDetailPage() {
             {/* Botón contactar */}
             <div className="mt-8">
                 <button
-                    disabled={isSold}
+                    disabled={isSold || isReserved}
                     onClick={() => navigate(`/chat/${listing.id}`)}
                     className="w-full py-3 rounded-2xl font-semibold text-white bg-eia-azul-claro hover:opacity-90 cursor-pointer transition disabled:opacity-40 disabled:cursor-not-allowed"
                 >
-                    {isSold ? "No disponible" : "Contactar vendedor"}
+                    {isSold
+                        ? "No disponible"
+                        : isReserved
+                            ? "Espera a que el producto vuelva a estar disponible o sea vendido"
+                            : "Contacta al vendedor"}
                 </button>
             </div>
 

@@ -63,7 +63,7 @@
     "condition": "used",
     "price": 1400000,
     "location": "Campus Laureles",
-    "status": "reserved",
+    "status": "AVAILABLE",
     "images": [
       {
         "id": 7,
@@ -147,7 +147,7 @@
     "condition": "new",
     "price": 750000,
     "location": "Campus Laureles",
-    "status": "SOLD",
+    "status": "RESERVED",
     "images": [
       {
         "id": 16,
@@ -175,7 +175,7 @@
     "condition": "used",
     "price": 280000,
     "location": "Campus Belén",
-    "status": "sold",
+    "status": "SOLD",
     "images": [
       {
         "id": 19,
@@ -259,7 +259,7 @@
     "condition": "used",
     "price": 200000,
     "location": "Campus Belén",
-    "status": "reserved",
+    "status": "RESERVED",
     "images": [
       {
         "id": 28,
@@ -371,7 +371,7 @@
     "condition": "used",
     "price": 450000,
     "location": "Campus Robledo",
-    "status": "AVAILABLE",
+    "status": "RESERVED",
     "images": [
       {
         "id": 40,

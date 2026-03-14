@@ -1,6 +1,6 @@
 type Props = {
   children: React.ReactNode;
-  variant?: "success" | "danger" | "neutral";
+  variant?: "success" | "danger" | "neutral" | "info";
 };
 
 export default function Badge({ children, variant = "neutral" }: Props) {
@@ -9,6 +9,7 @@ export default function Badge({ children, variant = "neutral" }: Props) {
     success: "border-green-200 text-success bg-green-100",
     danger: "border-red-200 text-danger bg-red-100",
     neutral: "border-border text-muted bg-white",
+    info: "border-border text-info bg-cyan-100"
   };
 
   return <span className={`${base}  ${variants[variant]}`}>{children}</span>;
