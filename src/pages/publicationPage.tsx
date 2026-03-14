@@ -35,14 +35,13 @@ export default function PublicationPage() {
         </Link>
       </header>
 
-      {listings.length === 0
+      {allListings.length === 0
         ? <EmptyPublications />
         : (
           < ListingList listings={allListings} />
         )
       }
       {/* allListings pasa datos del JSON + datos de local storage */}
-      <ListingList listings={allListings} />
 
     </main>
   );
