@@ -9,7 +9,7 @@ export default function FavoritesPage() {
 
   return (
     <main className="max-w-6xl mx-auto px-4 py-8">
-      <h1 className="text-2xl text-tx-oscuro font-bold mb-2">Mis favoritos</h1>
+      <h1 className="text-2xl text-eia-azul font-bold mb-2">Mis favoritos</h1>
       <p className="text-eia-gris text-sm mb-6">
         {listings.length} {listings.length === 1 ? "publicación guardada" : "publicaciones guardadas"}
       </p>
@@ -30,10 +30,10 @@ export default function FavoritesPage() {
 
 function EmptyFavorites() {
   return (
-    <div className="flex flex-col items-center justify-center py-24 text-eia-gris gap-4">
-      <FiStar className="w-12 h-12" />
+    <div className="flex flex-col items-center justify-center py-20 text-eia-gris gap-4">
+      <FiStar className="w-15 h-15" />
       <p className="text-3xl font-bold text-eia-azul">Todavía no tienes favoritos</p>
-      <p className="text-md">Toca el ícono de estrella en cualquier publicación para verla aquí.</p>
+      <p className="text-sm">Toca el ícono de estrella en cualquier publicación para verla aquí.</p>
     </div>
   );
 }
