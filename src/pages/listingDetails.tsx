@@ -8,91 +8,93 @@ import Badge from "../components/ui/Badge";
 import ImageCarousel from "../components/ui/ImageCarousel";
 
 export default function ListingDetailPage() {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const { listing, loading, notFound } = useListingDetail(Number(id));
-  const { isFavorite, toggle } = useFavorites();
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const { listing, loading, notFound } = useListingDetail(Number(id));
+    const { isFavorite, toggle } = useFavorites();
+    
 
-  if (loading) return (
-    <div className="flex justify-center items-center h-64 text-muted">
-      Cargando...
-    </div>
-  );
+    if (loading) return (
+        <div className="flex justify-center items-center h-64 text-muted">
+            Cargando...
+        </div>
+    );
 
-  if (notFound || !listing) return (
-    <div className="flex flex-col items-center justify-center h-64 gap-3 text-muted">
-      <p className="text-lg">Publicación no encontrada</p>
-      <button onClick={() => navigate(-1)} className="text-sm underline">
-        Volver
-      </button>
-    </div>
-  );
+    if (notFound || !listing) return (
+        <div className="flex flex-col items-center justify-center h-64 gap-3 text-muted">
+            <p className="text-lg">Publicación no encontrada</p>
+            <button onClick={() => navigate(-1)} className="text-sm underline">
+                Volver
+            </button>
+        </div>
+    );
 
-  const isSold = listing.status === ListingStatusEnum.sold;
+    const isSold = listing.status === ListingStatusEnum.sold;
 
-  return (
-    <main className="max-w-2xl mx-auto px-4 py-8">
+    return (
+        <main className="max-w-2xl mx-auto px-4 py-8">
 
-      {/* Header con botón volver */}
-      <div className="flex items-center justify-between mb-6">
-        <button
-          onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-sm text-muted hover:text-text transition"
-        >
-          <FaArrowLeft />
-          Volver
-        </button>
-        <FavoriteButton
-          listingId={listing.id}
-          isFavorite={isFavorite(listing.id)}
-          onToggle={toggle}
-        />
-      </div>
+            {/* Header con botón volver */}
+            <div className="flex items-center justify-between mb-6">
+                <button
+                    onClick={() => navigate(-1)}
+                    className="flex items-center gap-2 text-sm text-muted hover:text-text transition cursor-pointer"
+                >
+                    <FaArrowLeft />
+                    Volver
+                </button>
+                <FavoriteButton
+                    listingId={listing.id}
+                    isFavorite={isFavorite(listing.id)}
+                    onToggle={toggle}
+                />
+            </div>
 
-      {/* Carrusel */}
-      <ImageCarousel images={listing.images} />
+            {/* Carrusel */}
+            <ImageCarousel images={listing.images} />
 
-      {/* Info principal */}
-      <div className="mt-6 flex items-start justify-between gap-4">
-        <h1 className="text-2xl font-bold text-text">{listing.title}</h1>
-        <Badge variant={isSold ? "danger" : "success"}>
-          {isSold ? ListingStatusEnum.sold : ListingStatusEnum.available}
-        </Badge>
-      </div>
-        {/* Precio */}
-      <p className="mt-1 text-3xl font-bold text-eia-azul-claro">
-        ${listing.price.toLocaleString("es-CO")}
-      </p>
+            {/* Info principal */}
+            <div className="mt-6 flex items-start justify-between gap-4">
+                <h1 className="text-2xl font-bold text-text">{listing.title}</h1>
+                <Badge variant={isSold ? "danger" : "success"}>
+                    {isSold ? ListingStatusEnum.sold : ListingStatusEnum.available}
+                </Badge>
+            </div>
+            {/* Precio */}
+            <p className="mt-1 text-3xl font-bold text-eia-azul-claro">
+                ${listing.price.toLocaleString("es-CO")}
+            </p>
 
-      {/* Detalles */}
-      <div className="mt-4 flex flex-wrap gap-3">
-        <span className="flex items-center gap-1 text-sm text-muted bg-surface border border-border px-3 py-1 rounded-full">
-          <FaTag className="w-3 h-3" /> {listing.category}
-        </span>
-        <span className="flex items-center gap-1 text-sm text-muted bg-surface border border-border px-3 py-1 rounded-full">
-          <FaBox className="w-3 h-3" /> {listing.condition}
-        </span>
-        <span className="flex items-center gap-1 text-sm text-muted bg-surface border border-border px-3 py-1 rounded-full">
-          <FaMapMarkerAlt className="w-3 h-3" /> {listing.location}
-        </span>
-      </div>
+            {/* Detalles */}
+            <div className="mt-4 flex flex-wrap gap-3">
+                <span className="flex items-center gap-1 text-sm text-muted bg-surface border border-border px-3 py-1 rounded-full">
+                    <FaTag className="w-3 h-3" /> {listing.category}
+                </span>
+                <span className="flex items-center gap-1 text-sm text-muted bg-surface border border-border px-3 py-1 rounded-full">
+                    <FaBox className="w-3 h-3" /> {listing.condition}
+                </span>
+                <span className="flex items-center gap-1 text-sm text-muted bg-surface border border-border px-3 py-1 rounded-full">
+                    <FaMapMarkerAlt className="w-3 h-3" /> {listing.location}
+                </span>
+            </div>
 
-      {/* Descripción */}
-      <div className="mt-6">
-        <h2 className="text-base font-semibold text-text mb-2">Descripción</h2>
-        <p className="text-sm text-muted leading-relaxed">{listing.description}</p>
-      </div>
+            {/* Descripción */}
+            <div className="mt-6">
+                <h2 className="text-base font-semibold text-text mb-2">Descripción</h2>
+                <p className="text-sm text-muted leading-relaxed">{listing.description}</p>
+            </div>
 
-      {/* Botón contactar */}
-      <div className="mt-8">
-        <button
-          disabled={isSold}
-          className="w-full py-3 rounded-2xl font-semibold text-white bg-eia-azul-claro hover:opacity-90 cursor-pointer transition disabled:opacity-40 disabled:cursor-not-allowed"
-        >
-          {isSold ? "No disponible" : "Contactar vendedor"}
-        </button>
-      </div>
+            {/* Botón contactar */}
+            <div className="mt-8">
+                <button
+                    disabled={isSold}
+                    onClick={() => navigate(`/chat/${listing.id}`)}
+                    className="w-full py-3 rounded-2xl font-semibold text-white bg-eia-azul-claro hover:opacity-90 cursor-pointer transition disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                    {isSold ? "No disponible" : "Contactar vendedor"}
+                </button>
+            </div>
 
-    </main>
-  );
+        </main>
+    );
 }
