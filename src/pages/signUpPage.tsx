@@ -11,7 +11,7 @@ export default function SignUpPage() {
     const [error, setError] = useState<string | null>(null);
 
     function onSubmit(e: React.FormEvent) {
-        e.preventDefault();
+        e.preventDefault(); 
         if (!name.trim() || !email.trim() || !password.trim()) {
             setError("Todos los campos obligatorios deben estar llenos.");
             return;
@@ -38,9 +38,9 @@ export default function SignUpPage() {
                         <label className="flex flex-col gap-1.5 md:col-span-2">
                             <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">Nombre Completo</span>
                             <div className="relative">
-                                <FiUser className="absolute left-4 top-3.5 text-eia-gris" />
+                                <FiUser className="absolute left-4 top-4 text-eia-gris" />
                                 <input
-                                    className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-12 py-3 text-md outline-none focus:border-eia-azul-claro focus:bg-white transition-all"
+                                    className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-12 py-3 text-md outline-none"
                                     type="text" placeholder="Ej. Juan Pérez"
                                     value={name} onChange={(e) => setName(e.target.value)} required
                                 />
@@ -51,9 +51,9 @@ export default function SignUpPage() {
                         <label className="flex flex-col gap-1.5">
                             <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">Correo Institucional</span>
                             <div className="relative">
-                                <FiMail className="absolute left-4 top-3.5 text-eia-gris" />
+                                <FiMail className="absolute left-4 top-4 text-eia-gris" />
                                 <input
-                                    className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-12 py-3 text-md outline-none focus:border-eia-azul-claro focus:bg-white transition-all"
+                                    className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-12 py-3 text-md outline-none"
                                     type="email" placeholder="usuario@eia.edu.co"
                                     value={email} onChange={(e) => setEmail(e.target.value)} required
                                 />
@@ -63,9 +63,9 @@ export default function SignUpPage() {
                         <label className="flex flex-col gap-1.5">
                             <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">Carrera</span>
                             <div className="relative">
-                                <FiBookOpen className="absolute left-4 top-3.5 text-eia-gris" />
+                                <FiBookOpen className="absolute left-4 top-4 text-eia-gris" />
                                 <input
-                                    className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-12 py-3 text-md outline-none focus:border-eia-azul-claro focus:bg-white transition-all"
+                                    className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-12 py-3 text-md outline-none"
                                     type="text" placeholder="Ingeniería..."
                                     value={major} onChange={(e) => setMajor(e.target.value)}
                                 />
@@ -76,9 +76,9 @@ export default function SignUpPage() {
                         <label className="flex flex-col gap-1.5 md:col-span-2">
                             <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">Contraseña</span>
                             <div className="relative">
-                                <FiLock className="absolute left-4 top-3.5 text-eia-gris" />
+                                <FiLock className="absolute left-4 top-4 text-eia-gris" />
                                 <input
-                                    className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-12 py-3 text-md outline-none focus:border-eia-azul-claro focus:bg-white transition-all"
+                                    className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-12 py-3 text-md outline-none"
                                     type="password" placeholder="••••••••"
                                     value={password} onChange={(e) => setPassword(e.target.value)} required
                                 />
