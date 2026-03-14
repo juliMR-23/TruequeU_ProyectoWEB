@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ListingList from "../components/listings/ListingList";
 import { type Listing } from "../types";
-import mockListingsData from "../data/listings.json"; // Datos base
+import listings from "../data/listings.json"; // Datos base
 import Button from "../components/ui/Button";
+import { FaList } from "react-icons/fa";
+
 
 export default function PublicationPage() {
   // Estado para las publicaciones
@@ -11,7 +13,7 @@ export default function PublicationPage() {
 
   useEffect(() => {
     // 1. Cargar los datos de prueba (JSON)
-    const baseListings = mockListingsData as Listing[];
+    const baseListings = listings as Listing[];
 
     // 2. Cargar los datos del LocalStorage
     const storedData = localStorage.getItem("eia_listings");
@@ -36,5 +38,15 @@ export default function PublicationPage() {
       {/* LISTADO: Pasa el estado dinámico en lugar del JSON estático */}
       <ListingList listings={allListings} />
     </main>
+  );
+}
+
+function EmptyPublications() {
+  return (
+    <div className="flex flex-col items-center justify-center py-24 text-eia-gris gap-4">
+      <FaList className="w-12 h-12" />
+      <p className="text-lg">Todavía no hay publicaciones</p>
+      <p className="text-sm">Espera a que alguien haga una publicación o crea una tú.</p>
+    </div>
   );
 }
