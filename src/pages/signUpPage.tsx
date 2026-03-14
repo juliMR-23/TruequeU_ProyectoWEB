@@ -11,13 +11,32 @@ export default function SignUpPage() {
     const [error, setError] = useState<string | null>(null);
 
     function onSubmit(e: React.FormEvent) {
-        e.preventDefault(); 
-        if (!name.trim() || !email.trim() || !password.trim()) {
-            setError("Todos los campos obligatorios deben estar llenos.");
-            return;
-        }
-        window.location.href = "/";
+    e.preventDefault();
+    setError(null); // Resetear error previo
+
+    // 1. Verificación de campos vacíos
+    if (!name.trim() || !email.trim() || !password.trim()) {
+        setError("Todos los campos obligatorios deben estar llenos.");
+        return;
     }
+
+    // 2. Verificación de dominio institucional
+    const eiaEmailRegex = /^.*@eia\.edu\.co$/;
+    if (!eiaEmailRegex.test(email)) {
+        setError("Debes usar un correo institucional válido (@eia.edu.co).");
+        return;
+    }
+
+    // 3. Verificación de seguridad de contraseña (mínimo 6 caracteres)
+    if (password.trim().length < 6) {
+        setError("La contraseña debe tener al menos 6 caracteres.");
+        return;
+    }
+
+    // Persistencia de sesión fake
+    localStorage.setItem("eia_user", JSON.stringify({ name, email, major }));
+    window.location.href = "/";
+}
 
     return (
         <main className="mx-auto max-w-4xl px-6 py-12">

@@ -9,14 +9,27 @@ export default function LoginPage() {
     const [error, setError] = useState<string | null>(null);
 
     function onSubmit(e: React.FormEvent) {
-        e.preventDefault();
-        //no debe estar vacío ningún campo
-        if (!email.trim() || !password.trim()) {
-            setError("Credenciales incompletas.");
-            return;
-        }
-        window.location.href = "/";//simula éxito, simplemente vuelve a home
+    e.preventDefault();
+    setError(null);
+
+    if (!email.trim() || !password.trim()) {
+        setError("Credenciales incompletas.");
+        return;
     }
+    const eiaEmailRegex = /^.*@eia\.edu\.co$/;
+    if (!eiaEmailRegex.test(email)) {
+        setError("El formato del correo es incorrecto (debe ser @eia.edu.co).");
+        return;
+    }
+    if (password.trim().length < 6) {
+        setError("La contraseña debe tener al menos 6 caracteres.");
+        return;
+    }
+
+    // Simulación de sesión
+    localStorage.setItem("eia_user", JSON.stringify({ name: "Estudiante EIA", email }));
+    window.location.href = "/";
+}
 
     return (
         <main className="mx-auto max-w-4xl px-6 py-12">
