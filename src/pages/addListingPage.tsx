@@ -2,6 +2,8 @@ import { useState } from "react";
 import { FiPlusCircle, FiType, FiFileText, FiImage, FiPlus, FiTrash2 } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/ui/Button";
+import { ListingStatusEnum, type Listing, type ListingImage } from "../types";
+
 
 export default function AddListingPage() {
     const navigate = useNavigate();
@@ -12,10 +14,12 @@ export default function AddListingPage() {
         category: "Libros",
         condition: "Nuevo",
         description: "",
+        price: 0,           // Nuevo campo
+        location: "Sede Las Palmas",
     });
 
     // Estado independiente para las imágenes, son lista dinámica
-    const [imageUrls, setImageUrls] = useState<string[]>([""]); 
+    const [imageUrls, setImageUrls] = useState<string[]>([""]);
     const [errors, setErrors] = useState<Record<string, string>>({});
 
     const validate = () => {
@@ -54,30 +58,44 @@ export default function AddListingPage() {
     };
 
     function onSubmit(e: React.FormEvent) {
-        e.preventDefault(); // Evita reset de página
+        e.preventDefault();//evita que la página refresque
         const validationErrors = validate();
 
-        // revisa si hay errores (algún elemento en la lista)
+        //revisa errores (elementos de una lista)
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
             return;
         }
+        // Mapear las strings de URLs al formato de la interfaz ListingImage
+        const validImages: ListingImage[] = imageUrls
+            .filter(url => url.trim() !== "")
+            .map((url, index) => ({
+                id: Date.now() + index, // ID único para cada imagen
+                url: url,
+                order: index
+            }));
 
-        // por hacer: persistencia con LocalStorage, algo así:
+        // Crear el objeto Listing 
+        const newListing: Listing = {
+            id: Date.now(),
+            title: formData.title,
+            description: formData.description,
+            category: formData.category,
+            condition: formData.condition,
+            price: formData.price,
+            location: formData.location,
+            status: ListingStatusEnum.available, // Usando Enum de types.ts
+            ownerId: 12345, // ID ficticio del usuario, por ahora sin verificación real
+            images: validImages
+        };
 
-        // const newListing = {
-        //     ...formData,
-        //     // Guardamos solo las URLs válidas (sin espacios vacíos).
-        //     images: imageUrls.filter(url => url.trim() !== ""),
-        //     id: Date.now(), // Genera un ID único basado en el timestamp actual.
-        //     author: "Usuario Estudiante",
-        //     createdAt: new Date().toISOString() // Formato de fecha estandarizado (ISO 8601).
-        // };
+        // Persistencia
+        const existingData = localStorage.getItem("eia_listings");
+        const listings = existingData ? JSON.parse(existingData) : [];
 
-        //const existingListings = JSON.parse(localStorage.getItem("eia_listings") || "[]");
-        //localStorage.setItem("eia_listings", JSON.stringify([newListing, ...existingListings]));
-        
-        window.location.href="/publicaciones";
+        localStorage.setItem("eia_listings", JSON.stringify([newListing, ...listings]));
+
+        window.location.href = "/publicaciones";
     }
 
     return (
@@ -177,6 +195,33 @@ export default function AddListingPage() {
                             {errors.description && <span className="text-danger text-xs font-bold ml-1">{errors.description}</span>}
                         </label>
 
+                        <label className="flex flex-col gap-1.5">
+                            <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">PRECIO (COP)</span>
+                            <div className="relative">
+                                <span className="absolute left-4 top-3 text-eia-gris font-bold">$</span>
+                                <input
+                                    className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-10 py-3 text-md outline-none focus:border-eia-azul-claro/30 transition-all"
+                                    type="number"
+                                    placeholder="0"
+                                    min="0"
+                                    value={formData.price}
+                                    onChange={(e) => setFormData({ ...formData, price: Number(e.target.value) })}
+                                />
+                            </div>
+                        </label>
+
+                        {/* UBICACIÓN / CAMPUS */}
+                        <label className="flex flex-col gap-1.5">
+                            <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">SEDE / CAMPUS</span>
+                            <select
+                                className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-4 py-3 text-md outline-none focus:border-eia-azul-claro/30 transition-all"
+                                value={formData.location}
+                                onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                            >
+                                <option value="Sede Las Palmas">Sede Las Palmas</option>
+                                <option value="Sede Zúñiga">Sede Zúñiga</option>
+                            </select>
+                        </label>
                         <div className="md:col-span-2 mt-8 flex flex-col md:flex-row gap-4 justify-center border-t pt-8 border-eia-fondo">
                             <Button type="submit" variant="primary" className="w-full max-w-xs">Publicar Objeto</Button>
                             {/* navigate(-1) es cosa de react-router, para volver a la pág anterior */}
