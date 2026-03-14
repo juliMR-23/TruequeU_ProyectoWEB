@@ -13,7 +13,7 @@ export default function FavoriteButton({ listingId, isFavorite, onToggle }: Prop
         e.stopPropagation(); // evita que el click abra el listing
         onToggle(listingId);
       }}
-      className="p-2 rounded-full bg-white/80 hover:bg-white transition"
+      className="p-1 rounded-full bg-white/80 hover:bg-white transition cursor-pointer"
       aria-label={isFavorite ? "Quitar de favoritos" : "Añadir a favoritos"}
     >
       {isFavorite

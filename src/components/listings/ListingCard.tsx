@@ -57,7 +57,7 @@ export default function ListingCard({ listing }: Props) {
             </div>
             {/* Ir a detalles */}
             <div className="my-3 rounded-btn  bg-surface px-1 py-2 text-sm font-medium shadow-card hover:bg-gray-50">
-                <Link to={`/listings/${listing.id}`} className="text-eia-azul-claro font-extrabold">
+                <Link to={`/details/${listing.id}`} className="text-eia-azul-claro font-extrabold">
                     Details
                 </Link>
             </div>
