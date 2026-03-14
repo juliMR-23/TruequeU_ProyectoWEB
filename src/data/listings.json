@@ -1,0 +1,242 @@
+[
+  {
+    "id": 1,
+    "title": "Calculadora Casio fx-991LA Plus",
+    "description": "Calculadora científica casi nueva, la usé un semestre. Incluye funda original. Ideal para cálculo e ingeniería.",
+    "category": "Útiles académicos",
+    "condition": "used",
+    "price": 85000,
+    "location": "Campus Laureles",
+    "status": "AVAILABLE",
+    "images": [
+      { "id": 1, "url": "https://placehold.co/600x400?text=Calculadora+1", "order": 0 },
+      { "id": 2, "url": "https://placehold.co/600x400?text=Calculadora+2", "order": 1 },
+      { "id": 3, "url": "https://placehold.co/600x400?text=Calculadora+3", "order": 2 }
+    ],
+    "ownerId": 1
+  },
+  {
+    "id": 2,
+    "title": "Libros de Cálculo Diferencial e Integral",
+    "description": "Stewart Cálculo edición 7 y 8. Ambos en buen estado con algunas anotaciones a lápiz. Los vendo juntos o separados.",
+    "category": "Libros",
+    "condition": "used",
+    "price": 60000,
+    "location": "Campus Robledo",
+    "status": "AVAILABLE",
+    "images": [
+      { "id": 4, "url": "https://placehold.co/600x400?text=Libros+1", "order": 0 },
+      { "id": 5, "url": "https://placehold.co/600x400?text=Libros+2", "order": 1 },
+      { "id": 6, "url": "https://placehold.co/600x400?text=Libros+3", "order": 2 }
+    ],
+    "ownerId": 2
+  },
+  {
+    "id": 3,
+    "title": "Portátil Lenovo IdeaPad 15",
+    "description": "Intel Core i5 10ma gen, 8GB RAM, 512GB SSD. Batería dura 5 horas. Perfecto para programación y diseño básico. Cargador incluido.",
+    "category": "Tecnología",
+    "condition": "used",
+    "price": 1400000,
+    "location": "Campus Laureles",
+    "status": "reserved",
+    "images": [
+      { "id": 7, "url": "https://placehold.co/600x400?text=Portatil+1", "order": 0 },
+      { "id": 8, "url": "https://placehold.co/600x400?text=Portatil+2", "order": 1 },
+      { "id": 9, "url": "https://placehold.co/600x400?text=Portatil+3", "order": 2 }
+    ],
+    "ownerId": 3
+  },
+  {
+    "id": 4,
+    "title": "Mochila Totto 40L",
+    "description": "Mochila universitaria con compartimento para portátil de hasta 15 pulgadas. Color negro, poco uso.",
+    "category": "Accesorios",
+    "condition": "used",
+    "price": 70000,
+    "location": "Campus Belén",
+    "status": "AVAILABLE",
+    "images": [
+      { "id": 10, "url": "https://placehold.co/600x400?text=Mochila+1", "order": 0 },
+      { "id": 11, "url": "https://placehold.co/600x400?text=Mochila+2", "order": 1 },
+      { "id": 12, "url": "https://placehold.co/600x400?text=Mochila+3", "order": 2 }
+    ],
+    "ownerId": 4
+  },
+  {
+    "id": 5,
+    "title": "Arduino Uno + Kit de sensores",
+    "description": "Kit completo con Arduino Uno, 20 sensores, protoboard, cables y LEDs. Todo en caja original. Lo usé en Electrónica I.",
+    "category": "Tecnología",
+    "condition": "used",
+    "price": 120000,
+    "location": "Campus Robledo",
+    "status": "AVAILABLE",
+    "images": [
+      { "id": 13, "url": "https://placehold.co/600x400?text=Arduino+1", "order": 0 },
+      { "id": 14, "url": "https://placehold.co/600x400?text=Arduino+2", "order": 1 },
+      { "id": 15, "url": "https://placehold.co/600x400?text=Arduino+3", "order": 2 }
+    ],
+    "ownerId": 5
+  },
+  {
+    "id": 6,
+    "title": "Tablet Samsung Galaxy Tab A8",
+    "description": "64GB, pantalla 10.5 pulgadas. Incluye funda y vidrio templado. Excelente para leer PDFs y tomar notas en clase.",
+    "category": "Tecnología",
+    "condition": "new",
+    "price": 750000,
+    "location": "Campus Laureles",
+    "status": "AVAILABLE",
+    "images": [
+      { "id": 16, "url": "https://placehold.co/600x400?text=Tablet+1", "order": 0 },
+      { "id": 17, "url": "https://placehold.co/600x400?text=Tablet+2", "order": 1 },
+      { "id": 18, "url": "https://placehold.co/600x400?text=Tablet+3", "order": 2 }
+    ],
+    "ownerId": 6
+  },
+  {
+    "id": 7,
+    "title": "Silla ergonómica de escritorio",
+    "description": "Silla con soporte lumbar, altura ajustable y apoyabrazos. Ideal si tienes home office o estudias muchas horas.",
+    "category": "Muebles",
+    "condition": "used",
+    "price": 280000,
+    "location": "Campus Belén",
+    "status": "sold",
+    "images": [
+      { "id": 19, "url": "https://placehold.co/600x400?text=Silla+1", "order": 0 },
+      { "id": 20, "url": "https://placehold.co/600x400?text=Silla+2", "order": 1 },
+      { "id": 21, "url": "https://placehold.co/600x400?text=Silla+3", "order": 2 }
+    ],
+    "ownerId": 7
+  },
+  {
+    "id": 8,
+    "title": "Uniforme de laboratorio nuevo talla M",
+    "description": "Bata blanca manga larga talla M, nunca usada. Incluye gafas de seguridad y guantes de nitrilo (caja de 50).",
+    "category": "Útiles académicos",
+    "condition": "new",
+    "price": 45000,
+    "location": "Campus Robledo",
+    "status": "AVAILABLE",
+    "images": [
+      { "id": 22, "url": "https://placehold.co/600x400?text=Uniforme+1", "order": 0 },
+      { "id": 23, "url": "https://placehold.co/600x400?text=Uniforme+2", "order": 1 },
+      { "id": 24, "url": "https://placehold.co/600x400?text=Uniforme+3", "order": 2 }
+    ],
+    "ownerId": 8
+  },
+  {
+    "id": 9,
+    "title": "Mouse inalámbrico Logitech MX Master 3",
+    "description": "Mouse ergonómico con scroll rápido y botones programables. Batería dura semanas. Poco uso, en perfectas condiciones.",
+    "category": "Tecnología",
+    "condition": "used",
+    "price": 180000,
+    "location": "Campus Laureles",
+    "status": "AVAILABLE",
+    "images": [
+      { "id": 25, "url": "https://placehold.co/600x400?text=Mouse+1", "order": 0 },
+      { "id": 26, "url": "https://placehold.co/600x400?text=Mouse+2", "order": 1 },
+      { "id": 27, "url": "https://placehold.co/600x400?text=Mouse+3", "order": 2 }
+    ],
+    "ownerId": 2
+  },
+  {
+    "id": 10,
+    "title": "Impresora HP DeskJet 2775",
+    "description": "Impresora multifuncional WiFi. Imprime, escanea y copia. Incluye cartuchos casi llenos. Perfecta para trabajos e informes.",
+    "category": "Tecnología",
+    "condition": "used",
+    "price": 200000,
+    "location": "Campus Belén",
+    "status": "reserved",
+    "images": [
+      { "id": 28, "url": "https://placehold.co/600x400?text=Impresora+1", "order": 0 },
+      { "id": 29, "url": "https://placehold.co/600x400?text=Impresora+2", "order": 1 },
+      { "id": 30, "url": "https://placehold.co/600x400?text=Impresora+3", "order": 2 }
+    ],
+    "ownerId": 9
+  },
+  {
+    "id": 11,
+    "title": "Teclado mecánico Redragon K552",
+    "description": "Switches rojos, retroiluminación RGB. En excelente estado. Lo cambio porque conseguí uno inalámbrico.",
+    "category": "Tecnología",
+    "condition": "used",
+    "price": 130000,
+    "location": "Campus Robledo",
+    "status": "AVAILABLE",
+    "images": [
+      { "id": 31, "url": "https://placehold.co/600x400?text=Teclado+1", "order": 0 },
+      { "id": 32, "url": "https://placehold.co/600x400?text=Teclado+2", "order": 1 },
+      { "id": 33, "url": "https://placehold.co/600x400?text=Teclado+3", "order": 2 }
+    ],
+    "ownerId": 10
+  },
+  {
+    "id": 12,
+    "title": "Audífonos Sony WH-1000XM4",
+    "description": "Cancelación de ruido activa, 30 horas de batería. Incluye estuche y cable. Ideales para estudiar en la biblioteca.",
+    "category": "Tecnología",
+    "condition": "used",
+    "price": 600000,
+    "location": "Campus Laureles",
+    "status": "AVAILABLE",
+    "images": [
+      { "id": 34, "url": "https://placehold.co/600x400?text=Audifonos+1", "order": 0 },
+      { "id": 35, "url": "https://placehold.co/600x400?text=Audifonos+2", "order": 1 },
+      { "id": 36, "url": "https://placehold.co/600x400?text=Audifonos+3", "order": 2 }
+    ],
+    "ownerId": 3
+  },
+  {
+    "id": 13,
+    "title": "Cuadernos universitarios x5",
+    "description": "5 cuadernos de 100 hojas cuadriculados, sin usar. Los compré de más al inicio del semestre.",
+    "category": "Útiles académicos",
+    "condition": "new",
+    "price": 20000,
+    "location": "Campus Belén",
+    "status": "AVAILABLE",
+    "images": [
+      { "id": 37, "url": "https://placehold.co/600x400?text=Cuadernos+1", "order": 0 },
+      { "id": 38, "url": "https://placehold.co/600x400?text=Cuadernos+2", "order": 1 },
+      { "id": 39, "url": "https://placehold.co/600x400?text=Cuadernos+3", "order": 2 }
+    ],
+    "ownerId": 11
+  },
+  {
+    "id": 14,
+    "title": "Monitor LG 24 pulgadas Full HD",
+    "description": "Panel IPS, 75Hz, entrada HDMI y VGA. Sin píxeles muertos. Perfecto para montar una segunda pantalla.",
+    "category": "Tecnología",
+    "condition": "used",
+    "price": 450000,
+    "location": "Campus Robledo",
+    "status": "AVAILABLE",
+    "images": [
+      { "id": 40, "url": "https://placehold.co/600x400?text=Monitor+1", "order": 0 },
+      { "id": 41, "url": "https://placehold.co/600x400?text=Monitor+2", "order": 1 },
+      { "id": 42, "url": "https://placehold.co/600x400?text=Monitor+3", "order": 2 }
+    ],
+    "ownerId": 5
+  },
+  {
+    "id": 15,
+    "title": "Cámara Canon EOS Rebel SL3",
+    "description": "24MP, video 4K, pantalla táctil abatible. Incluye lente 18-55mm, cargador, correa y estuche. Usada en electiva de fotografía.",
+    "category": "Tecnología",
+    "condition": "used",
+    "price": 1800000,
+    "location": "Campus Laureles",
+    "status": "AVAILABLE",
+    "images": [
+      { "id": 43, "url": "https://placehold.co/600x400?text=Camara+1", "order": 0 },
+      { "id": 44, "url": "https://placehold.co/600x400?text=Camara+2", "order": 1 },
+      { "id": 45, "url": "https://placehold.co/600x400?text=Camara+3", "order": 2 }
+    ],
+    "ownerId": 6
+  }
+]
