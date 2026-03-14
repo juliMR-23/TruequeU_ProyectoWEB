@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { ListingStatusEnum, type Listing } from "../../types";
 import Badge from "../ui/Badge";
 import Button from "../ui/Button";
 import FavoriteButton from "../ui/FavoriteButton";
 import { useFavorites } from "../../hooks/useFavorites";
+import { FaFlag } from "react-icons/fa";
+import { LuCircleAlert } from "react-icons/lu";
 
 
 type Props = {
@@ -14,6 +16,7 @@ export default function ListingCard({ listing }: Props) {
     const isSold: boolean = listing.status.toUpperCase() === ListingStatusEnum.sold;
     const isReserved: boolean = listing.status.toUpperCase() === ListingStatusEnum.reserved
     const { isFavorite, toggle } = useFavorites();
+    const navigate = useNavigate();
     // toma la primera imagen de la clase Listing, para poderla mostrar
     const coverImage = listing.images.find(img => img.order === 0) ?? listing.images[0];
 
@@ -76,12 +79,21 @@ export default function ListingCard({ listing }: Props) {
           {isSold ? "Unavailable" : "Add"}
         </Button> */}
                 {/* Añadir/quitar de favoritos */}
-                <div className="bottom-2 right-2">
-                    <FavoriteButton
-                        listingId={listing.id}
-                        isFavorite={isFavorite(listing.id)}
-                        onToggle={toggle}
-                    />
+                <div className="flex items-center gap-1">
+                    <button
+                        onClick={() => navigate(`/report/${listing.id}`)}
+                        className="flex items-center gap-1 text-xs text-muted hover:text-red-500 transition px-2 py-1 rounded-lg hover:bg-red-50"
+                        title="Denunciar publicación"
+                    >
+                        <LuCircleAlert className="w-5 h-5" />
+                    </button>
+                    <div className="bottom-2 right-2">
+                        <FavoriteButton
+                            listingId={listing.id}
+                            isFavorite={isFavorite(listing.id)}
+                            onToggle={toggle}
+                        />
+                    </div>
                 </div>
             </div>
         </article>
