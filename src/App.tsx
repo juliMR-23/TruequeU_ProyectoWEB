@@ -11,6 +11,7 @@ import PublicationPage from './pages/publicationPage'
 import AddListingPage from './pages/addListingPage'
 import FavoritesPage from './pages/favoritePage'
 import ListingDetailPage from './pages/listingDetails'
+import ProfilePage from './pages/profilePage'
 import ChatPage from './pages/chatPage'
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path="/crearListing" element={<AddListingPage/>}/>
           <Route path="/favoritos" element={<FavoritesPage/>}/>
           <Route path="/details/:id" element={<ListingDetailPage/>}/>
+          <Route path="/perfil" element={<ProfilePage/>}/>
           <Route path="/chat/:id" element={<ChatPage/>}/>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
