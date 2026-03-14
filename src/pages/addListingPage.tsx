@@ -24,17 +24,17 @@ export default function AddListingPage() {
 
     const validate = () => {
         const newErrors: Record<string, string> = {};
-        if (formData.title.trim().length < 8)
-            newErrors.title = "El título debe tener al menos 8 caracteres";
-        if (formData.description.trim().length < 12)
-            newErrors.description = "La descripción debe tener al menos 12 caracteres";
+        if (formData.title.trim().length < 8 || formData.title.trim().length > 40)
+            newErrors.title = "El título debe tener entre 8 y 40 caracteres";
+        if (formData.description.trim().length < 12 || formData.title.trim().length > 150)
+            newErrors.description = "La descripción debe tener entre 20 y 150 caracteres";
 
         // trim para que no acepte vacío ni solo espacios
         const validImages = imageUrls.filter(url => url.trim() !== "");
         if (validImages.length < 3)
             newErrors.images = "Debes agregar al menos 3 imágenes del objeto";
-        if (validImages.length > 6)
-            newErrors.images = "No puedes agregar más de 6 imágenes del objeto";
+        if (validImages.length > 8)
+            newErrors.images = "No puedes agregar más de 8 imágenes del objeto";
 
         return newErrors;
     };
