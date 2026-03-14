@@ -10,17 +10,18 @@ export default function LoginPage() {
 
     function onSubmit(e: React.FormEvent) {
         e.preventDefault();
+        //no debe estar vacío ningún campo
         if (!email.trim() || !password.trim()) {
             setError("Credenciales incompletas.");
             return;
         }
-        window.location.href = "/";
+        window.location.href = "/";//simula éxito, simplemente vuelve a home
     }
 
     return (
         <main className="mx-auto max-w-4xl px-6 py-12">
             <section className="bg-white shadow-xl rounded-2xl border border-eia-azul/10 overflow-hidden">
-                <div className="bg-eia-azul py-6 px-10 text-white flex items-center gap-3">
+                <div className="bg-eia-azul-claro py-6 px-10 text-white flex items-center gap-3">
                     <FiLogIn size={28} />
                     <h1 className="text-2xl font-bold tracking-tight">Acceso al Sistema</h1>
                 </div>
@@ -35,9 +36,9 @@ export default function LoginPage() {
                         <label className="flex flex-col gap-1.5">
                             <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">Correo Institucional</span>
                             <div className="relative">
-                                <FiMail className="absolute left-4 top-3.5 text-eia-gris" />
+                                <FiMail className="absolute left-4 top-4 text-eia-gris" />
                                 <input
-                                    className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-12 py-3 text-md outline-none focus:border-eia-azul-claro focus:bg-white transition-all"
+                                    className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-12 py-3 text-md outline-none"
                                     type="email" placeholder="usuario@eia.edu.co"
                                     value={email} onChange={(e) => setEmail(e.target.value)} required
                                 />
@@ -47,9 +48,9 @@ export default function LoginPage() {
                         <label className="flex flex-col gap-1.5">
                             <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">Contraseña</span>
                             <div className="relative">
-                                <FiLock className="absolute left-4 top-3.5 text-eia-gris" />
+                                <FiLock className="absolute left-4 top-4 text-eia-gris" />
                                 <input
-                                    className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-12 py-3 text-md outline-none focus:border-eia-azul-claro focus:bg-white transition-all"
+                                    className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-12 py-3 text-md outline-none"
                                     type="password" placeholder="••••••••"
                                     value={password} onChange={(e) => setPassword(e.target.value)} required
                                 />
