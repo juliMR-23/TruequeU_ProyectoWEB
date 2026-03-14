@@ -9,9 +9,21 @@
     "location": "Campus Laureles",
     "status": "AVAILABLE",
     "images": [
-      { "id": 1, "url": "https://placehold.co/600x400?text=Calculadora+1", "order": 0 },
-      { "id": 2, "url": "https://placehold.co/600x400?text=Calculadora+2", "order": 1 },
-      { "id": 3, "url": "https://placehold.co/600x400?text=Calculadora+3", "order": 2 }
+      {
+        "id": 1,
+        "url": "https://panamericana.vtexassets.com/arquivos/ids/379666-800-auto?v=637479821856270000&width=800&height=auto&aspect=true",
+        "order": 0
+      },
+      {
+        "id": 2,
+        "url": "https://http2.mlstatic.com/D_NQ_NP_853247-MCO92755558426_092025-O.webp",
+        "order": 1
+      },
+      {
+        "id": 3,
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRiNA6q8VkmBLlSXJs1kTMFNPr3tOgWlXi1g&s",
+        "order": 2
+      }
     ],
     "ownerId": 1
   },
@@ -23,11 +35,23 @@
     "condition": "used",
     "price": 60000,
     "location": "Campus Robledo",
-    "status": "AVAILABLE",
+    "status": "SOLD",
     "images": [
-      { "id": 4, "url": "https://placehold.co/600x400?text=Libros+1", "order": 0 },
-      { "id": 5, "url": "https://placehold.co/600x400?text=Libros+2", "order": 1 },
-      { "id": 6, "url": "https://placehold.co/600x400?text=Libros+3", "order": 2 }
+      {
+        "id": 4,
+        "url": "https://http2.mlstatic.com/D_NQ_NP_899907-MCO46513598500_062021-O.webp",
+        "order": 0
+      },
+      {
+        "id": 5,
+        "url": "https://http2.mlstatic.com/D_NQ_NP_864745-MCO46513513786_062021-O.webp",
+        "order": 1
+      },
+      {
+        "id": 6,
+        "url": "https://http2.mlstatic.com/D_NQ_NP_979281-MCO73064253393_112023-O.webp",
+        "order": 2
+      }
     ],
     "ownerId": 2
   },
@@ -41,9 +65,21 @@
     "location": "Campus Laureles",
     "status": "reserved",
     "images": [
-      { "id": 7, "url": "https://placehold.co/600x400?text=Portatil+1", "order": 0 },
-      { "id": 8, "url": "https://placehold.co/600x400?text=Portatil+2", "order": 1 },
-      { "id": 9, "url": "https://placehold.co/600x400?text=Portatil+3", "order": 2 }
+      {
+        "id": 7,
+        "url": "https://http2.mlstatic.com/D_NQ_NP_961072-MCO95967666842_102025-O.webp",
+        "order": 0
+      },
+      {
+        "id": 8,
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3zOvb2ONjnnRAGtdA1YnAxpFLZG5nhwjt7Q&s",
+        "order": 1
+      },
+      {
+        "id": 9,
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdHrXlSAiizDFt78n8iRW0qmfmpTDxr_yLdg&s",
+        "order": 2
+      }
     ],
     "ownerId": 3
   },
@@ -57,9 +93,21 @@
     "location": "Campus Belén",
     "status": "AVAILABLE",
     "images": [
-      { "id": 10, "url": "https://placehold.co/600x400?text=Mochila+1", "order": 0 },
-      { "id": 11, "url": "https://placehold.co/600x400?text=Mochila+2", "order": 1 },
-      { "id": 12, "url": "https://placehold.co/600x400?text=Mochila+3", "order": 2 }
+      {
+        "id": 10,
+        "url": "https://http2.mlstatic.com/D_NQ_NP_2X_857195-MLA99450722236_112025-T.webp",
+        "order": 0
+      },
+      {
+        "id": 11,
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbjkNbzoNI9J9tK_mr4cPWXTEUnGhhSIdI8w&s",
+        "order": 1
+      },
+      {
+        "id": 12,
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrGKK_fEAGy3-LFW1vLu868iTfKY4hfprM7g&s",
+        "order": 2
+      }
     ],
     "ownerId": 4
   },
@@ -73,9 +121,21 @@
     "location": "Campus Robledo",
     "status": "AVAILABLE",
     "images": [
-      { "id": 13, "url": "https://placehold.co/600x400?text=Arduino+1", "order": 0 },
-      { "id": 14, "url": "https://placehold.co/600x400?text=Arduino+2", "order": 1 },
-      { "id": 15, "url": "https://placehold.co/600x400?text=Arduino+3", "order": 2 }
+      {
+        "id": 13,
+        "url": "https://cdnx.jumpseller.com/mactornica/image/8979530/ARDUINO_UNO_R3.png?1654715293",
+        "order": 0
+      },
+      {
+        "id": 14,
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU0jFiF0BrCnuoqjrzRGiyQwGuQRwEZVs5hg&s",
+        "order": 1
+      },
+      {
+        "id": 15,
+        "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW7q1Ay-R3pox2qMwPbIetWD01yDvI-aJ0cg&s3",
+        "order": 2
+      }
     ],
     "ownerId": 5
   },
@@ -87,11 +147,23 @@
     "condition": "new",
     "price": 750000,
     "location": "Campus Laureles",
-    "status": "AVAILABLE",
+    "status": "SOLD",
     "images": [
-      { "id": 16, "url": "https://placehold.co/600x400?text=Tablet+1", "order": 0 },
-      { "id": 17, "url": "https://placehold.co/600x400?text=Tablet+2", "order": 1 },
-      { "id": 18, "url": "https://placehold.co/600x400?text=Tablet+3", "order": 2 }
+      {
+        "id": 16,
+        "url": "https://http2.mlstatic.com/D_Q_NP_853595-MLU77635870585_072024-O.webp",
+        "order": 0
+      },
+      {
+        "id": 17,
+        "url": "https://http2.mlstatic.com/D_NQ_NP_2X_864025-CBT83495772075_042025-T.webp",
+        "order": 1
+      },
+      {
+        "id": 18,
+        "url": "https://placehold.co/600x400?text=Tablet+3",
+        "order": 2
+      }
     ],
     "ownerId": 6
   },
@@ -105,9 +177,21 @@
     "location": "Campus Belén",
     "status": "sold",
     "images": [
-      { "id": 19, "url": "https://placehold.co/600x400?text=Silla+1", "order": 0 },
-      { "id": 20, "url": "https://placehold.co/600x400?text=Silla+2", "order": 1 },
-      { "id": 21, "url": "https://placehold.co/600x400?text=Silla+3", "order": 2 }
+      {
+        "id": 19,
+        "url": "https://ergosillas.co/images/sillas-presidente/fone-ultra-silla-presidente-para-oficina/fone-silla-presidente-para-oficina-0.jpg",
+        "order": 0
+      },
+      {
+        "id": 20,
+        "url": "https://placehold.co/600x400?text=Silla+2",
+        "order": 1
+      },
+      {
+        "id": 21,
+        "url": "https://placehold.co/600x400?text=Silla+3",
+        "order": 2
+      }
     ],
     "ownerId": 7
   },
@@ -121,9 +205,21 @@
     "location": "Campus Robledo",
     "status": "AVAILABLE",
     "images": [
-      { "id": 22, "url": "https://placehold.co/600x400?text=Uniforme+1", "order": 0 },
-      { "id": 23, "url": "https://placehold.co/600x400?text=Uniforme+2", "order": 1 },
-      { "id": 24, "url": "https://placehold.co/600x400?text=Uniforme+3", "order": 2 }
+      {
+        "id": 22,
+        "url": "https://static.wixstatic.com/media/53163e_cd9c324dc4fb42e7a270716d9ca5bf03~mv2.png/v1/fill/w_560,h_672,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/53163e_cd9c324dc4fb42e7a270716d9ca5bf03~mv2.png",
+        "order": 0
+      },
+      {
+        "id": 23,
+        "url": "https://placehold.co/600x400?text=Uniforme+2",
+        "order": 1
+      },
+      {
+        "id": 24,
+        "url": "https://placehold.co/600x400?text=Uniforme+3",
+        "order": 2
+      }
     ],
     "ownerId": 8
   },
@@ -137,9 +233,21 @@
     "location": "Campus Laureles",
     "status": "AVAILABLE",
     "images": [
-      { "id": 25, "url": "https://placehold.co/600x400?text=Mouse+1", "order": 0 },
-      { "id": 26, "url": "https://placehold.co/600x400?text=Mouse+2", "order": 1 },
-      { "id": 27, "url": "https://placehold.co/600x400?text=Mouse+3", "order": 2 }
+      {
+        "id": 25,
+        "url": "https://media.falabella.com/falabellaCO/43700767_1/w=1500,h=1500,fit=cover",
+        "order": 0
+      },
+      {
+        "id": 26,
+        "url": "https://placehold.co/600x400?text=Mouse+2",
+        "order": 1
+      },
+      {
+        "id": 27,
+        "url": "https://placehold.co/600x400?text=Mouse+3",
+        "order": 2
+      }
     ],
     "ownerId": 2
   },
@@ -153,9 +261,21 @@
     "location": "Campus Belén",
     "status": "reserved",
     "images": [
-      { "id": 28, "url": "https://placehold.co/600x400?text=Impresora+1", "order": 0 },
-      { "id": 29, "url": "https://placehold.co/600x400?text=Impresora+2", "order": 1 },
-      { "id": 30, "url": "https://placehold.co/600x400?text=Impresora+3", "order": 2 }
+      {
+        "id": 28,
+        "url": "https://co-media.hptiendaenlinea.com/catalog/product/cache/b3b166914d87ce343d4dc5ec5117b502/7/F/7FR21A-2_T1679073201.png",
+        "order": 0
+      },
+      {
+        "id": 29,
+        "url": "https://placehold.co/600x400?text=Impresora+2",
+        "order": 1
+      },
+      {
+        "id": 30,
+        "url": "https://placehold.co/600x400?text=Impresora+3",
+        "order": 2
+      }
     ],
     "ownerId": 9
   },
@@ -167,11 +287,23 @@
     "condition": "used",
     "price": 130000,
     "location": "Campus Robledo",
-    "status": "AVAILABLE",
+    "status": "SOLD",
     "images": [
-      { "id": 31, "url": "https://placehold.co/600x400?text=Teclado+1", "order": 0 },
-      { "id": 32, "url": "https://placehold.co/600x400?text=Teclado+2", "order": 1 },
-      { "id": 33, "url": "https://placehold.co/600x400?text=Teclado+3", "order": 2 }
+      {
+        "id": 31,
+        "url": "https://exitocol.vtexassets.com/arquivos/ids/18541593/teclado-gamer-redragon-kumara-k552-rainbow-negro.jpg?v=638205665403000000",
+        "order": 0
+      },
+      {
+        "id": 32,
+        "url": "https://placehold.co/600x400?text=Teclado+2",
+        "order": 1
+      },
+      {
+        "id": 33,
+        "url": "https://placehold.co/600x400?text=Teclado+3",
+        "order": 2
+      }
     ],
     "ownerId": 10
   },
@@ -183,11 +315,23 @@
     "condition": "used",
     "price": 600000,
     "location": "Campus Laureles",
-    "status": "AVAILABLE",
+    "status": "SOLD",
     "images": [
-      { "id": 34, "url": "https://placehold.co/600x400?text=Audifonos+1", "order": 0 },
-      { "id": 35, "url": "https://placehold.co/600x400?text=Audifonos+2", "order": 1 },
-      { "id": 36, "url": "https://placehold.co/600x400?text=Audifonos+3", "order": 2 }
+      {
+        "id": 34,
+        "url": "https://media.falabella.com/falabellaCO/17308370_1/w=800,h=800,fit=pad",
+        "order": 0
+      },
+      {
+        "id": 35,
+        "url": "https://placehold.co/600x400?text=Audifonos+2",
+        "order": 1
+      },
+      {
+        "id": 36,
+        "url": "https://placehold.co/600x400?text=Audifonos+3",
+        "order": 2
+      }
     ],
     "ownerId": 3
   },
@@ -201,9 +345,21 @@
     "location": "Campus Belén",
     "status": "AVAILABLE",
     "images": [
-      { "id": 37, "url": "https://placehold.co/600x400?text=Cuadernos+1", "order": 0 },
-      { "id": 38, "url": "https://placehold.co/600x400?text=Cuadernos+2", "order": 1 },
-      { "id": 39, "url": "https://placehold.co/600x400?text=Cuadernos+3", "order": 2 }
+      {
+        "id": 37,
+        "url": "https://http2.mlstatic.com/D_NQ_NP_785174-MLU74128456593_012024-O.webp",
+        "order": 0
+      },
+      {
+        "id": 38,
+        "url": "https://placehold.co/600x400?text=Cuadernos+2",
+        "order": 1
+      },
+      {
+        "id": 39,
+        "url": "https://placehold.co/600x400?text=Cuadernos+3",
+        "order": 2
+      }
     ],
     "ownerId": 11
   },
@@ -217,9 +373,21 @@
     "location": "Campus Robledo",
     "status": "AVAILABLE",
     "images": [
-      { "id": 40, "url": "https://placehold.co/600x400?text=Monitor+1", "order": 0 },
-      { "id": 41, "url": "https://placehold.co/600x400?text=Monitor+2", "order": 1 },
-      { "id": 42, "url": "https://placehold.co/600x400?text=Monitor+3", "order": 2 }
+      {
+        "id": 40,
+        "url": "https://www.lg.com/content/dam/channel/wcms/co/images/monitores/24ms550-b/gallery/fhd-24ms550-gallery-02-2010.jpg/jcr:content/renditions/thum-1600x1062.jpeg",
+        "order": 0
+      },
+      {
+        "id": 41,
+        "url": "https://placehold.co/600x400?text=Monitor+2",
+        "order": 1
+      },
+      {
+        "id": 42,
+        "url": "https://placehold.co/600x400?text=Monitor+3",
+        "order": 2
+      }
     ],
     "ownerId": 5
   },
@@ -231,11 +399,23 @@
     "condition": "used",
     "price": 1800000,
     "location": "Campus Laureles",
-    "status": "AVAILABLE",
+    "status": "SOLD",
     "images": [
-      { "id": 43, "url": "https://placehold.co/600x400?text=Camara+1", "order": 0 },
-      { "id": 44, "url": "https://placehold.co/600x400?text=Camara+2", "order": 1 },
-      { "id": 45, "url": "https://placehold.co/600x400?text=Camara+3", "order": 2 }
+      {
+        "id": 43,
+        "url": "https://tiendadefotografia.com.co/wp-content/uploads/2022/08/SL3_580x580_2.png",
+        "order": 0
+      },
+      {
+        "id": 44,
+        "url": "https://placehold.co/600x400?text=Camara+2",
+        "order": 1
+      },
+      {
+        "id": 45,
+        "url": "https://placehold.co/600x400?text=Camara+3",
+        "order": 2
+      }
     ],
     "ownerId": 6
   }
