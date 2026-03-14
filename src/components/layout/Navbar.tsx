@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { FiHome, FiList, FiUser } from "react-icons/fi";
+import { FiHome, FiList, FiStar, FiUser } from "react-icons/fi";
 import logo from '../../assets/logo.svg';
 
 export default function Navbar() {
@@ -16,16 +16,18 @@ export default function Navbar() {
                         TRUEQUE U
                     </h2>
                 </NavLink>
-                
+
                 <nav className="flex items-center gap-8" aria-label="Nav principal">
-                    
+
                     <NavLink to={"/"} className={({ isActive }) => isActive ? `${linkBase} ${activeClass} ` : linkBase}>
                         <FiHome /> <span>Home</span>
                     </NavLink>
                     <NavLink to={"/publicaciones"} className={({ isActive }) => isActive ? `${linkBase} ${activeClass}` : linkBase}>
                         <FiList /> <span>Publicaciones</span>
                     </NavLink>
-
+                    <NavLink to={"/favoritos"} className={({ isActive }) => isActive ? `${linkBase} ${activeClass}` : linkBase}>
+                        <FiStar /> <span>Favoritos</span>
+                    </NavLink>
                     <NavLink to={"/perfil"} className={({ isActive }) => isActive ? `${linkBase} ${activeClass}` : linkBase}>
                         <FiUser /> <span>Perfil</span>
                     </NavLink>

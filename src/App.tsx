@@ -8,6 +8,7 @@ import SignUpPage from './pages/signUpPage'
 import NotFoundPage from './pages/notFoundPage'
 import Footer from './components/layout/footer'
 import PublicationPage from './pages/publicationPage'
+import FavoritesPage from './pages/favoritePage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -21,6 +22,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path='/publicaciones' element={<PublicationPage/>}/>
+          <Route path='/favoritos' element={<FavoritesPage/>}/>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
