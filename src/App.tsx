@@ -2,12 +2,13 @@ import { useState } from 'react'
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import Navbar from './components/layout/Navbar'
+import Footer from './components/layout/Footer'
 import HomePage from './pages/homePage'
 import LoginPage from './pages/loginPage'
 import SignUpPage from './pages/signUpPage'
 import NotFoundPage from './pages/notFoundPage'
-import Footer from './components/layout/footer'
 import PublicationPage from './pages/publicationPage'
+import AddListingPage from './pages/addListingPage'
 import FavoritesPage from './pages/favoritePage'
 
 function App() {
@@ -18,11 +19,12 @@ function App() {
       <Navbar />
       <div className="flex-grow">
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<HomePage/>} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignUpPage />} />
-          <Route path='/publicaciones' element={<PublicationPage/>}/>
-          <Route path='/favoritos' element={<FavoritesPage/>}/>
+          <Route path="/signup" element={<SignUpPage/>} />
+          <Route path="/publicaciones" element={<PublicationPage/>}/>
+          <Route path="/crearListing" element={<AddListingPage/>}/>
+          <Route path="/favoritos" element={<FavoritesPage/>}/>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
