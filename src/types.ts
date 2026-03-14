@@ -1,4 +1,4 @@
-export type ListingStatus = "AVAILABLE" | "RESERVED" | "SOLD";
+//export type ListingStatus = "AVAILABLE" | "RESERVED" | "SOLD";
 
 export enum ListingStatusEnum {
     available = "AVAILABLE",
@@ -14,7 +14,7 @@ export interface Listing{
     condition: string;
     price: number;
     location: string;
-    status: ListingStatus;
+    status: ListingStatusEnum;
     ownerId: number;
     images: ListingImage[];
 }
@@ -22,5 +22,5 @@ export interface Listing{
 export interface ListingImage {
     id: number;
     url: string;
-//order: number;
+    order: number;
 }
