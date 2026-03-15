@@ -18,7 +18,7 @@ export default function ProfilePage() {
     if (!user) {
         return (
             <main className="flex flex-col items-center justify-center py-24 gap-4">
-                <BsPersonFillSlash className="h-50 w-50"/>
+                <BsPersonFillSlash className="h-50 w-50 text-eia-gris"/>
                 <p className="text-eia-gris text-md">Aún no hay un usuario activo.</p>
                 <div className="flex flex-row items-center gap-6">
                     <Link to="/signup">

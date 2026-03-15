@@ -6,8 +6,10 @@ export default function HomePage() {
         <main className='mx-auto max-w-6xl px-6 py-12'>
             <div className="flex flex-col items-center justify-center">
                 <header className="text-center mb-10">
-                    <p className="text-tx-suave text-2xl">Un lugar para compartir</p>
-                    <h1 className="font-bold text-7xl text-eia-azul">Bienvenid@</h1>
+                    <p className="text-eia-gris text-[clamp(1.5rem,3vw,2rem)]">Un lugar para compartir</p>
+                    <h1 className="font-bold text-eia-azul text-[clamp(3.4rem,8vw,6rem)]">Bienvenid@</h1>
+                    {/* text[8vw] hace que crezca seún la pantalla, es fluido (vw=view width),
+                    clamp le da max y min para que no sea desproporcional */}
                 </header>
                 
                 <div className="flex flex-row items-center gap-6">
