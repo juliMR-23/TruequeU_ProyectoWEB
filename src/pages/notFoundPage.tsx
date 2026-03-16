@@ -1,8 +1,7 @@
-import { useNavigate, Link } from "react-router-dom";
+import {Link } from "react-router-dom";
 import StateMessage from "../components/ui/StateMessage";
 
 export default function NotFoundPage() {
-  const navigate = useNavigate();
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-20 flex flex-col items-center justify-center min-h-[70vh]">

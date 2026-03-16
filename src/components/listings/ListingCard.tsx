@@ -1,10 +1,8 @@
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ListingStatusEnum, type Listing } from "../../types";
 import Badge from "../ui/Badge";
-import Button from "../ui/Button";
 import FavoriteButton from "../ui/FavoriteButton";
 import { useFavorites } from "../../hooks/useFavorites";
-import { FaFlag } from "react-icons/fa";
 import { LuCircleAlert } from "react-icons/lu";
 
 
