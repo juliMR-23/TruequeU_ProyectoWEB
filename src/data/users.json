@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "Admin EIA",
+    "email": "admin@eia.edu.co",
+    "password": "123",
+    "major": "Ingeniería de Sistemas",
+    "avatar": "https://ui-avatars.com/api/?name=Admin+EIA"
+  },
+  {
+    "id": 2,
+    "name": "Estudiante Prueba",
+    "email": "prueba@eia.edu.co",
+    "password": "123",
+    "major": "Ingeniería Industrial",
+    "avatar": "https://ui-avatars.com/api/?name=Estudiante+Prueba"
+  }
+]
