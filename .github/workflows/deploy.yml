@@ -33,7 +33,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      # ✅ SPA fallback para BrowserRouter (si usas HashRouter, puedes quitar esta línea)
       - name: SPA fallback
         run: cp dist/index.html dist/404.html
 
