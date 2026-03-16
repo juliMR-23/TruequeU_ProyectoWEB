@@ -2,36 +2,49 @@ import { useState } from "react";
 import { FiLogIn, FiMail, FiLock } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/ui/Button";
+import { useAuth } from "../hooks/useAuth";//hook, lo usamos para el login real
 
 export default function LoginPage() {
     const navigate = useNavigate();
-    
+    const { login } = useAuth();
+
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [error, setError] = useState<string | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false); //estado para el botón, desactivar mientras hace promesa-respuesta
 
-    function onSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setError(null);
+    async function onSubmit(e: React.FormEvent) {
+        e.preventDefault();
+        setError(null);
+        setIsSubmitting(true);
 
-    if (!email.trim() || !password.trim()) {
-        setError("Credenciales incompletas.");
-        return;
-    }
-    const eiaEmailRegex = /^.*@eia\.edu\.co$/;
-    if (!eiaEmailRegex.test(email)) {
-        setError("El formato del correo es incorrecto (debe ser @eia.edu.co).");
-        return;
-    }
-    if (password.trim().length < 6) {
-        setError("La contraseña debe tener al menos 6 caracteres.");
-        return;
-    }
+        if (!email.trim() || !password.trim()) {
+            setError("Credenciales incompletas.");
+            setIsSubmitting(false);
+            return;
+        }
+        const eiaEmailRegex = /^.*@eia\.edu\.co$/;
+        if (!eiaEmailRegex.test(email)) {
+            setError("El formato del correo es incorrecto (debe ser @eia.edu.co).");
+            return;
+        }
+        if (password.trim().length < 6) {
+            setError("La contraseña debe tener al menos 6 caracteres.");
+            return;
+        }
 
-    // Simulación de sesión
-    localStorage.setItem("eia_user", JSON.stringify({ name: "Estudiante EIA", email }));
-    navigate("/");
-}
+        try {
+            //servicio login real a través del hook
+            await login(email, password);
+            navigate("/"); // Éxito
+        } catch (err: any) {
+            //captura error: reject de la promesa
+            setError(err || "Error al iniciar sesión.");
+        } finally {
+            //vuelve a habilitar el botón
+            setIsSubmitting(false);
+        }
+    }
 
     return (
         <main className="mx-auto max-w-4xl px-6 py-12">
@@ -75,8 +88,11 @@ export default function LoginPage() {
                         {error && <p className="text-danger font-bold text-center bg-danger/10 py-3 rounded-xl border border-danger/20">{error}</p>}
 
                         <div className="mt-4 flex flex-col items-center">
-                            <Button type="submit" variant="primary" className="w-full max-w-sm py-3 text-lg">
-                                Entrar
+                            <Button type="submit" variant="primary"
+                            className="w-full max-w-sm py-3 text-lg"
+                            disabled={isSubmitting}//deshabilita si está cargando
+                            >
+                                {isSubmitting ? "Entrando..." : "Entrar"}
                             </Button>
                             <p className="mt-6 text-sm text-tx-suave">
                                 ¿No tienes cuenta? <Link className="text-eia-azul font-bold hover:underline" to="/signup">Regístrate aquí</Link>

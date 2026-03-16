@@ -2,12 +2,12 @@ import { FiUser, FiMail, FiBook, FiLogOut } from "react-icons/fi";
 import Button from "../components/ui/Button";
 import { BsPersonFillSlash } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 export default function ProfilePage() {
     const navigate = useNavigate();
     // 1. Recuperar los datos del localStorage
-    const storedUser = localStorage.getItem("eia_user");
-    const user = storedUser ? JSON.parse(storedUser) : null;
+    const {user} = useAuth();
 
     // Función para cerrar sesión
     const handleLogout = () => {

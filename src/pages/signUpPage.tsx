@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FiUserPlus, FiUser, FiMail, FiLock, FiBookOpen } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/ui/Button";
+import { useAuth } from "../hooks/useAuth";
 
 export default function SignUpPage() {
     const navigate = useNavigate();
@@ -10,34 +11,48 @@ export default function SignUpPage() {
     const [major, setMajor] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [error, setError] = useState<string | null>(null);
+    const { register } = useAuth(); //extrae la funcion que necesita
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
-    function onSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setError(null); // Resetear error previo
+    async function onSubmit(e: React.FormEvent) {
+        e.preventDefault();
+        setError(null); // Resetear error previo
+        setIsSubmitting(true);
+        //revisa campos vacíos
+        if (!name.trim() || !email.trim() || !password.trim()) {
+            setError("Todos los campos obligatorios deben estar llenos.");
+            return;
+        }
 
-    // 1. Verificación de campos vacíos
-    if (!name.trim() || !email.trim() || !password.trim()) {
-        setError("Todos los campos obligatorios deben estar llenos.");
-        return;
+        // dominio institucional
+        const eiaEmailRegex = /^.*@eia\.edu\.co$/;
+        if (!eiaEmailRegex.test(email)) {
+            setError("Debes usar un correo institucional válido (@eia.edu.co).");
+            return;
+        }
+
+        //seguridad de contraseña (mínimo 6 caracteres / min, mayus y num)
+        if (password.trim().length < 6) {
+            setError("La contraseña debe tener al menos 6 caracteres.");
+            return;
+        }
+        const passRegex=/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).+$/;
+        if(!passRegex.test(password)){
+            setError("La contraseña debe tener mayúsculas, minúsculas y números")
+            return;
+        }
+
+        try {
+            //función register desde hook
+            await register({ name, email, major, password });
+            navigate("/");
+        } catch (err: any) {
+            // también evita que se repitan correos
+            setError(err || "Ocurrió un error en el registro.");
+        } finally {
+            setIsSubmitting(false);//habilita otra vez
+        }
     }
-
-    // 2. Verificación de dominio institucional
-    const eiaEmailRegex = /^.*@eia\.edu\.co$/;
-    if (!eiaEmailRegex.test(email)) {
-        setError("Debes usar un correo institucional válido (@eia.edu.co).");
-        return;
-    }
-
-    // 3. Verificación de seguridad de contraseña (mínimo 6 caracteres)
-    if (password.trim().length < 6) {
-        setError("La contraseña debe tener al menos 6 caracteres.");
-        return;
-    }
-
-    // Persistencia de sesión fake
-    localStorage.setItem("eia_user", JSON.stringify({ name, email, major }));
-    navigate("/");
-}
 
     return (
         <main className="mx-auto max-w-4xl px-6 py-12">
@@ -108,8 +123,11 @@ export default function SignUpPage() {
                         {error && <p className="md:col-span-2 text-danger font-bold text-center bg-danger/10 py-3 rounded-xl border border-danger/20">{error}</p>}
 
                         <div className="md:col-span-2 mt-4 flex flex-col items-center">
-                            <Button type="submit" variant="primary" className="w-full max-w-sm py-3 text-lg">
-                                Registrarme
+                            <Button type="submit" variant="primary"
+                            className="w-full max-w-sm py-3 text-lg"
+                            disabled={isSubmitting}
+                            >
+                                {isSubmitting ? "Creando cuenta..." : "Registrarme"}
                             </Button>
                             <p className="mt-6 text-sm text-tx-suave">
                                 ¿Ya tienes una cuenta? <Link className="text-eia-azul font-bold hover:underline" to="/login">Inicia sesión</Link>
