@@ -1,7 +1,10 @@
 import Button from "../components/ui/Button";
 import { Link } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 export default function HomePage() {
+    const { user } = useAuth(); //usuario actual
+
     return (
         <main className='mx-auto max-w-6xl px-6 py-12'>
             <div className="flex flex-col items-center justify-center">
@@ -13,12 +16,26 @@ export default function HomePage() {
                 </header>
                 
                 <div className="flex flex-row items-center gap-6">
-                    <Link to="/signup">
-                        <Button variant='primary'>Registrarse</Button>
-                    </Link>
-                    <Link to="/login">
-                        <Button variant='outline'>Iniciar sesión</Button>
-                    </Link>
+                    {/* Renderizado Condicional */}
+                    {user ? (//lo que muestra si está logueado
+                        <>
+                            <Link to="/perfil">
+                                <Button variant='primary'>Mi Perfil</Button>
+                            </Link>
+                            <Link to="/favoritos">
+                                <Button variant='outline'>Mis Favoritos</Button>
+                            </Link>
+                        </>
+                    ) : (//Si no hay sesión iniciada
+                        <>
+                            <Link to="/signup">
+                                <Button variant='primary'>Registrarse</Button>
+                            </Link>
+                            <Link to="/login">
+                                <Button variant='outline'>Iniciar sesión</Button>
+                            </Link>
+                        </>
+                    )}
                 </div>
             </div>
         </main>
