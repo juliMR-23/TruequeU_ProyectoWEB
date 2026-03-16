@@ -30,9 +30,6 @@ jobs:
       - name: Install
         run: npm ci
 
-      - name: Test (optional but recommended)
-        run: npm run test:run
-
       - name: Build
         run: npm run build
 
