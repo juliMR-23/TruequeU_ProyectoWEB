@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { FiLogIn, FiMail, FiLock } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/ui/Button";
 
 export default function LoginPage() {
+    const navigate = useNavigate();
+    
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [error, setError] = useState<string | null>(null);
@@ -28,7 +30,7 @@ export default function LoginPage() {
 
     // Simulación de sesión
     localStorage.setItem("eia_user", JSON.stringify({ name: "Estudiante EIA", email }));
-    window.location.href = "/";
+    navigate("/");
 }
 
     return (

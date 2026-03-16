@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { FiUserPlus, FiUser, FiMail, FiLock, FiBookOpen } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/ui/Button";
 
 export default function SignUpPage() {
+    const navigate = useNavigate();
     const [name, setName] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [major, setMajor] = useState<string>("");
@@ -35,7 +36,7 @@ export default function SignUpPage() {
 
     // Persistencia de sesión fake
     localStorage.setItem("eia_user", JSON.stringify({ name, email, major }));
-    window.location.href = "/";
+    navigate("/");
 }
 
     return (
