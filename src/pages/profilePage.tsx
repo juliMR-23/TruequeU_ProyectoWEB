@@ -1,34 +1,35 @@
 import { FiUser, FiMail, FiBook, FiLogOut } from "react-icons/fi";
 import Button from "../components/ui/Button";
-import { BsPersonFillSlash } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import StateMessage from "../components/ui/StateMessage";
 
 export default function ProfilePage() {
     const navigate = useNavigate();
-    // 1. Recuperar los datos del localStorage
-    const {user} = useAuth();
+    //manejo de usuarios
+    const {user, logout, loading} = useAuth();
 
-    // Función para cerrar sesión
-    const handleLogout = () => {
-        localStorage.removeItem("eia_user");
-        navigate("/login");
-    };
+    if(loading){
+        return(
+            <StateMessage
+            title="Cargando perfil"
+            description="Se está buscando el usuario"
+            type="loading"
+            />
+        );
+    }
 
     // Estado vacío si no hay usuario
     if (!user) {
         return (
-            <main className="flex flex-col items-center justify-center py-24 gap-4">
-                <BsPersonFillSlash className="h-50 w-50 text-eia-gris"/>
-                <p className="text-eia-gris text-md">Aún no hay un usuario activo.</p>
-                <div className="flex flex-row items-center gap-6">
-                    <Link to="/signup">
-                        <Button variant='primary'>Registrarse</Button>
-                    </Link>
-                    <Link to="/login">
-                        <Button variant='outline'>Iniciar sesión</Button>
-                    </Link>
-                </div>
+            <main className="mx-auto max-w-2xl px-6 py-24">
+                <StateMessage 
+                    type="empty" 
+                    title="Acceso denegado" 
+                    description="Debes ingresar con un correo de la EIA para ver tu perfil."
+                    actionText="Registrarse"
+                    onAction={() => navigate("/signup")}
+                />
             </main>
         );
     }
@@ -63,7 +64,7 @@ export default function ProfilePage() {
 
                     <Button 
                         variant="danger" 
-                        onClick={handleLogout}
+                        onClick={logout}
                     >
                         <FiLogOut className="mr-2" /> Cerrar Sesión
                     </Button>
