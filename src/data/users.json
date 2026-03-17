@@ -1,18 +1,30 @@
 [
   {
-    "id": 1,
+    "id": 0,
     "name": "Admin EIA",
     "email": "admin@eia.edu.co",
-    "password": "123",
-    "major": "Ingeniería de Sistemas",
-    "avatar": "https://ui-avatars.com/api/?name=Admin+EIA"
+    "password": "Admin123",
+    "major": "Ingeniería de Sistemas"
+  },
+  {
+    "id": 1,
+    "name": "Estudiante 1",
+    "email": "est1@eia.edu.co",
+    "password": "Est123",
+    "major": "Ingeniería Civil"
   },
   {
     "id": 2,
-    "name": "Estudiante Prueba",
-    "email": "prueba@eia.edu.co",
-    "password": "123",
-    "major": "Ingeniería Industrial",
-    "avatar": "https://ui-avatars.com/api/?name=Estudiante+Prueba"
+    "name": "Estudiante 2",
+    "email": "est2@eia.edu.co",
+    "password": "Est123",
+    "major": "Ingeniería Industrial"
+  },
+  {
+    "id": 3,
+    "name": "Estudiante 3",
+    "email": "est3@eia.edu.co",
+    "password": "Est123",
+    "major": "Ingeniería Biotecnológica"
   }
 ]
