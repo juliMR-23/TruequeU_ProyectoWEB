@@ -11,7 +11,7 @@ export default function NotFoundPage() {
         title="Página no encontrada"
         description="La ruta a la que intentas acceder no existe o ha sido movida."
         actionText="Volver al inicio"
-        onAction={() => (window.location.href = "/")}
+        onAction={() => navigate("/")}
       />
       
       <div className="mt-6 text-center">

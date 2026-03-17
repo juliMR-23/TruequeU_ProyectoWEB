@@ -1,11 +1,40 @@
 import { useFavoriteListings } from "../hooks/useFavoriteListings";
 import ListingCard from "../components/listings/ListingCard";
+import { BsPersonSlash } from "react-icons/bs";
 import { FiStar } from "react-icons/fi";
+import { useAuth } from "../hooks/useAuth";
+import StateMessage from "../components/ui/StateMessage";
+import { useNavigate } from "react-router-dom";
+
 
 export default function FavoritesPage() {
   const { listings, loading } = useFavoriteListings();
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
-  if (loading) return <p className="p-8 text-eia-gris">Cargando...</p>;
+  if (loading) {
+    return (
+      <div className="py-20">
+        <StateMessage type="loading" title="Cargando favoritos" description="Se están buscando los datos" />
+      </div>
+    );
+  }
+
+  //no logueado:
+  if (!user) {
+    return (
+      <main className="mx-auto max-w-2xl px-6 py-24">
+        <StateMessage
+          type="empty"
+          title="Ingresa para ver favoritos"
+          description="Debes ser parte de la comunidad EIA para guardar y ver tus objetos deseados."
+          actionText="Registrarse"
+          onAction={() => navigate("/signup")}
+          icon={<BsPersonSlash size={32} className="text-eia-gris" />}
+        />
+      </main>
+    );
+  }
 
   return (
     <main className="max-w-6xl mx-auto px-4 py-8">
@@ -15,7 +44,16 @@ export default function FavoritesPage() {
       </p>
 
       {listings.length === 0
-        ? <EmptyFavorites />
+        ? <main className="mx-auto max-w-2xl px-6 py-2">
+          <StateMessage
+            type="empty"
+            title="Aún no hay favoritos"
+            description="Toca el ícono de estrella en cualquier publicación para guardarla aquí."
+            actionText="Explorar trueques"
+            onAction={() => navigate("/publicaciones")}
+            icon={<FiStar size={30} className="text-eia-gris" />}
+          />
+        </main>
         : (
           <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {listings.map((l) => (
@@ -25,15 +63,5 @@ export default function FavoritesPage() {
         )
       }
     </main>
-  );
-}
-
-function EmptyFavorites() {
-  return (
-    <div className="flex flex-col items-center justify-center py-20 text-eia-gris gap-4">
-      <FiStar className="w-15 h-15" />
-      <p className="text-3xl font-bold text-eia-azul">Todavía no tienes favoritos</p>
-      <p className="text-sm">Toca el ícono de estrella en cualquier publicación para verla aquí.</p>
-    </div>
   );
 }

@@ -24,3 +24,11 @@ export interface ListingImage {
     url: string;
     order: number;
 }
+
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  major: string;//Carrera del estudiante
+}

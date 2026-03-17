@@ -7,6 +7,7 @@ type Props = {
   description?: string;
   actionText?: string;
   onAction?: () => void;
+  icon?: React.ReactNode;//prop para poner ícono custom
 };
 
 export default function StateMessage({ 
@@ -14,7 +15,8 @@ export default function StateMessage({
   type, 
   description, 
   actionText, 
-  onAction 
+  onAction,
+  icon
 }: Props) {
   
   const Icon = type === "loading" ? FiLoader : type === "error" ? FiAlertTriangle : FiInbox;
@@ -39,7 +41,11 @@ export default function StateMessage({
   return (
     <div className={`rounded-xl border border-dashed p-8 text-center bg-white shadow-sm ${currentStyle.border}`}>
       <div className={`mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full border-2 ${currentStyle.ring}`}>
-        <Icon size={24} className={type === "loading" ? "animate-spin" : ""} />
+        {icon ? (
+          icon// usa el que le entrega props, si no, icons por defecto
+        ) : (
+          <Icon size={24} className={type === "loading" ? "animate-spin" : ""} />
+        )}
       </div>
       <h2 className="text-xl font-bold text-eia-azul leading-tight">
         {title}

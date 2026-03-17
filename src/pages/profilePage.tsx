@@ -1,33 +1,37 @@
 import { FiUser, FiMail, FiBook, FiLogOut } from "react-icons/fi";
 import Button from "../components/ui/Button";
-import { BsPersonFillSlash } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
+import StateMessage from "../components/ui/StateMessage";
+import { BsPersonSlash } from "react-icons/bs";
 
 export default function ProfilePage() {
-    // 1. Recuperar los datos del localStorage
-    const storedUser = localStorage.getItem("eia_user");
-    const user = storedUser ? JSON.parse(storedUser) : null;
+    const navigate = useNavigate();
+    //manejo de usuarios
+    const {user, logout, loading} = useAuth();
 
-    // Función para cerrar sesión
-    const handleLogout = () => {
-        localStorage.removeItem("eia_user");
-        window.location.href = "/login";
-    };
+    if(loading){
+        return(
+            <StateMessage
+            title="Cargando perfil"
+            description="Se está buscando el usuario"
+            type="loading"
+            />
+        );
+    }
 
     // Estado vacío si no hay usuario
     if (!user) {
         return (
-            <main className="flex flex-col items-center justify-center py-24 gap-4">
-                <BsPersonFillSlash className="h-50 w-50 text-eia-gris"/>
-                <p className="text-eia-gris text-md">Aún no hay un usuario activo.</p>
-                <div className="flex flex-row items-center gap-6">
-                    <Link to="/signup">
-                        <Button variant='primary'>Registrarse</Button>
-                    </Link>
-                    <Link to="/login">
-                        <Button variant='outline'>Iniciar sesión</Button>
-                    </Link>
-                </div>
+            <main className="mx-auto max-w-2xl px-6 py-24">
+                <StateMessage 
+                    type="empty" 
+                    title="Acceso denegado" 
+                    description="Debes ingresar con un correo de la EIA para ver tu perfil."
+                    actionText="Registrarse"
+                    onAction={() => navigate("/signup")}
+                    icon={<BsPersonSlash size={32} className="text-eia-gris" />}
+                />
             </main>
         );
     }
@@ -62,7 +66,7 @@ export default function ProfilePage() {
 
                     <Button 
                         variant="danger" 
-                        onClick={handleLogout}
+                        onClick={logout}
                     >
                         <FiLogOut className="mr-2" /> Cerrar Sesión
                     </Button>

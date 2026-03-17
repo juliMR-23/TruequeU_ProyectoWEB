@@ -1,35 +1,59 @@
 import { useState } from "react";
 import { FiLogIn, FiMail, FiLock } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/ui/Button";
+import { useAuth } from "../hooks/useAuth";//hook, lo usamos para el login real
 
 export default function LoginPage() {
+    const navigate = useNavigate();
+    const { login } = useAuth();
+
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-    const [error, setError] = useState<string | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false); //estado para el botón, desactivar mientras hace promesa-respuesta
+    const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
 
-    function onSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setError(null);
+    async function onSubmit(e: React.FormEvent) {
+        e.preventDefault();
+        setErrors({}); // Limpia errores previos
+        setIsSubmitting(true);
 
-    if (!email.trim() || !password.trim()) {
-        setError("Credenciales incompletas.");
-        return;
-    }
-    const eiaEmailRegex = /^.*@eia\.edu\.co$/;
-    if (!eiaEmailRegex.test(email)) {
-        setError("El formato del correo es incorrecto (debe ser @eia.edu.co).");
-        return;
-    }
-    if (password.trim().length < 6) {
-        setError("La contraseña debe tener al menos 6 caracteres.");
-        return;
-    }
+        const newErrors: { email?: string; password?: string } = {};
+        //para poder validar el campo del error
 
-    // Simulación de sesión
-    localStorage.setItem("eia_user", JSON.stringify({ name: "Estudiante EIA", email }));
-    window.location.href = "/";
-}
+        try {
+            // Validaciones locales
+            const eiaEmailRegex = /^.*@eia\.edu\.co$/;
+            if (!email.trim()) {
+                newErrors.email = "El correo es obligatorio.";
+            } else if (!eiaEmailRegex.test(email)) {
+                newErrors.email = "Usa tu correo institucional @eia.edu.co";
+            }
+
+            if (!password.trim()) {
+                newErrors.password = "La contraseña es obligatoria.";
+            } else if (password.length < 6) {
+                newErrors.password = "Mínimo 6 caracteres.";
+            }
+
+            // Si hay errores locales, los guardamos y frenamos
+            if (Object.keys(newErrors).length > 0) {
+                setErrors(newErrors);
+                return; // Aquí el finally se encargará de habilitar el botón
+            }
+
+            // Intento de login real
+            await login(email, password);
+            navigate("/");
+
+        } catch (err: any) {
+            // Error de "backend" (credenciales incorrectas)
+            // Lo asignamos al password o creamos un error general
+            setErrors({ password: err || "Credenciales no válidas." });
+        } finally {
+            setIsSubmitting(false);
+        }
+    }
 
     return (
         <main className="mx-auto max-w-4xl px-6 py-12">
@@ -51,11 +75,22 @@ export default function LoginPage() {
                             <div className="relative">
                                 <FiMail className="absolute left-4 top-4 text-eia-gris" />
                                 <input
-                                    className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-12 py-3 text-md outline-none"
+                                    className={`w-full rounded-xl border-2 px-12 py-3 text-md outline-none transition-all ${errors.email
+                                        ? "border-danger bg-danger/5"
+                                        : "border-eia-fondo bg-eia-fondo"
+                                        }`}
                                     type="email" placeholder="usuario@eia.edu.co"
-                                    value={email} onChange={(e) => setEmail(e.target.value)} required
+                                    value={email}
+                                    onChange={(e) => {
+                                        setEmail(e.target.value);
+                                        // Si existe un error en este campo, lo borramos del objeto
+                                        if (errors.email) {
+                                            setErrors(prev => ({ ...prev, email: undefined }));
+                                        }
+                                    }}
                                 />
                             </div>
+                            {errors.email && <span className="text-danger text-xs font-bold ml-1 mt-1">{errors.email}</span>}
                         </label>
 
                         <label className="flex flex-col gap-1.5">
@@ -63,18 +98,29 @@ export default function LoginPage() {
                             <div className="relative">
                                 <FiLock className="absolute left-4 top-4 text-eia-gris" />
                                 <input
-                                    className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-12 py-3 text-md outline-none"
+                                    className={`w-full rounded-xl border-2 px-12 py-3 text-md outline-none transition-all ${errors.password
+                                        ? "border-danger bg-danger/5"
+                                        : "border-eia-fondo bg-eia-fondo"
+                                        }`}
                                     type="password" placeholder="••••••••"
-                                    value={password} onChange={(e) => setPassword(e.target.value)} required
+                                    value={password}
+                                    onChange={(e) => {
+                                        setPassword(e.target.value);
+                                        if (errors.password) {
+                                            setErrors(prev => ({ ...prev, password: undefined }));
+                                        }
+                                    }}
                                 />
                             </div>
+                            {errors.password && <span className="text-danger text-xs font-bold ml-1 mt-1">{errors.password}</span>}
                         </label>
 
-                        {error && <p className="text-danger font-bold text-center bg-danger/10 py-3 rounded-xl border border-danger/20">{error}</p>}
-
                         <div className="mt-4 flex flex-col items-center">
-                            <Button type="submit" variant="primary" className="w-full max-w-sm py-3 text-lg">
-                                Entrar
+                            <Button type="submit" variant="primary"
+                                className="w-full max-w-sm py-3 text-lg"
+                                disabled={isSubmitting}//deshabilita si está cargando
+                            >
+                                {isSubmitting ? "Entrando..." : "Entrar"}
                             </Button>
                             <p className="mt-6 text-sm text-tx-suave">
                                 ¿No tienes cuenta? <Link className="text-eia-azul font-bold hover:underline" to="/signup">Regístrate aquí</Link>

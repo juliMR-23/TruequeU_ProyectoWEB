@@ -95,7 +95,7 @@ export default function AddListingPage() {
 
         localStorage.setItem("eia_listings", JSON.stringify([newListing, ...listings]));
 
-        window.location.href = "/publicaciones";
+        navigate("/publicaciones");
     }
 
     return (

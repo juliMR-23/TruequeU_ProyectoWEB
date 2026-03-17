@@ -1,0 +1,30 @@
+[
+  {
+    "id": 0,
+    "name": "Admin EIA",
+    "email": "admin@eia.edu.co",
+    "password": "Admin123",
+    "major": "Ingeniería de Sistemas"
+  },
+  {
+    "id": 1,
+    "name": "Estudiante 1",
+    "email": "est1@eia.edu.co",
+    "password": "Est123",
+    "major": "Ingeniería Civil"
+  },
+  {
+    "id": 2,
+    "name": "Estudiante 2",
+    "email": "est2@eia.edu.co",
+    "password": "Est123",
+    "major": "Ingeniería Industrial"
+  },
+  {
+    "id": 3,
+    "name": "Estudiante 3",
+    "email": "est3@eia.edu.co",
+    "password": "Est123",
+    "major": "Ingeniería Biotecnológica"
+  }
+]
