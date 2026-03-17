@@ -1,11 +1,11 @@
 import { useFavoriteListings } from "../hooks/useFavoriteListings";
 import ListingCard from "../components/listings/ListingCard";
+import { BsPersonSlash } from "react-icons/bs";
 import { FiStar } from "react-icons/fi";
 import { useAuth } from "../hooks/useAuth";
 import StateMessage from "../components/ui/StateMessage";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import Button from "../components/ui/Button";
+
 
 export default function FavoritesPage() {
   const { listings, loading } = useFavoriteListings();
@@ -30,6 +30,7 @@ export default function FavoritesPage() {
           description="Debes ser parte de la comunidad EIA para guardar y ver tus objetos deseados."
           actionText="Registrarse"
           onAction={() => navigate("/signup")}
+          icon={<BsPersonSlash size={32} className="text-eia-gris" />}
         />
       </main>
     );
@@ -46,10 +47,11 @@ export default function FavoritesPage() {
         ? <main className="mx-auto max-w-2xl px-6 py-2">
           <StateMessage
             type="empty"
-            title="Tu lista está vacía"
+            title="Aún no hay favoritos"
             description="Toca el ícono de estrella en cualquier publicación para guardarla aquí."
             actionText="Explorar trueques"
             onAction={() => navigate("/publicaciones")}
+            icon={<FiStar size={30} className="text-eia-gris" />}
           />
         </main>
         : (

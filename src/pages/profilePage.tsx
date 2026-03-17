@@ -3,6 +3,7 @@ import Button from "../components/ui/Button";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import StateMessage from "../components/ui/StateMessage";
+import { BsPersonSlash } from "react-icons/bs";
 
 export default function ProfilePage() {
     const navigate = useNavigate();
@@ -29,6 +30,7 @@ export default function ProfilePage() {
                     description="Debes ingresar con un correo de la EIA para ver tu perfil."
                     actionText="Registrarse"
                     onAction={() => navigate("/signup")}
+                    icon={<BsPersonSlash size={32} className="text-eia-gris" />}
                 />
             </main>
         );
