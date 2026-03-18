@@ -43,7 +43,7 @@ export default function ListingCard({ listing }: Props) {
             <div className="flex items-start justify-between gap-3">
                 <div>
                     {/* Titulo */}
-                    <h3 className="m-0 text-base font-bold text-lg">{listing.title}</h3>
+                    <h3 className="m-0 font-bold text-lg">{listing.title}</h3>
                     {/* Categoria */}
                     <span className="mt-1 uppercase tracking-widest text-xs text-eia-gris">{listing.category}</span>
                 </div>
