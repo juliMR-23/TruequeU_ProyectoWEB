@@ -3,10 +3,10 @@
     "id": 1,
     "title": "Calculadora Casio fx-991LA Plus",
     "description": "Calculadora científica casi nueva, la usé un semestre. Incluye funda original. Ideal para cálculo e ingeniería.",
-    "category": "Útiles académicos",
-    "condition": "used",
+    "category": "Útiles",
+    "condition": "Usado",
     "price": 85000,
-    "location": "Campus Laureles",
+    "location": "Sede Las Palmas",
     "status": "AVAILABLE",
     "images": [
       {
@@ -25,16 +25,16 @@
         "order": 2
       }
     ],
-    "ownerId": 1
+    "ownerId": 2
   },
   {
     "id": 2,
     "title": "Libros de Cálculo Diferencial e Integral",
     "description": "Stewart Cálculo edición 7 y 8. Ambos en buen estado con algunas anotaciones a lápiz. Los vendo juntos o separados.",
     "category": "Libros",
-    "condition": "used",
+    "condition": "Usado",
     "price": 60000,
-    "location": "Campus Robledo",
+    "location": "Sede Zúñiga",
     "status": "SOLD",
     "images": [
       {
@@ -53,16 +53,16 @@
         "order": 2
       }
     ],
-    "ownerId": 2
+    "ownerId": 1
   },
   {
     "id": 3,
     "title": "Portátil Lenovo IdeaPad 15",
     "description": "Intel Core i5 10ma gen, 8GB RAM, 512GB SSD. Batería dura 5 horas. Perfecto para programación y diseño básico. Cargador incluido.",
     "category": "Tecnología",
-    "condition": "used",
+    "condition": "Usado",
     "price": 1400000,
-    "location": "Campus Laureles",
+    "location": "Sede Las Palmas",
     "status": "AVAILABLE",
     "images": [
       {
@@ -88,9 +88,9 @@
     "title": "Mochila Totto 40L",
     "description": "Mochila universitaria con compartimento para portátil de hasta 15 pulgadas. Color negro, poco uso.",
     "category": "Accesorios",
-    "condition": "used",
+    "condition": "Usado",
     "price": 70000,
-    "location": "Campus Belén",
+    "location": "Sede Zúñiga",
     "status": "AVAILABLE",
     "images": [
       {
@@ -109,16 +109,16 @@
         "order": 2
       }
     ],
-    "ownerId": 4
+    "ownerId": 1
   },
   {
     "id": 5,
     "title": "Arduino Uno + Kit de sensores",
     "description": "Kit completo con Arduino Uno, 20 sensores, protoboard, cables y LEDs. Todo en caja original. Lo usé en Electrónica I.",
     "category": "Tecnología",
-    "condition": "used",
+    "condition": "Usado",
     "price": 120000,
-    "location": "Campus Robledo",
+    "location": "Sede Las Palmas",
     "status": "AVAILABLE",
     "images": [
       {
@@ -137,16 +137,16 @@
         "order": 2
       }
     ],
-    "ownerId": 5
+    "ownerId": 2
   },
   {
     "id": 6,
     "title": "Tablet Samsung Galaxy Tab A8",
     "description": "64GB, pantalla 10.5 pulgadas. Incluye funda y vidrio templado. Excelente para leer PDFs y tomar notas en clase.",
     "category": "Tecnología",
-    "condition": "new",
+    "condition": "Nuevo",
     "price": 750000,
-    "location": "Campus Laureles",
+    "location": "Sede Zúñiga",
     "status": "RESERVED",
     "images": [
       {
@@ -165,16 +165,16 @@
         "order": 2
       }
     ],
-    "ownerId": 6
+    "ownerId": 3
   },
   {
     "id": 7,
     "title": "Silla ergonómica de escritorio",
     "description": "Silla con soporte lumbar, altura ajustable y apoyabrazos. Ideal si tienes home office o estudias muchas horas.",
-    "category": "Muebles",
-    "condition": "used",
+    "category": "Otro",
+    "condition": "Usado",
     "price": 280000,
-    "location": "Campus Belén",
+    "location": "Sede Las Palmas",
     "status": "SOLD",
     "images": [
       {
@@ -193,16 +193,16 @@
         "order": 2
       }
     ],
-    "ownerId": 7
+    "ownerId": 1
   },
   {
     "id": 8,
     "title": "Uniforme de laboratorio nuevo talla M",
     "description": "Bata blanca manga larga talla M, nunca usada. Incluye gafas de seguridad y guantes de nitrilo (caja de 50).",
-    "category": "Útiles académicos",
-    "condition": "new",
+    "category": "Útiles",
+    "condition": "Nuevo",
     "price": 45000,
-    "location": "Campus Robledo",
+    "location": "Sede Zúñiga",
     "status": "AVAILABLE",
     "images": [
       {
@@ -221,16 +221,16 @@
         "order": 2
       }
     ],
-    "ownerId": 8
+    "ownerId": 2
   },
   {
     "id": 9,
     "title": "Mouse inalámbrico Logitech MX Master 3",
     "description": "Mouse ergonómico con scroll rápido y botones programables. Batería dura semanas. Poco uso, en perfectas condiciones.",
     "category": "Tecnología",
-    "condition": "used",
+    "condition": "Usado",
     "price": 180000,
-    "location": "Campus Laureles",
+    "location": "Sede Las Palmas",
     "status": "AVAILABLE",
     "images": [
       {
@@ -249,16 +249,16 @@
         "order": 2
       }
     ],
-    "ownerId": 2
+    "ownerId": 3
   },
   {
     "id": 10,
     "title": "Impresora HP DeskJet 2775",
     "description": "Impresora multifuncional WiFi. Imprime, escanea y copia. Incluye cartuchos casi llenos. Perfecta para trabajos e informes.",
     "category": "Tecnología",
-    "condition": "used",
+    "condition": "Usado",
     "price": 200000,
-    "location": "Campus Belén",
+    "location": "Sede Zúñiga",
     "status": "RESERVED",
     "images": [
       {
@@ -277,16 +277,16 @@
         "order": 2
       }
     ],
-    "ownerId": 9
+    "ownerId": 1
   },
   {
     "id": 11,
     "title": "Teclado mecánico Redragon K552",
     "description": "Switches rojos, retroiluminación RGB. En excelente estado. Lo cambio porque conseguí uno inalámbrico.",
     "category": "Tecnología",
-    "condition": "used",
+    "condition": "Usado",
     "price": 130000,
-    "location": "Campus Robledo",
+    "location": "Sede Las Palmas",
     "status": "SOLD",
     "images": [
       {
@@ -305,16 +305,16 @@
         "order": 2
       }
     ],
-    "ownerId": 10
+    "ownerId": 2
   },
   {
     "id": 12,
     "title": "Audífonos Sony WH-1000XM4",
     "description": "Cancelación de ruido activa, 30 horas de batería. Incluye estuche y cable. Ideales para estudiar en la biblioteca.",
     "category": "Tecnología",
-    "condition": "used",
+    "condition": "Usado",
     "price": 600000,
-    "location": "Campus Laureles",
+    "location": "Sede Zúñiga",
     "status": "SOLD",
     "images": [
       {
@@ -339,10 +339,10 @@
     "id": 13,
     "title": "Cuadernos universitarios x5",
     "description": "5 cuadernos de 100 hojas cuadriculados, sin usar. Los compré de más al inicio del semestre.",
-    "category": "Útiles académicos",
-    "condition": "new",
+    "category": "Útiles",
+    "condition": "Nuevo",
     "price": 20000,
-    "location": "Campus Belén",
+    "location": "Sede Las Palmas",
     "status": "AVAILABLE",
     "images": [
       {
@@ -361,16 +361,16 @@
         "order": 2
       }
     ],
-    "ownerId": 11
+    "ownerId": 1
   },
   {
     "id": 14,
     "title": "Monitor LG 24 pulgadas Full HD",
     "description": "Panel IPS, 75Hz, entrada HDMI y VGA. Sin píxeles muertos. Perfecto para montar una segunda pantalla.",
     "category": "Tecnología",
-    "condition": "used",
+    "condition": "Usado",
     "price": 450000,
-    "location": "Campus Robledo",
+    "location": "Sede Zúñiga",
     "status": "RESERVED",
     "images": [
       {
@@ -389,16 +389,16 @@
         "order": 2
       }
     ],
-    "ownerId": 5
+    "ownerId": 2
   },
   {
     "id": 15,
     "title": "Cámara Canon EOS Rebel SL3",
     "description": "24MP, video 4K, pantalla táctil abatible. Incluye lente 18-55mm, cargador, correa y estuche. Usada en electiva de fotografía.",
     "category": "Tecnología",
-    "condition": "used",
+    "condition": "Usado",
     "price": 1800000,
-    "location": "Campus Laureles",
+    "location": "Sede Las Palmas",
     "status": "SOLD",
     "images": [
       {
@@ -417,7 +417,7 @@
         "order": 2
       }
     ],
-    "ownerId": 6
+    "ownerId": 3
   },
   {
     "id": 99,
@@ -445,6 +445,6 @@
         "order": 2
       }
     ],
-    "ownerId": 11
+    "ownerId": 0
   }
 ]
