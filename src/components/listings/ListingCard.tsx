@@ -3,18 +3,18 @@ import { ListingStatusEnum, type Listing } from "../../types";
 import Badge from "../ui/Badge";
 import Button from "../ui/Button";
 import FavoriteButton from "../ui/FavoriteButton";
-import { useFavorites } from "../../hooks/useFavorites";
 import { LuCircleAlert } from "react-icons/lu";
 
 
 type Props = {
     listing: Listing;
+    isFavorite: boolean;
+    onToggle: (id: number) => void;
 }
 
-export default function ListingCard({ listing }: Props) {
+export default function ListingCard({ listing, isFavorite, onToggle }: Props) {
     const isSold: boolean = listing.status.toUpperCase() === ListingStatusEnum.sold;
     const isReserved: boolean = listing.status.toUpperCase() === ListingStatusEnum.reserved
-    const { isFavorite, toggle } = useFavorites();
     const navigate = useNavigate();
     // toma la primera imagen de la clase Listing, para poderla mostrar
     const coverImage = listing.images.find(img => img.order === 0) ?? listing.images[0];
@@ -67,8 +67,8 @@ export default function ListingCard({ listing }: Props) {
                 </button>
                 <FavoriteButton
                     listingId={listing.id}
-                    isFavorite={isFavorite(listing.id)}
-                    onToggle={toggle}
+                    isFavorite={isFavorite}   
+                    onToggle={onToggle}          
                 />
 
             </div>

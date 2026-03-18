@@ -4,13 +4,15 @@ import ListingList from "../components/listings/ListingList";
 import { type Listing } from "../types";
 import listings from "../data/listings.json"; // Datos base
 import Button from "../components/ui/Button";
-import { FaList } from "react-icons/fa";
 import StateMessage from "../components/ui/StateMessage";
+import { useFavorites } from "../hooks/useFavorites";
 
 
 export default function PublicationPage() {
   // Estado para las publicaciones
   const [allListings, setAllListings] = useState<Listing[]>([]);
+  // Estado para los favoritos, así actualiza en tiempo real
+  const { isFavorite, toggle } = useFavorites();
 
   useEffect(() => {
     // 1. Cargar los datos de prueba (JSON)
@@ -44,8 +46,7 @@ export default function PublicationPage() {
           <Button variant="outline">Crear Publicación</Button>
         </Link>
       </header>
-      < ListingList listings={allListings} />
-      {/* allListings pasa datos del JSON + datos de local storage */}
+      <ListingList listings={allListings} isFavorite={isFavorite} onToggle={toggle} />      {/* allListings pasa datos del JSON + datos de local storage */}
 
     </main>
   );

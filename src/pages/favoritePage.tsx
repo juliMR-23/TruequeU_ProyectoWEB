@@ -5,12 +5,18 @@ import { FiStar } from "react-icons/fi";
 import { useAuth } from "../hooks/useAuth";
 import StateMessage from "../components/ui/StateMessage";
 import { useNavigate } from "react-router-dom";
+import { useFavorites } from "../hooks/useFavorites";
+
 
 
 export default function FavoritesPage() {
   const { listings, loading } = useFavoriteListings();
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { isFavorite, toggle } = useFavorites();
+  const favoritedListings = listings.filter(l => isFavorite(l.id));
+
+
 
   if (loading) {
     return (
@@ -40,10 +46,9 @@ export default function FavoritesPage() {
     <main className="max-w-6xl mx-auto px-4 py-8">
       <h1 className="text-2xl text-eia-azul font-bold mb-2">Mis favoritos</h1>
       <p className="text-eia-gris text-sm mb-6">
-        {listings.length} {listings.length === 1 ? "publicación guardada" : "publicaciones guardadas"}
-      </p>
+        {favoritedListings.length} {favoritedListings.length === 1 ? "publicación guardada" : "publicaciones guardadas"}      </p>
 
-      {listings.length === 0
+      {favoritedListings.length === 0
         ? <main className="mx-auto max-w-2xl px-6 py-2">
           <StateMessage
             type="empty"
@@ -56,8 +61,13 @@ export default function FavoritesPage() {
         </main>
         : (
           <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {listings.map((l) => (
-              <ListingCard key={l.id} listing={l} />
+            {favoritedListings.map((l) => (
+              <ListingCard
+                key={l.id}
+                listing={l}
+                isFavorite={isFavorite(l.id)}
+                onToggle={toggle}
+              />
             ))}
           </section>
         )
