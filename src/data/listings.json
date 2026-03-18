@@ -3,7 +3,7 @@
     "id": 1,
     "title": "Calculadora Casio fx-991LA Plus",
     "description": "Calculadora científica casi nueva, la usé un semestre. Incluye funda original. Ideal para cálculo e ingeniería.",
-    "category": "Útiles académicos",
+    "category": "Útiles",
     "condition": "Usado",
     "price": 85000,
     "location": "Sede Las Palmas",
@@ -199,7 +199,7 @@
     "id": 8,
     "title": "Uniforme de laboratorio nuevo talla M",
     "description": "Bata blanca manga larga talla M, nunca usada. Incluye gafas de seguridad y guantes de nitrilo (caja de 50).",
-    "category": "Útiles académicos",
+    "category": "Útiles",
     "condition": "Nuevo",
     "price": 45000,
     "location": "Sede Zúñiga",
@@ -339,7 +339,7 @@
     "id": 13,
     "title": "Cuadernos universitarios x5",
     "description": "5 cuadernos de 100 hojas cuadriculados, sin usar. Los compré de más al inicio del semestre.",
-    "category": "Útiles académicos",
+    "category": "Útiles",
     "condition": "Nuevo",
     "price": 20000,
     "location": "Sede Las Palmas",
@@ -445,6 +445,6 @@
         "order": 2
       }
     ],
-    "ownerId": 11
+    "ownerId": 0
   }
 ]
