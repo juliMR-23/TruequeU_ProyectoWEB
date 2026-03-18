@@ -3,20 +3,20 @@ import { ListingStatusEnum, type Listing } from "../../types";
 import Badge from "../ui/Badge";
 import Button from "../ui/Button";
 import FavoriteButton from "../ui/FavoriteButton";
-import { useFavorites } from "../../hooks/useFavorites";
 import { LuCircleAlert } from "react-icons/lu";
 import { FiTrash2 } from "react-icons/fi";
 
 
 type Props = {
     listing: Listing;
-    onDelete?: (id: number) => void; // Prop opcional para borrar
+    isFavorite: boolean;
+    onToggle: (id: number) => void;
+    onDelete?: (id: number) => void; 
 }
 
-export default function ListingCard({ listing, onDelete }: Props) {
+export default function ListingCard({ listing, isFavorite, onToggle, onDelete }: Props) {
     const isSold: boolean = listing.status.toUpperCase() === ListingStatusEnum.sold;
     const isReserved: boolean = listing.status.toUpperCase() === ListingStatusEnum.reserved
-    const { isFavorite, toggle } = useFavorites();
     const navigate = useNavigate();
     // toma la primera imagen de la clase Listing, para poderla mostrar
     const coverImage = listing.images.find(img => img.order === 0) ?? listing.images[0];
@@ -58,7 +58,7 @@ export default function ListingCard({ listing, onDelete }: Props) {
             <div className="flex items-start justify-between gap-3">
                 <div>
                     {/* Titulo */}
-                    <h3 className="m-0 text-base font-bold text-lg">{listing.title}</h3>
+                    <h3 className="m-0 font-bold text-lg">{listing.title}</h3>
                     {/* Categoria */}
                     <span className="mt-1 uppercase tracking-widest text-xs text-eia-gris">{listing.category}</span>
                 </div>
@@ -82,8 +82,8 @@ export default function ListingCard({ listing, onDelete }: Props) {
                 </button>
                 <FavoriteButton
                     listingId={listing.id}
-                    isFavorite={isFavorite(listing.id)}
-                    onToggle={toggle}
+                    isFavorite={isFavorite}   
+                    onToggle={onToggle}          
                 />
 
             </div>
