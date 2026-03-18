@@ -51,8 +51,8 @@ export default function FilterBar({
         className="py-2 px-3 text-sm bg-surface border border-border rounded-xl text-text outline-none focus:border-eia-azul-claro transition"
       >
         <option value="">Todas las condiciones</option>
-        <option value="new">Nuevo</option>
-        <option value="used">Usado</option>
+        <option value="Nuevo">Nuevo</option>
+        <option value="Usado">Usado</option>
       </select>
 
       {/* Botón limpiar — solo aparece si hay filtros activos */}
