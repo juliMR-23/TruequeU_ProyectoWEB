@@ -1,10 +1,9 @@
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ListingStatusEnum, type Listing } from "../../types";
 import Badge from "../ui/Badge";
 import Button from "../ui/Button";
 import FavoriteButton from "../ui/FavoriteButton";
 import { useFavorites } from "../../hooks/useFavorites";
-import { FaFlag } from "react-icons/fa";
 import { LuCircleAlert } from "react-icons/lu";
 
 
@@ -44,58 +43,42 @@ export default function ListingCard({ listing }: Props) {
             <div className="flex items-start justify-between gap-3">
                 <div>
                     {/* Titulo */}
-                    <h3 className="m-0 text-base font-bold text-text">{listing.title}</h3>
+                    <h3 className="m-0 text-base font-bold text-lg">{listing.title}</h3>
                     {/* Categoria */}
-                    <span className="mt-1 text-xs text-muted">{listing.category}</span>
-                    {/* Descripción */}
-                    <p className="mt-1 text-xs text-muted">{listing.description}</p>
+                    <span className="mt-1 uppercase tracking-widest text-xs text-eia-gris">{listing.category}</span>
                 </div>
             </div>
-            <div className="mt-3 space-y-2 text-sm text-text">
-                <p className="m-0">
-                    {/* Condición */}
-                    <span className="font-bold">Condition:</span>{" "}
-                    <span className="text-muted">{listing.condition}</span>
-                </p>
-                <p className="m-0">
-                    {/* Ubicación */}
-                    <span className="font-bold">Location:</span>{" "}
-                    <span className="text-muted">
-                        {listing.location}
-                    </span>
-                </p>
+            <div className="flex justify-between my-3">
+                <div className="flex items-center gap-2 text-sm font-semibold text-eia-gris">
+                    <p className="text-lg text-eia-azul-claro">${listing.price}</p>
+                    <p>|</p>
+                    <p>{listing.condition}</p>
+                </div>
+                <button
+                    onClick={(e) => {
+                        e.preventDefault(); // evita comportamientos extraños o refresh
+                        e.stopPropagation(); //evita que interrumpa al otro boton (fav)
+                        navigate(`/report/${listing.id}`);
+                    }}
+                    className="ml-auto text-eia-gris hover:text-red-500 hover:cursor-pointer transition px-2 py-1 rounded-lg"
+                    title="Denunciar publicación"
+                >
+                    <LuCircleAlert className="w-5 h-5" />
+                </button>
+                <FavoriteButton
+                    listingId={listing.id}
+                    isFavorite={isFavorite(listing.id)}
+                    onToggle={toggle}
+                />
+
             </div>
             {/* Ir a detalles */}
-            <div className="my-3 rounded-btn  bg-surface px-1 py-2 text-sm font-medium shadow-card hover:bg-gray-50">
-                <Link to={`/details/${listing.id}`} className="text-eia-azul-claro font-extrabold">
-                    Details
+            <div className="my-2 w-full">
+                <Link to={`/details/${listing.id}`}>
+                    <Button variant="outline" className="w-full">Ver detalles</Button>
                 </Link>
             </div>
-            <div className="mt-auto flex items-center justify-between">
-                {/* precio */}
-                <p className="m-0 font-semibold text-text">${listing.price}</p>
-                {/* <Button variant="primary" disabled={isSold} onClick={() => onAddToCart(listing)}>
-          <FiShoppingCart />
-          {isSold ? "Unavailable" : "Add"}
-        </Button> */}
-                {/* Añadir/quitar de favoritos */}
-                <div className="flex items-center gap-1">
-                    <button
-                        onClick={() => navigate(`/report/${listing.id}`)}
-                        className="flex items-center gap-1 text-xs text-muted hover:text-red-500 transition px-2 py-1 rounded-lg hover:bg-red-50"
-                        title="Denunciar publicación"
-                    >
-                        <LuCircleAlert className="w-5 h-5" />
-                    </button>
-                    <div className="bottom-2 right-2">
-                        <FavoriteButton
-                            listingId={listing.id}
-                            isFavorite={isFavorite(listing.id)}
-                            onToggle={toggle}
-                        />
-                    </div>
-                </div>
-            </div>
+
         </article>
     )
 }
