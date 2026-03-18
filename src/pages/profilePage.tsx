@@ -79,8 +79,8 @@ export default function ProfilePage() {
     }
 
     return (
-        <main className="max-w-6xl flex flex-col items-center mx-auto px-6 py-12">
-            <div className="my-3 w-full max-w-3xl bg-white shadow-xl rounded-2xl border border-eia-azul/10 overflow-hidden">
+        <main className="max-w-6xl flex flex-col items-safe-center mx-auto px-6 py-12">
+            <div className="my-3 self-center w-full max-w-3xl bg-white shadow-xl rounded-2xl border border-eia-azul/10 overflow-hidden">
                 <div className="bg-eia-azul-claro py-10 flex flex-col items-center text-white">
                     <div className="bg-white p-4 rounded-full mb-4">
                         <FiUser className="h-20 w-20 text-eia-azul-claro" />
@@ -125,12 +125,12 @@ export default function ProfilePage() {
               type="empty"
               title="Aún no has publicado nada"
               description="Anímate a subir tu primer objeto para intercambiar con otros compañeros."
-              actionText="Crear mi primera publicación"
+              actionText="Crear publicación"
               onAction={() => navigate("/crearListing")}
             />
           </div>
         ) : (
-          <ListingList listings={myListings} />
+          <ListingList listings={myListings} onDelete={handleDeleteListing} />
         )}
       </section>
         </main>
