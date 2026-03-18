@@ -5,13 +5,15 @@ import Button from "../ui/Button";
 import FavoriteButton from "../ui/FavoriteButton";
 import { useFavorites } from "../../hooks/useFavorites";
 import { LuCircleAlert } from "react-icons/lu";
+import { FiTrash2 } from "react-icons/fi";
 
 
 type Props = {
     listing: Listing;
+    onDelete?: (id: number) => void; // Prop opcional para borrar
 }
 
-export default function ListingCard({ listing }: Props) {
+export default function ListingCard({ listing, onDelete }: Props) {
     const isSold: boolean = listing.status.toUpperCase() === ListingStatusEnum.sold;
     const isReserved: boolean = listing.status.toUpperCase() === ListingStatusEnum.reserved
     const { isFavorite, toggle } = useFavorites();
@@ -37,6 +39,19 @@ export default function ListingCard({ listing }: Props) {
                     }>
                         {listing.status.toUpperCase()}
                     </Badge>
+                    {/* Botón de eliminar (Solo si onDelete existe) */}
+                    {onDelete && (
+                        <button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                onDelete(listing.id);
+                            }}
+                            className="bg-white/90 p-2 rounded-full text-red-500 hover:bg-red-500 hover:text-white transition-colors shadow-sm"
+                            title="Eliminar publicación"
+                        >
+                            <FiTrash2 size={16} />
+                        </button>
+                    )}
                 </div>
             </div>
 
