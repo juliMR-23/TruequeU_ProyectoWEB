@@ -8,12 +8,14 @@ import { useState, useEffect } from "react";
 import ListingList from "../components/listings/ListingList";
 import { type Listing } from "../types";
 import baseListingsJson from "../data/listings.json";
+import { useFavorites } from "../hooks/useFavorites";
 
 export default function ProfilePage() {
     const navigate = useNavigate();
     //manejo de usuarios
     const { user, logout, loading } = useAuth();
     const [myListings, setMyListings] = useState<Listing[]>([]);
+    const { isFavorite, toggle } = useFavorites();
 
     useEffect(() => {
         if (!user) return;
@@ -130,7 +132,8 @@ export default function ProfilePage() {
             />
           </div>
         ) : (
-          <ListingList listings={myListings} onDelete={handleDeleteListing} />
+          <ListingList listings={myListings} isFavorite={isFavorite} // Pasamos la función del hook
+            onToggle={toggle} onDelete={handleDeleteListing} />
         )}
       </section>
         </main>
