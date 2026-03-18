@@ -5,6 +5,7 @@ import { type Listing } from "../types";
 import listings from "../data/listings.json"; // Datos base
 import Button from "../components/ui/Button";
 import { FaList } from "react-icons/fa";
+import StateMessage from "../components/ui/StateMessage";
 
 
 export default function PublicationPage() {
@@ -23,6 +24,15 @@ export default function PublicationPage() {
     setAllListings([...userListings, ...baseListings]);
   }, []);
 
+  if (allListings.length === 0) return (
+    <main className="mx-auto max-w-2xl px-6 py-24">
+      <StateMessage
+        title="Aún no hay publicaciones"
+        description="Espera a que alguien haga una publicación o crea una tú."
+        type="empty" />
+    </main>
+  );
+
   return (
     <main className="max-w-6xl mx-auto px-4 py-8">
       {/* HEADER: Flexbox para alinear título y botón */}
@@ -34,25 +44,9 @@ export default function PublicationPage() {
           <Button variant="outline">Crear Publicación</Button>
         </Link>
       </header>
-
-      {allListings.length === 0
-        ? <EmptyPublications />
-        : (
-          < ListingList listings={allListings} />
-        )
-      }
+      < ListingList listings={allListings} />
       {/* allListings pasa datos del JSON + datos de local storage */}
 
     </main>
-  );
-}
-
-function EmptyPublications() {
-  return (//manejo de empty states
-    <div className="flex flex-col items-center justify-center py-25 text-eia-gris gap-4">
-      <FaList className="w-12 h-12" />
-      <p className="text-3xl font-bold text-eia-azul">Todavía no hay publicaciones</p>
-      <p className="text-sm">Espera a que alguien haga una publicación o crea una tú.</p>
-    </div>
   );
 }

@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { FiPlusCircle, FiType, FiFileText, FiImage, FiPlus, FiTrash2 } from "react-icons/fi";
+import { BsPersonSlash } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/ui/Button";
 import { ListingStatusEnum, type Listing, type ListingImage } from "../types";
+import { useAuth } from "../hooks/useAuth";
+import StateMessage from "../components/ui/StateMessage";
 
 
 export default function AddListingPage() {
     const navigate = useNavigate();
+    const { user, loading } = useAuth();
 
     // agrupando los campos, menos imágenes que es más complejo
     const [formData, setFormData] = useState({
@@ -14,7 +18,7 @@ export default function AddListingPage() {
         category: "Libros",
         condition: "Nuevo",
         description: "",
-        price: 0,           // Nuevo campo
+        price: 0,
         location: "Sede Las Palmas",
     });
 
@@ -22,12 +26,35 @@ export default function AddListingPage() {
     const [imageUrls, setImageUrls] = useState<string[]>([""]);
     const [errors, setErrors] = useState<Record<string, string>>({});
 
+    if (loading) return (
+        <div className="py-20">
+            <StateMessage type="loading" title="Cargando la página" />
+        </div>
+    );
+
+    if (!user) return (
+        <main className="mx-auto max-w-2xl px-6 py-24">
+            <StateMessage
+                type="empty"
+                title="Ingresa para crear publicaciones"
+                description="Debes ser parte de la comunidad EIA para publicar tus trueques."
+                actionText="Registrarse"
+                onAction={() => navigate("/signup")}
+                icon={<BsPersonSlash size={32} className="text-eia-gris" />}
+            />
+        </main>
+    );
+
     const validate = () => {
         const newErrors: Record<string, string> = {};
         if (formData.title.trim().length < 8 || formData.title.trim().length > 40)
             newErrors.title = "El título debe tener entre 8 y 40 caracteres";
-        if (formData.description.trim().length < 12 || formData.title.trim().length > 150)
-            newErrors.description = "La descripción debe tener entre 20 y 150 caracteres";
+        if (formData.description.trim().length < 20 || formData.description.trim().length > 500)
+            newErrors.description = "La descripción debe tener entre 20 y 500 caracteres";
+        if (formData.price < 0)
+            newErrors.price = "El precio no puede ser negativo";
+        else if (formData.price > 10000000)
+            newErrors.price = "El precio supera el tope (max:10.000.000)";
 
         // trim para que no acepte vacío ni solo espacios
         const validImages = imageUrls.filter(url => url.trim() !== "");
@@ -85,14 +112,12 @@ export default function AddListingPage() {
             price: formData.price,
             location: formData.location,
             status: ListingStatusEnum.available, // Usando Enum de types.ts
-            ownerId: 12345, // ID ficticio del usuario, por ahora sin verificación real
+            ownerId: user!.id, //id del usuario logueado, no va a ser null porque arriba se maneja emptyState
             images: validImages
         };
 
         // Persistencia
-        const existingData = localStorage.getItem("eia_listings");
-        const listings = existingData ? JSON.parse(existingData) : [];
-
+        const listings = JSON.parse(localStorage.getItem("eia_listings") || "[]");
         localStorage.setItem("eia_listings", JSON.stringify([newListing, ...listings]));
 
         navigate("/publicaciones");
@@ -200,13 +225,13 @@ export default function AddListingPage() {
                             <div className="relative">
                                 <span className="absolute left-4 top-3 text-eia-gris font-bold">$</span>
                                 <input
-                                    className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-10 py-3 text-md outline-none focus:border-eia-azul-claro/30 transition-all"
+                                    className={`w-full rounded-xl border-2 bg-eia-fondo px-10 py-3 text-md outline-none transition-all ${errors.price ? 'border-danger' : 'border-eia-fondo'}`}
                                     type="number"
                                     placeholder="0"
-                                    min="0"
                                     value={formData.price}
                                     onChange={(e) => setFormData({ ...formData, price: Number(e.target.value) })}
                                 />
+                                {errors.price && (<span className="text-danger text-xs font-bold ml-1">{errors.price}</span>)}
                             </div>
                         </label>
 
