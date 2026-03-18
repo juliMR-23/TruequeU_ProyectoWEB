@@ -15,23 +15,23 @@ export default function ListingDetailPage() {
     const { isFavorite, toggle } = useFavorites();
 
 
-    if (loading) 
-         return (
-              <div className="py-20">
+    if (loading)
+        return (
+            <div className="py-20">
                 <StateMessage type="loading" title="Cargando detalles" description="Buscando la publicación" />
-              </div>
-            );
+            </div>
+        );
 
     if (notFound || !listing) return (
-          <main className="mx-auto max-w-2xl px-6 py-24">
+        <main className="mx-auto max-w-2xl px-6 py-24">
             <StateMessage
-              type="empty"
-              title="Publicación no encontrada"
-              actionText="Volver"
-              onAction={() => navigate(-1)}
+                type="empty"
+                title="Publicación no encontrada"
+                actionText="Volver"
+                onAction={() => navigate(-1)}
             />
-          </main>
-        );
+        </main>
+    );
 
     const isSold = listing.status.toUpperCase() === ListingStatusEnum.sold;
     const isReserved = listing.status.toUpperCase() === ListingStatusEnum.reserved;
@@ -95,18 +95,29 @@ export default function ListingDetailPage() {
                 <p className="text-sm text-muted leading-relaxed">{listing.description}</p>
             </div>
 
-            {/* Botón contactar */}
-            <div className="mt-8">
+            {/* Botón contactar y denunciar */}
+            <div className="mt-8 flex gap-1">
                 <button
                     disabled={isSold || isReserved}
-                    onClick={() => navigate(`/chat/${listing.id}`)}
-                    className="w-full py-3 rounded-2xl font-semibold text-white bg-eia-azul-claro hover:opacity-90 cursor-pointer transition disabled:opacity-40 disabled:cursor-not-allowed"
+                    onClick={() => navigate(`/chat/${listing.ownerId}`)}
+                    className="flex-2 py-3 rounded-2xl font-semibold text-white bg-eia-azul-claro hover:opacity-90 cursor-pointer transition disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                     {isSold
                         ? "No disponible"
                         : isReserved
                             ? "Espera a que el producto vuelva a estar disponible o sea vendido"
                             : "Contacta al vendedor"}
+                </button>
+                <button
+                    onClick={(e) => {
+                        e.preventDefault(); // evita comportamientos extraños o refresh
+                        e.stopPropagation(); //evita que interrumpa al otro boton (contactar)
+                        navigate(`/report/${listing.id}`);
+                    }}
+                    className="flex-1 py-3 rounded-2xl font-semibold text-white bg-danger hover:opacity-90 cursor-pointer transition disabled:opacity-40"
+                    title="Denunciar publicación"
+                >
+                    Denunciar publicación
                 </button>
             </div>
 
