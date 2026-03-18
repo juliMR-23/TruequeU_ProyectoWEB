@@ -227,8 +227,7 @@ export default function AddListingPage() {
                                 <input
                                     className={`w-full rounded-xl border-2 bg-eia-fondo px-10 py-3 text-md outline-none transition-all ${errors.price ? 'border-danger' : 'border-eia-fondo'}`}
                                     type="number"
-                                    placeholder="0"
-                                    value={formData.price}
+                                    placeholder="000"
                                     onChange={(e) => setFormData({ ...formData, price: Number(e.target.value) })}
                                 />
                                 {errors.price && (<span className="text-danger text-xs font-bold ml-1">{errors.price}</span>)}

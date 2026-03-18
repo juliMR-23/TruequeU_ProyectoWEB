@@ -11,7 +11,7 @@ type Props = {
     listing: Listing;
     isFavorite: boolean;
     onToggle: (id: number) => void;
-    onDelete?: (id: number) => void; 
+    onDelete?: (id: number) => void;
 }
 
 export default function ListingCard({ listing, isFavorite, onToggle, onDelete }: Props) {
@@ -65,7 +65,7 @@ export default function ListingCard({ listing, isFavorite, onToggle, onDelete }:
             </div>
             <div className="flex justify-between my-3">
                 <div className="flex items-center gap-2 text-sm font-semibold text-eia-gris">
-                    <p className="text-lg text-eia-azul-claro">${listing.price}</p>
+                    <p className="text-lg text-eia-azul-claro"> ${listing.price.toLocaleString("es-CO")}</p>
                     <p>|</p>
                     <p>{listing.condition}</p>
                 </div>
@@ -82,8 +82,8 @@ export default function ListingCard({ listing, isFavorite, onToggle, onDelete }:
                 </button>
                 <FavoriteButton
                     listingId={listing.id}
-                    isFavorite={isFavorite}   
-                    onToggle={onToggle}          
+                    isFavorite={isFavorite}
+                    onToggle={onToggle}
                 />
 
             </div>
