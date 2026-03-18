@@ -6,6 +6,7 @@ import { useFavorites } from "../hooks/useFavorites";
 import FavoriteButton from "../components/ui/FavoriteButton";
 import Badge from "../components/ui/Badge";
 import ImageCarousel from "../components/ui/ImageCarousel";
+import StateMessage from "../components/ui/StateMessage";
 
 export default function ListingDetailPage() {
     const { id } = useParams();
@@ -14,20 +15,23 @@ export default function ListingDetailPage() {
     const { isFavorite, toggle } = useFavorites();
 
 
-    if (loading) return (
-        <div className="flex justify-center items-center h-64 text-muted">
-            Cargando...
-        </div>
-    );
+    if (loading) 
+         return (
+              <div className="py-20">
+                <StateMessage type="loading" title="Cargando detalles" description="Buscando la publicación" />
+              </div>
+            );
 
     if (notFound || !listing) return (
-        <div className="flex flex-col items-center justify-center h-64 gap-3 text-muted">
-            <p className="text-lg">Publicación no encontrada</p>
-            <button onClick={() => navigate(-1)} className="text-sm underline">
-                Volver
-            </button>
-        </div>
-    );
+          <main className="mx-auto max-w-2xl px-6 py-24">
+            <StateMessage
+              type="empty"
+              title="Publicación no encontrada"
+              actionText="Volver"
+              onAction={() => navigate(-1)}
+            />
+          </main>
+        );
 
     const isSold = listing.status.toUpperCase() === ListingStatusEnum.sold;
     const isReserved = listing.status.toUpperCase() === ListingStatusEnum.reserved;
