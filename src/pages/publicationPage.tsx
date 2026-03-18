@@ -4,7 +4,6 @@ import ListingList from "../components/listings/ListingList";
 import { type Listing } from "../types";
 import listings from "../data/listings.json"; // Datos base
 import Button from "../components/ui/Button";
-import { FaList } from "react-icons/fa";
 import StateMessage from "../components/ui/StateMessage";
 
 
