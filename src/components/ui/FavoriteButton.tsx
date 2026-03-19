@@ -18,7 +18,7 @@ export default function FavoriteButton({ listingId, isFavorite, onToggle }: Prop
     >
       {isFavorite
         ? <FaStar className="text-yellow-500 w-5 h-5" />
-        : <FaRegStar className="text-gray-400 w-5 h-5 hover:text-yellow-300" />
+        : <FaRegStar className="text-eia-gris w-5 h-5 hover:text-yellow-300" />
       }
     </button>
   );

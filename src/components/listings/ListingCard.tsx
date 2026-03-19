@@ -39,19 +39,6 @@ export default function ListingCard({ listing, isFavorite, onToggle, onDelete }:
                     }>
                         {listing.status.toUpperCase()}
                     </Badge>
-                    {/* Botón de eliminar (Solo si onDelete existe) */}
-                    {onDelete && (
-                        <button
-                            onClick={(e) => {
-                                e.preventDefault();
-                                onDelete(listing.id);
-                            }}
-                            className="bg-white/90 p-2 rounded-full text-red-500 hover:bg-red-500 hover:text-white transition-colors shadow-sm"
-                            title="Eliminar publicación"
-                        >
-                            <FiTrash2 size={16} />
-                        </button>
-                    )}
                 </div>
             </div>
 
@@ -69,17 +56,33 @@ export default function ListingCard({ listing, isFavorite, onToggle, onDelete }:
                     <p>|</p>
                     <p>{listing.condition}</p>
                 </div>
-                <button
-                    onClick={(e) => {
-                        e.preventDefault(); // evita comportamientos extraños o refresh
-                        e.stopPropagation(); //evita que interrumpa al otro boton (fav)
-                        navigate(`/report/${listing.id}`);
-                    }}
-                    className="ml-auto text-eia-gris hover:text-red-500 hover:cursor-pointer transition px-2 py-1 rounded-lg"
-                    title="Denunciar publicación"
-                >
-                    <LuCircleAlert className="w-5 h-5" />
-                </button>
+                {/* Botón de eliminar (onDelete cuando está desde perfil), sino, pone botón de report */}
+                {onDelete
+                    ? <button
+                        onClick={(e) => {
+                            e.preventDefault();
+                            onDelete(listing.id);
+                        }}
+                        className="ml-auto px-2 text-eia-gris hover:text-danger hover:cursor-pointer transition-colors"
+                        title="Eliminar publicación"
+                    >
+                        <FiTrash2 className="w-5 h-5" />
+                    </button>
+                    : (
+                        <button
+                            onClick={(e) => {
+                                e.preventDefault(); // evita comportamientos extraños o refresh
+                                e.stopPropagation(); //evita que interrumpa al otro boton (fav)
+                                navigate(`/report/${listing.id}`);
+                            }}
+                            className="ml-auto text-eia-gris hover:text-red-500 hover:cursor-pointer transition px-2 py-1 rounded-lg"
+                            title="Denunciar publicación"
+                        >
+                            <LuCircleAlert className="w-5 h-5" />
+                        </button>
+                    )
+                }
+
                 <FavoriteButton
                     listingId={listing.id}
                     isFavorite={isFavorite}
