@@ -8,10 +8,10 @@ export default function Footer() {
         <div className="flex justify-between gap-8">
           
           <div className="flex flex-col gap-1 max-w-xl text-left">
-            <h2 className="text-eia-azul-claro font-bold tracking-widest text-xl">
+            <h2 className="text-white font-bold tracking-widest text-xl">
               TRUEQUE U
             </h2>
-            <p className="text-white/70 text-sm">
+            <p className="text-white/70 text-sm font-semibold">
               Fomentando la economía circular y el apoyo entre estudiantes de la Universidad EIA.
             </p>
           </div>
