@@ -64,22 +64,27 @@ export default function SignUpPage() {
 
     return (
         <main className="mx-auto max-w-4xl px-6 py-12">
-            <section className="bg-white shadow-xl rounded-2xl border border-eia-azul/10 overflow-hidden">
-                <div className="bg-eia-azul-claro py-6 px-10 text-white flex items-center gap-3">
-                    <FiUserPlus size={28} />
-                    <h1 className="text-2xl font-bold tracking-tight">Crear una nueva cuenta</h1>
+            <section className="lg:flex bg-white shadow-xl rounded-2xl border border-eia-azul/10 overflow-hidden">
+                <div className="lg:w-[30%] bg-eia-azul-claro py-6 px-10 text-white flex flex-row lg:flex-col items-center justify-center gap-3">
+                    <FiUserPlus className="h-5 w-5 lg:h-12 lg:w-12" />
+                    <h1 className="text-center text-2xl font-bold tracking-tight">Crear una nueva cuenta</h1>
                 </div>
 
                 <div className="p-10">
-                    <header className="mb-8">
+                    <header className="mb-8 text-center">
                         <h2 className="text-eia-azul font-bold text-2xl">Únete a TruequeU</h2>
                         <p className="text-tx-suave">Regístrate con tu correo institucional para comenzar.</p>
+                        <p className="mt-3 text-eia-gris text-xs italic">
+                            <span className="text-danger">*</span> Campos obligatorios
+                        </p>
                     </header>
 
                     <form className="grid grid-cols-1 md:grid-cols-2 gap-6" onSubmit={onSubmit}>
                         {/* Nombre ocupa todo el ancho */}
                         <label className="flex flex-col gap-1.5 md:col-span-2">
-                            <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">Nombre Completo</span>
+                            <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">
+                                Nombre Completo<span className="text-danger">*</span>
+                                </span>
                             <div className="relative">
                                 <FiUser className="absolute left-4 top-4 text-eia-gris" />
                                 <input
@@ -97,7 +102,9 @@ export default function SignUpPage() {
 
                         {/* Email y Carrera en la misma fila */}
                         <label className="flex flex-col gap-1.5">
-                            <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">Correo Institucional</span>
+                            <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">
+                                Correo Institucional<span className="text-danger">*</span>
+                                </span>
                             <div className="relative">
                                 <FiMail className="absolute left-4 top-4 text-eia-gris" />
                                 <input
@@ -114,7 +121,9 @@ export default function SignUpPage() {
                         </label>
 
                         <label className="flex flex-col gap-1.5">
-                            <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">Carrera</span>
+                            <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">
+                                Carrera<span className="text-danger">*</span>
+                                </span>
                             <div className="relative">
                                 <FiBookOpen className="absolute left-4 top-4 text-eia-gris" />
                                 <input
@@ -132,7 +141,9 @@ export default function SignUpPage() {
 
                         {/* Password ocupa todo el ancho */}
                         <label className="flex flex-col gap-1.5 md:col-span-2">
-                            <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">Contraseña</span>
+                            <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">
+                                Contraseña<span className="text-danger">*</span>
+                                </span>
                             <div className="relative">
                                 <FiLock className="absolute left-4 top-4 text-eia-gris" />
                                 <input

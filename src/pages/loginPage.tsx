@@ -57,21 +57,26 @@ export default function LoginPage() {
 
     return (
         <main className="mx-auto max-w-4xl px-6 py-12">
-            <section className="bg-white shadow-xl rounded-2xl border border-eia-azul/10 overflow-hidden">
-                <div className="bg-eia-azul-claro py-6 px-10 text-white flex items-center gap-3">
-                    <FiLogIn size={28} />
-                    <h1 className="text-2xl font-bold tracking-tight">Acceso al Sistema</h1>
+            <section className="lg:flex bg-white shadow-xl rounded-2xl border border-eia-azul/10 overflow-hidden">
+                <div className="lg:w-[40%] bg-eia-azul-claro py-6 px-10 text-white gap-3 flex flex-row lg:flex-col items-center justify-center">
+                    <FiLogIn className="h-5 w-5 lg:h-12 lg:w-12" />
+                    <h1 className="text-2xl text-center font-bold tracking-tight">Acceso al Sistema</h1>
                 </div>
 
-                <div className="p-10 flex flex-col items-center">
+                <div className="p-10 flex flex-col items-center max-w-5xl w-full">
                     <header className="mb-8 text-center">
                         <h2 className="text-eia-azul font-bold text-2xl">Bienvenido de nuevo</h2>
                         <p className="text-tx-suave">Ingresa tus datos institucionales para continuar.</p>
+                        <p className="mt-3 text-xs text-eia-gris italic">
+                            <span className="text-danger">*</span> Campos obligatorios
+                        </p>
                     </header>
 
                     <form className="w-full max-w-2xl flex flex-col gap-6" onSubmit={onSubmit}>
                         <label className="flex flex-col gap-1.5">
-                            <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">Correo Institucional</span>
+                            <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">
+                                Correo Institucional<span className="text-danger">*</span>
+                            </span>
                             <div className="relative">
                                 <FiMail className="absolute left-4 top-4 text-eia-gris" />
                                 <input
@@ -94,7 +99,9 @@ export default function LoginPage() {
                         </label>
 
                         <label className="flex flex-col gap-1.5">
-                            <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">Contraseña</span>
+                            <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">
+                                Contraseña<span className="text-danger">*</span>
+                            </span>
                             <div className="relative">
                                 <FiLock className="absolute left-4 top-4 text-eia-gris" />
                                 <input

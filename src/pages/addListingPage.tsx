@@ -132,12 +132,20 @@ export default function AddListingPage() {
                 </div>
 
                 <div className="p-10">
+                    <header className="mb-8 text-center">
+                        {/* //info del inicio */}
+                        <p className="text-xs text-eia-gris">
+                            <span className="text-danger">*</span> Campos obligatorios
+                        </p>
+                    </header>
                     {/* grid-cols-1 md:grid-cols-2 maneja el diseño responsivo (móvil/escritorio) */}
                     <form className="grid grid-cols-1 md:grid-cols-2 gap-8" onSubmit={onSubmit}>
 
                         {/* md:col-span-2 hace que el campo ocupe el ancho completo en pantallas grandes */}
                         <label className="flex flex-col gap-1.5 md:col-span-2">
-                            <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">TÍTULO DEL OBJETO</span>
+                            <span className="text-xs font-bold tracking-wider text-eia-azul-claro ml-1">
+                                TÍTULO DEL OBJETO<span className="text-danger">*</span>
+                            </span>
                             <div className="relative">
                                 {/* posición absoluta para que "flote" */}
                                 <FiType className="absolute left-4 top-4 text-eia-gris" />
@@ -153,7 +161,9 @@ export default function AddListingPage() {
                         </label>
 
                         <label className="flex flex-col gap-1.5">
-                            <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">CATEGORÍA</span>
+                            <span className="text-xs font-bold tracking-wider text-eia-azul-claro ml-1">
+                                CATEGORÍA<span className="text-danger">*</span> 
+                            </span>
                             <select
                                 className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-4 py-3 text-md outline-none"
                                 value={formData.category}
@@ -168,7 +178,9 @@ export default function AddListingPage() {
                         </label>
 
                         <label className="flex flex-col gap-1.5">
-                            <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">ESTADO</span>
+                            <span className="text-xs font-bold tracking-wider text-eia-azul-claro ml-1">
+                                ESTADO<span className="text-danger">*</span> 
+                                </span>
                             <select
                                 className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-4 py-3 text-md outline-none"
                                 value={formData.condition}
@@ -180,7 +192,9 @@ export default function AddListingPage() {
                         </label>
 
                         <div className="md:col-span-2 flex flex-col gap-3">
-                            <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">IMÁGENES DEL OBJETO (MÍNIMO 3)</span>
+                            <span className="text-xs font-bold tracking-wider text-eia-azul-claro ml-1">
+                                IMÁGENES DEL OBJETO (MÍNIMO 3)<span className="text-danger">*</span> 
+                                </span>
                             <div className="grid grid-cols-1 gap-3">
                                 {imageUrls.map((url, index) => (
                                     <div key={index} className="flex gap-2">
@@ -207,7 +221,9 @@ export default function AddListingPage() {
                         </div>
 
                         <label className="flex flex-col gap-1.5 md:col-span-2">
-                            <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">DESCRIPCIÓN</span>
+                            <span className="text-xs font-bold tracking-wider text-eia-azul-claro ml-1">
+                                DESCRIPCIÓN<span className="text-danger">*</span> 
+                                </span>
                             <div className="relative">
                                 <FiFileText className="absolute left-4 top-4 text-eia-gris" />
                                 <textarea
@@ -221,7 +237,9 @@ export default function AddListingPage() {
                         </label>
 
                         <label className="flex flex-col gap-1.5">
-                            <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">PRECIO (COP)</span>
+                            <span className="text-xs font-bold tracking-wider text-eia-azul-claro ml-1">
+                                PRECIO (COP)<span className="text-danger">*</span> 
+                            </span>
                             <div className="relative">
                                 <span className="absolute left-4 top-3 text-eia-gris font-bold">$</span>
                                 <input
@@ -234,9 +252,11 @@ export default function AddListingPage() {
                             </div>
                         </label>
 
-                        {/* UBICACIÓN / CAMPUS */}
+                        {/* UBICACIÓN */}
                         <label className="flex flex-col gap-1.5">
-                            <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">SEDE / CAMPUS</span>
+                            <span className="text-xs font-bold tracking-wider text-eia-azul-claro ml-1">
+                                SEDE / CAMPUS<span className="text-danger">*</span> 
+                            </span>
                             <select
                                 className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-4 py-3 text-md outline-none focus:border-eia-azul-claro/30 transition-all"
                                 value={formData.location}
