@@ -152,7 +152,7 @@ export default function AddListingPage() {
                                 {/* posición absoluta para que "flote" */}
                                 <FiType className="absolute left-4 top-4 text-eia-gris" />
                                 <input
-                                    className={`w-full rounded-xl border-2 bg-eia-fondo px-12 py-3 text-md outline-none transition-all ${errors.title ? 'border-danger' : 'border-eia-fondo'}`}
+                                    className={`w-full rounded-xl border-2 px-12 py-3 text-md outline-none transition-all ${errors.title ? 'border-danger bg-danger/5' : 'bg-eia-fondo border-eia-fondo'}`}
                                     type="text" placeholder="Ej. Libro de Cálculo de Stewart"
                                     value={formData.title}
                                     // Sincronización
@@ -206,7 +206,7 @@ export default function AddListingPage() {
                                         <div className="relative flex-grow">
                                             <FiImage className="absolute left-4 top-4 text-eia-gris" />
                                             <input
-                                                className={`w-full rounded-xl border-2 bg-eia-fondo px-12 py-3 text-md outline-none transition-all ${errors.images ? 'border-danger/30' : 'border-eia-fondo'}`}
+                                                className={`w-full rounded-xl border-2 px-12 py-3 text-md outline-none transition-all ${errors.images ? 'border-danger/5 bg-danger/5' : 'bg-eia-fondo border-eia-fondo'}`}
                                                 type="url" placeholder="https://..."
                                                 value={url}
                                                 onChange={(e) => {
@@ -223,7 +223,7 @@ export default function AddListingPage() {
                                     </div>
                                 ))}
                             </div>
-                            <button type="button" onClick={addImageField} className="flex items-center gap-2 text-eia-azul font-bold text-sm mt-2 hover:opacity-70">
+                            <button type="button" onClick={addImageField} className="flex items-center gap-2 text-eia-azul font-bold text-sm mt-1 hover:text-eia-gris">
                                 <FiPlus /> Agregar otra imagen
                             </button>
                             {errors.images && <span className="text-danger text-xs font-bold ml-1">{errors.images}</span>}
@@ -236,7 +236,7 @@ export default function AddListingPage() {
                             <div className="relative">
                                 <FiFileText className="absolute left-4 top-4 text-eia-gris" />
                                 <textarea
-                                    className={`w-full rounded-xl border-2 bg-eia-fondo px-12 py-3 text-md outline-none transition-all min-h-[120px] ${errors.description ? 'border-danger' : 'border-eia-fondo'}`}
+                                    className={`w-full rounded-xl border-2 px-12 py-3 text-md outline-none transition-all min-h-[120px] ${errors.description ? 'border-danger bg-danger/5' : 'bg-eia-fondo border-eia-fondo'}`}
                                     placeholder="Describe detalles, marcas de uso o especificaciones..."
                                     value={formData.description}
                                     onChange={(e) => {
@@ -255,7 +255,7 @@ export default function AddListingPage() {
                             <div className="relative">
                                 <span className="absolute left-4 top-3 text-eia-gris font-bold">$</span>
                                 <input
-                                    className={`w-full rounded-xl border-2 bg-eia-fondo px-10 py-3 text-md outline-none transition-all ${errors.price ? 'border-danger' : 'border-eia-fondo'}`}
+                                    className={`w-full rounded-xl border-2 px-10 py-3 text-md outline-none transition-all ${errors.price ? 'border-danger bg-danger/5' : 'bg-eia-fondo border-eia-fondo'}`}
                                     type="number"
                                     onChange={(e) => {
                                         setFormData({ ...formData, price: Number(e.target.value) })
