@@ -128,19 +128,18 @@ export default function AddListingPage() {
     return (
         <main className="mx-auto max-w-4xl px-6 py-12">
             <section className="bg-white shadow-xl rounded-2xl border border-eia-azul/10 overflow-hidden">
-                <div className="justify-center bg-eia-azul-claro py-6 px-10 text-white flex items-center gap-3">
-                    <FiPlusCircle size={28} />
-                    <h1 className="text-2xl font-bold tracking-tight">Nueva Publicación</h1>
+                <div className="flex md:flex-row flex-col justify-between bg-eia-azul-claro py-6 px-10 text-white items-center">
+                    <div className="flex items-center gap-2">
+                        <FiPlusCircle size={28} />
+                        <h1 className="text-2xl font-bold tracking-tight">Nueva Publicación</h1>
+                    </div>
+                    <span className="text-[10px] opacity-85 italic tracking-widest">
+                        <span className="text-danger text-sm font-bold">*</span> Campos obligatorios
+                    </span>
                 </div>
-                
 
-                <div className="px-10">
-                    <header className="py-3 text-center">
-                        {/* //info del inicio */}
-                        <p className="text-xs text-eia-gris">
-                            <span className="text-danger">*</span> Campos obligatorios
-                        </p>
-                    </header>
+
+                <div className="px-10 py-8">
                     {/* grid-cols-1 md:grid-cols-2 para diseño responsive (móvil/escritorio) */}
                     <form className="grid grid-cols-1 md:grid-cols-2 gap-8" onSubmit={onSubmit}>
 
@@ -242,7 +241,7 @@ export default function AddListingPage() {
                                     value={formData.description}
                                     onChange={(e) => {
                                         setFormData({ ...formData, description: e.target.value })
-                                        if(errors.description) setErrors(prev => ({ ...prev, description: "" }))
+                                        if (errors.description) setErrors(prev => ({ ...prev, description: "" }))
                                     }}
                                 />
                             </div>
@@ -281,7 +280,7 @@ export default function AddListingPage() {
                                 <option value="Sede Zúñiga">Sede Zúñiga</option>
                             </select>
                         </label>
-                        <div className="md:col-span-2 mt-8 flex flex-col md:flex-row gap-4 justify-center border-t pt-8 border-eia-fondo">
+                        <div className="flex flex-col md:flex-row md:col-span-2 gap-4 justify-center items-center border-t pt-8 border-eia-fondo">
                             <Button type="submit" variant="primary" className="w-full max-w-xs">Publicar Objeto</Button>
                             {/* navigate(-1) es cosa de react-router, para volver a la pág anterior */}
                             <Button type="button" variant="outline" className="w-full max-w-xs" onClick={() => navigate(-1)}>Cancelar</Button>
