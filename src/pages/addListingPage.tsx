@@ -55,6 +55,8 @@ export default function AddListingPage() {
             newErrors.price = "El precio no puede ser negativo";
         else if (formData.price > 10000000)
             newErrors.price = "El precio supera el tope (max:10.000.000)";
+        else if (!formData.price)
+            newErrors.price = "Ingrese precio para el producto"
 
         // trim para que no acepte vacío ni solo espacios
         const validImages = imageUrls.filter(url => url.trim() !== "");
@@ -126,19 +128,20 @@ export default function AddListingPage() {
     return (
         <main className="mx-auto max-w-4xl px-6 py-12">
             <section className="bg-white shadow-xl rounded-2xl border border-eia-azul/10 overflow-hidden">
-                <div className="bg-eia-azul-claro py-6 px-10 text-white flex items-center gap-3">
+                <div className="justify-center bg-eia-azul-claro py-6 px-10 text-white flex items-center gap-3">
                     <FiPlusCircle size={28} />
                     <h1 className="text-2xl font-bold tracking-tight">Nueva Publicación</h1>
                 </div>
+                
 
-                <div className="p-10">
-                    <header className="mb-8 text-center">
+                <div className="px-10">
+                    <header className="py-3 text-center">
                         {/* //info del inicio */}
                         <p className="text-xs text-eia-gris">
                             <span className="text-danger">*</span> Campos obligatorios
                         </p>
                     </header>
-                    {/* grid-cols-1 md:grid-cols-2 maneja el diseño responsivo (móvil/escritorio) */}
+                    {/* grid-cols-1 md:grid-cols-2 para diseño responsive (móvil/escritorio) */}
                     <form className="grid grid-cols-1 md:grid-cols-2 gap-8" onSubmit={onSubmit}>
 
                         {/* md:col-span-2 hace que el campo ocupe el ancho completo en pantallas grandes */}
@@ -154,7 +157,10 @@ export default function AddListingPage() {
                                     type="text" placeholder="Ej. Libro de Cálculo de Stewart"
                                     value={formData.title}
                                     // Sincronización
-                                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                                    onChange={(e) => {
+                                        setFormData({ ...formData, title: e.target.value })
+                                        if (errors.title) setErrors(prev => ({ ...prev, title: "" }))
+                                    }}
                                 />
                             </div>
                             {errors.title && <span className="text-danger text-xs font-bold ml-1">{errors.title}</span>}
@@ -162,7 +168,7 @@ export default function AddListingPage() {
 
                         <label className="flex flex-col gap-1.5">
                             <span className="text-xs font-bold tracking-wider text-eia-azul-claro ml-1">
-                                CATEGORÍA<span className="text-danger">*</span> 
+                                CATEGORÍA<span className="text-danger">*</span>
                             </span>
                             <select
                                 className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-4 py-3 text-md outline-none"
@@ -179,8 +185,8 @@ export default function AddListingPage() {
 
                         <label className="flex flex-col gap-1.5">
                             <span className="text-xs font-bold tracking-wider text-eia-azul-claro ml-1">
-                                ESTADO<span className="text-danger">*</span> 
-                                </span>
+                                ESTADO<span className="text-danger">*</span>
+                            </span>
                             <select
                                 className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-4 py-3 text-md outline-none"
                                 value={formData.condition}
@@ -193,8 +199,8 @@ export default function AddListingPage() {
 
                         <div className="md:col-span-2 flex flex-col gap-3">
                             <span className="text-xs font-bold tracking-wider text-eia-azul-claro ml-1">
-                                IMÁGENES DEL OBJETO (MÍNIMO 3)<span className="text-danger">*</span> 
-                                </span>
+                                IMÁGENES DEL OBJETO (MÍNIMO 3)<span className="text-danger">*</span>
+                            </span>
                             <div className="grid grid-cols-1 gap-3">
                                 {imageUrls.map((url, index) => (
                                     <div key={index} className="flex gap-2">
@@ -203,7 +209,11 @@ export default function AddListingPage() {
                                             <input
                                                 className={`w-full rounded-xl border-2 bg-eia-fondo px-12 py-3 text-md outline-none transition-all ${errors.images ? 'border-danger/30' : 'border-eia-fondo'}`}
                                                 type="url" placeholder="https://..."
-                                                value={url} onChange={(e) => updateImageUrl(index, e.target.value)}
+                                                value={url}
+                                                onChange={(e) => {
+                                                    updateImageUrl(index, e.target.value)
+                                                    if (errors.images) setErrors(prev => ({ ...prev, images: "" }))
+                                                }}
                                             />
                                         </div>
                                         {imageUrls.length > 1 && (
@@ -222,15 +232,18 @@ export default function AddListingPage() {
 
                         <label className="flex flex-col gap-1.5 md:col-span-2">
                             <span className="text-xs font-bold tracking-wider text-eia-azul-claro ml-1">
-                                DESCRIPCIÓN<span className="text-danger">*</span> 
-                                </span>
+                                DESCRIPCIÓN<span className="text-danger">*</span>
+                            </span>
                             <div className="relative">
                                 <FiFileText className="absolute left-4 top-4 text-eia-gris" />
                                 <textarea
                                     className={`w-full rounded-xl border-2 bg-eia-fondo px-12 py-3 text-md outline-none transition-all min-h-[120px] ${errors.description ? 'border-danger' : 'border-eia-fondo'}`}
                                     placeholder="Describe detalles, marcas de uso o especificaciones..."
                                     value={formData.description}
-                                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                                    onChange={(e) => {
+                                        setFormData({ ...formData, description: e.target.value })
+                                        if(errors.description) setErrors(prev => ({ ...prev, description: "" }))
+                                    }}
                                 />
                             </div>
                             {errors.description && <span className="text-danger text-xs font-bold ml-1">{errors.description}</span>}
@@ -238,15 +251,17 @@ export default function AddListingPage() {
 
                         <label className="flex flex-col gap-1.5">
                             <span className="text-xs font-bold tracking-wider text-eia-azul-claro ml-1">
-                                PRECIO (COP)<span className="text-danger">*</span> 
+                                PRECIO (COP)<span className="text-danger">*</span>
                             </span>
                             <div className="relative">
                                 <span className="absolute left-4 top-3 text-eia-gris font-bold">$</span>
                                 <input
                                     className={`w-full rounded-xl border-2 bg-eia-fondo px-10 py-3 text-md outline-none transition-all ${errors.price ? 'border-danger' : 'border-eia-fondo'}`}
                                     type="number"
-                                    placeholder="000"
-                                    onChange={(e) => setFormData({ ...formData, price: Number(e.target.value) })}
+                                    onChange={(e) => {
+                                        setFormData({ ...formData, price: Number(e.target.value) })
+                                        if (errors.price) setErrors(prev => ({ ...prev, price: "" }))
+                                    }}
                                 />
                                 {errors.price && (<span className="text-danger text-xs font-bold ml-1">{errors.price}</span>)}
                             </div>
@@ -255,7 +270,7 @@ export default function AddListingPage() {
                         {/* UBICACIÓN */}
                         <label className="flex flex-col gap-1.5">
                             <span className="text-xs font-bold tracking-wider text-eia-azul-claro ml-1">
-                                SEDE / CAMPUS<span className="text-danger">*</span> 
+                                SEDE / CAMPUS<span className="text-danger">*</span>
                             </span>
                             <select
                                 className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-4 py-3 text-md outline-none focus:border-eia-azul-claro/30 transition-all"
