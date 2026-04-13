@@ -82,7 +82,7 @@ export default function LoginPage() {
                                 <input
                                     className={`w-full rounded-xl border-2 px-12 py-3 text-md outline-none transition-all ${errors.email
                                         ? "border-danger bg-danger/5"
-                                        : "border-eia-fondo bg-eia-fondo"
+                                        : "border-eia-fondo bg-eia-fondo focus:border-eia-azul-claro"
                                         }`}
                                     type="email" placeholder="usuario@eia.edu.co"
                                     value={email}
@@ -107,7 +107,7 @@ export default function LoginPage() {
                                 <input
                                     className={`w-full rounded-xl border-2 px-12 py-3 text-md outline-none transition-all ${errors.password
                                         ? "border-danger bg-danger/5"
-                                        : "border-eia-fondo bg-eia-fondo"
+                                        : "border-eia-fondo bg-eia-fondo focus:border-eia-azul-claro"
                                         }`}
                                     type="password" placeholder="••••••••"
                                     value={password}

@@ -152,7 +152,7 @@ export default function AddListingPage() {
                                 {/* posición absoluta para que "flote" */}
                                 <FiType className="absolute left-4 top-4 text-eia-gris" />
                                 <input
-                                    className={`w-full rounded-xl border-2 px-12 py-3 text-md outline-none transition-all ${errors.title ? 'border-danger bg-danger/5' : 'bg-eia-fondo border-eia-fondo'}`}
+                                    className={`w-full rounded-xl border-2 px-12 py-3 text-md outline-none transition-all ${errors.title ? 'border-danger bg-danger/5' : 'bg-eia-fondo border-eia-fondo focus:border-eia-azul-claro'}`}
                                     type="text" placeholder="Ej. Libro de Cálculo de Stewart"
                                     value={formData.title}
                                     // Sincronización
@@ -170,7 +170,7 @@ export default function AddListingPage() {
                                 CATEGORÍA<span className="text-danger">*</span>
                             </span>
                             <select
-                                className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-4 py-3 text-md outline-none"
+                                className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-4 py-3 text-md outline-none focus:border-eia-azul-claro"
                                 value={formData.category}
                                 onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                             >
@@ -187,7 +187,7 @@ export default function AddListingPage() {
                                 ESTADO<span className="text-danger">*</span>
                             </span>
                             <select
-                                className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-4 py-3 text-md outline-none"
+                                className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-4 py-3 text-md outline-none focus:border-eia-azul-claro"
                                 value={formData.condition}
                                 onChange={(e) => setFormData({ ...formData, condition: e.target.value })}
                             >
@@ -206,7 +206,7 @@ export default function AddListingPage() {
                                         <div className="relative flex-grow">
                                             <FiImage className="absolute left-4 top-4 text-eia-gris" />
                                             <input
-                                                className={`w-full rounded-xl border-2 px-12 py-3 text-md outline-none transition-all ${errors.images ? 'border-danger/5 bg-danger/5' : 'bg-eia-fondo border-eia-fondo'}`}
+                                                className={`w-full rounded-xl border-2 px-12 py-3 text-md outline-none transition-all ${errors.images ? 'border-danger/5 bg-danger/5' : 'bg-eia-fondo border-eia-fondo focus:border-eia-azul-claro'}`}
                                                 type="url" placeholder="https://..."
                                                 value={url}
                                                 onChange={(e) => {
@@ -236,7 +236,7 @@ export default function AddListingPage() {
                             <div className="relative">
                                 <FiFileText className="absolute left-4 top-4 text-eia-gris" />
                                 <textarea
-                                    className={`w-full rounded-xl border-2 px-12 py-3 text-md outline-none transition-all min-h-[120px] ${errors.description ? 'border-danger bg-danger/5' : 'bg-eia-fondo border-eia-fondo'}`}
+                                    className={`w-full rounded-xl border-2 px-12 py-3 text-md outline-none transition-all min-h-[120px] ${errors.description ? 'border-danger bg-danger/5' : 'bg-eia-fondo border-eia-fondo focus:border-eia-azul-claro'}`}
                                     placeholder="Describe detalles, marcas de uso o especificaciones..."
                                     value={formData.description}
                                     onChange={(e) => {
@@ -255,7 +255,7 @@ export default function AddListingPage() {
                             <div className="relative">
                                 <span className="absolute left-4 top-3 text-eia-gris font-bold">$</span>
                                 <input
-                                    className={`w-full rounded-xl border-2 px-10 py-3 text-md outline-none transition-all ${errors.price ? 'border-danger bg-danger/5' : 'bg-eia-fondo border-eia-fondo'}`}
+                                    className={`w-full rounded-xl border-2 px-10 py-3 text-md outline-none transition-all ${errors.price ? 'border-danger bg-danger/5' : 'bg-eia-fondo border-eia-fondo focus:border-eia-azul-claro'}`}
                                     type="number"
                                     onChange={(e) => {
                                         setFormData({ ...formData, price: Number(e.target.value) })
@@ -272,7 +272,7 @@ export default function AddListingPage() {
                                 SEDE / CAMPUS<span className="text-danger">*</span>
                             </span>
                             <select
-                                className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-4 py-3 text-md outline-none focus:border-eia-azul-claro/30 transition-all"
+                                className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-4 py-3 text-md outline-none focus:border-eia-azul-claro"
                                 value={formData.location}
                                 onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                             >

@@ -88,7 +88,7 @@ export default function SignUpPage() {
                             <div className="relative">
                                 <FiUser className="absolute left-4 top-4 text-eia-gris" />
                                 <input
-                                    className={`w-full rounded-xl border-2 px-12 py-3 text-md outline-none transition-all ${errors.name ? "border-danger bg-danger/5" : "border-eia-fondo bg-eia-fondo"}`}
+                                    className={`w-full rounded-xl border-2 px-12 py-3 text-md outline-none transition-all ${errors.name ? "border-danger bg-danger/5" : "border-eia-fondo bg-eia-fondo focus:border-eia-azul-claro"}`}
                                     type="text" placeholder="Ej. Juan Pérez"
                                     value={name}
                                     onChange={(e) => {
@@ -108,7 +108,7 @@ export default function SignUpPage() {
                             <div className="relative">
                                 <FiMail className="absolute left-4 top-4 text-eia-gris" />
                                 <input
-                                    className={`w-full rounded-xl border-2 px-12 py-3 text-md outline-none transition-all ${errors.email ? "border-danger bg-danger/5" : "border-eia-fondo bg-eia-fondo"}`}
+                                    className={`w-full rounded-xl border-2 px-12 py-3 text-md outline-none transition-all ${errors.email ? "border-danger bg-danger/5" : "border-eia-fondo bg-eia-fondo focus:border-eia-azul-claro"}`}
                                     type="email" placeholder="usuario@eia.edu.co"
                                     value={email} 
                                     onChange={(e) => {
@@ -127,7 +127,7 @@ export default function SignUpPage() {
                             <div className="relative">
                                 <FiBookOpen className="absolute left-4 top-4 text-eia-gris" />
                                 <input
-                                    className={`w-full rounded-xl border-2 px-12 py-3 text-md outline-none transition-all ${errors.major ? "border-danger bg-danger/5" : "border-eia-fondo bg-eia-fondo"}`}
+                                    className={`w-full rounded-xl border-2 px-12 py-3 text-md outline-none transition-all ${errors.major ? "border-danger bg-danger/5" : "border-eia-fondo bg-eia-fondo focus:border-eia-azul-claro"}`}
                                     type="text" placeholder="Ingeniería..."
                                     value={major} 
                                     onChange={(e) => {
@@ -147,7 +147,7 @@ export default function SignUpPage() {
                             <div className="relative">
                                 <FiLock className="absolute left-4 top-4 text-eia-gris" />
                                 <input
-                                    className={`w-full rounded-xl border-2 px-12 py-3 text-md outline-none transition-all ${errors.password ? "border-danger bg-danger/5" : "border-eia-fondo bg-eia-fondo"}`}
+                                    className={`w-full rounded-xl border-2 px-12 py-3 text-md outline-none transition-all ${errors.password ? "border-danger bg-danger/5" : "border-eia-fondo bg-eia-fondo focus:border-eia-azul-claro"}`}
                                     type="password" placeholder="••••••••"
                                     value={password} 
                                     onChange={(e) => {
