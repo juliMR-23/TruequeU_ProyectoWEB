@@ -184,7 +184,7 @@ export default function AddListingPage() {
 
                         <label className="flex flex-col gap-1.5">
                             <span className="text-xs font-bold tracking-wider text-eia-azul-claro ml-1">
-                                ESTADO<span className="text-danger">*</span>
+                                CONDICIÓN<span className="text-danger">*</span>
                             </span>
                             <select
                                 className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-4 py-3 text-md outline-none focus:border-eia-azul-claro"
