@@ -112,7 +112,7 @@ export default function ListingDetailPage() {
                     onClick={(e) => {
                         e.preventDefault(); // evita comportamientos extraños o refresh
                         e.stopPropagation(); //evita que interrumpa al otro boton (contactar)
-                        navigate(`/report/${listing.id}`);
+                        navigate(`/reportListing/${listing.id}`);
                     }}
                     className="flex-1 py-3 rounded-2xl font-semibold text-white bg-danger hover:opacity-90 cursor-pointer transition disabled:opacity-40"
                     title="Denunciar publicación"

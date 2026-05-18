@@ -56,7 +56,7 @@ export default function SignUpPage() {
             await register({ name, email, major, password });
             navigate("/");
         } catch (err: any) {
-            setErrors({ email: err || "El correo ya está registrado o hubo un error." });
+            setErrors({ email: err || "No se pudo determinar si las credenciales son auténticas" });//seguramente es correo repetido
         } finally {
             setIsSubmitting(false);
         }
