@@ -22,13 +22,22 @@ export default function ListingCard({ listing, isFavorite, onToggle, onDelete }:
     const coverImage = listing.images.find(img => img.order === 0) ?? listing.images[0];
 
     return (
-        <article className="rounded-card border border-border bg-white p-4 shadow-card rounded-2xl flex flex-col transition-all duration-200 hover:shadow-lg hover:-translate-y-3">
+        <article className={`
+            rounded-card border border-border bg-white p-4 shadow-card rounded-2xl flex flex-col
+            ${isSold ? " opacity-75" : "transition-all duration-200 hover:shadow-lg hover:-translate-y-3"}
+        `}>
             <div className="relative mb-4">
                 <img
                     src={coverImage.url}
                     alt={listing.title}
-                    className="w-full h-48 object-cover rounded-2xl"
+                    className={`
+                        w-full h-48 object-cover rounded-2xl
+                        ${isSold ? "grayscale brightness-75" : ""}
+                    `}
                 />
+                {isSold && (
+                    <div className="absolute inset-0 bg-black/20 rounded-2xl" />
+                )}
                 <div className="absolute top-2 right-2">
                     <Badge variant={
                         isSold
@@ -52,7 +61,7 @@ export default function ListingCard({ listing, isFavorite, onToggle, onDelete }:
             </div>
             <div className="flex justify-between my-3">
                 <div className="flex items-center gap-2 text-sm font-semibold text-eia-gris">
-                    <p className="text-lg text-eia-azul-claro"> ${listing.price.toLocaleString("es-CO")}</p>
+                    <p className={`text-lg ${isSold?"":"text-eia-azul-claro"}`}> {listing.price==0? "Gratis": `$${listing.price.toLocaleString("es-CO")}`}</p>
                     <p>|</p>
                     <p>{listing.condition}</p>
                 </div>
@@ -71,9 +80,9 @@ export default function ListingCard({ listing, isFavorite, onToggle, onDelete }:
                     : (
                         <button
                             onClick={(e) => {
-                                e.preventDefault(); // evita comportamientos extraños o refresh
+                                e.preventDefault();//evita comportamientos extraños o refresh
                                 e.stopPropagation(); //evita que interrumpa al otro boton (fav)
-                                navigate(`/report/${listing.id}`);
+                                navigate(`/reportListing/${listing.id}`);//ir a reporte de publicación
                             }}
                             className="ml-auto text-eia-gris hover:text-red-500 hover:cursor-pointer transition px-2 py-1 rounded-lg"
                             title="Denunciar publicación"
