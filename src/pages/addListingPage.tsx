@@ -18,7 +18,7 @@ export default function AddListingPage() {
         category: "Libros",
         condition: "Nuevo",
         description: "",
-        price: 0,
+        price: 0 as number | "",
         location: "Sede Las Palmas",
     });
 
@@ -51,12 +51,12 @@ export default function AddListingPage() {
             newErrors.title = "El título debe tener entre 8 y 40 caracteres";
         if (formData.description.trim().length < 20 || formData.description.trim().length > 500)
             newErrors.description = "La descripción debe tener entre 20 y 500 caracteres";
-        if (formData.price < 0)
+        if (formData.price === "")
+            newErrors.price = "Ingrese precio para el producto"
+        else if (formData.price < 0)
             newErrors.price = "El precio no puede ser negativo";
         else if (formData.price > 10000000)
             newErrors.price = "El precio supera el tope (max:10.000.000)";
-        else if (!formData.price)
-            newErrors.price = "Ingrese precio para el producto"
 
         // trim para que no acepte vacío ni solo espacios
         const validImages = imageUrls.filter(url => url.trim() !== "");
@@ -111,7 +111,7 @@ export default function AddListingPage() {
             description: formData.description,
             category: formData.category,
             condition: formData.condition,
-            price: formData.price,
+            price: formData.price===""?0:formData.price,
             location: formData.location,
             status: ListingStatusEnum.available, // Usando Enum de types.ts
             ownerId: user!.id, //id del usuario logueado, no va a ser null porque arriba se maneja emptyState
@@ -258,7 +258,10 @@ export default function AddListingPage() {
                                     className={`w-full rounded-xl border-2 px-10 py-3 text-md outline-none transition-all ${errors.price ? 'border-danger bg-danger/5' : 'bg-eia-fondo border-eia-fondo focus:border-eia-azul-claro'}`}
                                     type="number"
                                     onChange={(e) => {
-                                        setFormData({ ...formData, price: Number(e.target.value) })
+                                        setFormData({
+                                            ...formData,
+                                            price: e.target.value === "" ? "" : Number(e.target.value)
+                                        })
                                         if (errors.price) setErrors(prev => ({ ...prev, price: "" }))
                                     }}
                                 />
