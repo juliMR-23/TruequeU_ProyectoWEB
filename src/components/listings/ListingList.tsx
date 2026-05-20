@@ -1,8 +1,8 @@
-import type { Listing } from "../../types";
+import type { ListingCardDTO } from "../../types";
 import ListingCard from "./ListingCard";
 
 type Props = {
-  listings: Listing[];
+  listings: ListingCardDTO[];
   isFavorite: (id: string) => boolean;
   onToggle: (id: string) => void;
   onDelete?: (id: string) => void; // Recibe la función opcional

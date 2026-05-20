@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Listing } from "../types";
+import type { ListingCardDTO } from "../types";
 
 interface Filters {
   search: string;
@@ -13,7 +13,7 @@ const INITIAL_FILTERS: Filters = {
   condicion: "",
 };
 
-export function useFilters(listings: Listing[]) {
+export function useFilters(listings: ListingCardDTO []) {
   const [filters, setFilters] = useState<Filters>(INITIAL_FILTERS);
 
   const setFilter = (key: keyof Filters, value: string) => {

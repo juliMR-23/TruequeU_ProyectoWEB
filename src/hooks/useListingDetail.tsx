@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { listingService } from "../services/listingService";
-import type { Listing } from "../types";
+import type { ListingDetailDTO } from "../types";
 
 export function useListingDetail(id: string) {
-  const [listing, setListing] = useState<Listing | null>(null);
+  const [listing, setListing] = useState<ListingDetailDTO | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
 

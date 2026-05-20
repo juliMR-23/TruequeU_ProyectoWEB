@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useFavorites } from "./useFavorites";
-import type { Listing } from "../types";
+import type { ListingCardDTO  } from "../types";
 import { listingService } from "../services/listingService";
 import { useAuth } from "./useAuth";
 
 export function useFavoriteListings() {
     const { toggle, isFavorite } = useFavorites();
-    const [listings, setListings] = useState<Listing[]>([]);
+    const [listings, setListings] = useState<ListingCardDTO []>([]);
     const [loading, setLoading] = useState(true);
     const { user } = useAuth();
 
