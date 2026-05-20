@@ -53,10 +53,10 @@ export default function SignUpPage() {
             return;
         }
         try {
-            await register({ name, email, major, password });
-            navigate("/");
+            await register( email, password, name, major );
+            navigate("/login");
         } catch (err: any) {
-            setErrors({ email: err || "No se pudo determinar si las credenciales son auténticas" });//seguramente es correo repetido
+            setErrors({ email: err?.message || "No se pudo determinar si las credenciales son auténticas" });//seguramente es correo repetido
         } finally {
             setIsSubmitting(false);
         }

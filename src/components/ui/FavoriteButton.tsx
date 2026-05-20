@@ -1,9 +1,9 @@
 import { FaStar, FaRegStar } from "react-icons/fa";
 
 type Props = {
-  listingId: number;
+  listingId: string;
   isFavorite: boolean;
-  onToggle: (id: number) => void;
+  onToggle: (id: string) => void;
 };
 
 export default function FavoriteButton({ listingId, isFavorite, onToggle }: Props) {
