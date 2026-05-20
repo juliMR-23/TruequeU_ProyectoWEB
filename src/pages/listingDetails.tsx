@@ -122,7 +122,7 @@ export default function ListingDetailPage() {
                                 : "Contacta al vendedor"}
                     </button>
                     <button
-                        onClick={() => navigate(`/report/${listing.idListing}`)}
+                        onClick={() => navigate(`/reportListing/${listing.idListing}`)}
                         className="flex-1 py-3 rounded-2xl font-semibold text-white bg-danger hover:opacity-90 cursor-pointer transition"
                     >
                         Denunciar

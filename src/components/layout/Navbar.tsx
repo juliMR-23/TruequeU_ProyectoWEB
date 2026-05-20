@@ -56,6 +56,10 @@ export default function Navbar() {
                         className={({ isActive }) => isActive ? `${linkBase} ${activeClass}` : linkBase}>
                         <FiList /> <span>Publicaciones</span>
                     </NavLink>
+                    <NavLink to="/perfil" onClick={closeMenu}
+                        className={({ isActive }) => isActive ? `${linkBase} ${activeClass}` : linkBase}>
+                        <FiUser /> <span>Perfil</span>
+                    </NavLink>
 
                     {/* Solo Admin */}
                     {user?.role === "Admin" && (
@@ -78,10 +82,6 @@ export default function Navbar() {
                                 <FiStar /> <span>Favoritos</span>
                             </NavLink>
 
-                            <NavLink to="/perfil" onClick={closeMenu}
-                                className={({ isActive }) => isActive ? `${linkBase} ${activeClass}` : linkBase}>
-                                <FiUser /> <span>Perfil</span>
-                            </NavLink>
                         </>
                     )}
 
