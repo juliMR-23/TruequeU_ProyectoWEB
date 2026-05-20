@@ -1,4 +1,4 @@
-import type { Listing } from "../types";
+import type { ListingCardDTO, ListingDetailDTO, CreateListingDTO } from "../types";
 import { api } from "./api"
 
 
@@ -6,22 +6,22 @@ import { api } from "./api"
 export const listingService = {
 
   // GET /api/Listing — catálogo público
-  getAll: async (): Promise<Listing[]> => {
+  getAll: async (): Promise<ListingCardDTO[]> => {
     return await api.get("/Listing");
   },
 
   // GET /api/Listing/{id} — detalle público
-  getById: async (id: string): Promise<Listing> => {
+  getById: async (id: string): Promise<ListingDetailDTO> => {
     return await api.get(`/Listing/${id}`);
   },
 
   // GET /api/Listing/owner/{ownerId} — listings de un usuario
-  getByOwnerId: async (ownerId: string): Promise<Listing[]> => {
+  getByOwnerId: async (ownerId: string): Promise<ListingCardDTO[]> => {
     return await api.get(`/Listing/owner/${ownerId}`);
   },
 
   // POST /api/Listing — crear listing
-  create: async (listing: Partial<Listing>): Promise<Listing> => {
+  create: async (listing: CreateListingDTO): Promise<ListingCardDTO> => {
     console.log("Mandando al back:", listing);
     return await api.post("/Listing", listing);
   },
@@ -40,7 +40,7 @@ export const listingService = {
   toggleFavorite: async (id: string): Promise<void> => {
     return await api.post(`/Listing/${id}/favorite`);
   },
-  getFavorites: async (): Promise<Listing[]> => {
+  getFavorites: async (): Promise<ListingCardDTO[]> => {
     return await api.get("/Listing/favorites");
   },
 

@@ -8,6 +8,7 @@ import Badge from "../components/ui/Badge";
 import StateMessage from "../components/ui/StateMessage";
 import { chatService } from "../services/chatService";
 import { useAuth } from "../hooks/useAuth";
+import { useState } from "react";
 
 export default function ListingDetailPage() {
     const { id } = useParams();
@@ -15,6 +16,7 @@ export default function ListingDetailPage() {
     const { listing, loading, notFound } = useListingDetail(id ?? "");
     const { isFavorite, toggle } = useFavorites();
     const { user } = useAuth();
+    const [currentImage, setCurrentImage] = useState(0);
 
     if (loading)
         return (
@@ -37,6 +39,10 @@ export default function ListingDetailPage() {
     const isOwner = user?.clientId === listing.ownerId;
     const isSold = listing.estado === Estado.Intercambiado;
     const isReserved = listing.estado === Estado.Reservado;
+    const images = [
+        listing.previewImageUrl,
+        ...listing.allImagesUrls
+    ].filter((img): img is string => Boolean(img));
 
     const handleContactSeller = async () => {
         if (!user) {
@@ -73,9 +79,49 @@ export default function ListingDetailPage() {
 
             {/* Carrusel */}
             {/* <ImageCarousel images={listing.images} /> */}
-            {/* Placeholder imagen */}
-            <div className="w-full h-64 bg-eia-fondo rounded-2xl flex items-center justify-center text-eia-gris text-sm mb-6">
-                Sin imagen
+            <div className="relative mb-6">
+                <img
+                    src={images[currentImage]}
+                    alt={listing.titulo}
+                    className="w-full h-80 object-cover rounded-2xl"
+                    onError={(e) => {
+                        e.currentTarget.src = "/placeholder.png";
+                    }}
+                />
+
+                {/* Botón izquierda */}
+                {currentImage > 0 && (
+                    <button
+                        onClick={() => setCurrentImage(currentImage - 1)}
+                        className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 text-white px-3 py-2 rounded-full hover:bg-black/60 transition"
+                    >
+                        ←
+                    </button>
+                )}
+
+                {/* Botón derecha */}
+                {currentImage < images.length - 1 && (
+                    <button
+                        onClick={() => setCurrentImage(currentImage + 1)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 text-white px-3 py-2 rounded-full hover:bg-black/60 transition"
+                    >
+                        →
+                    </button>
+                )}
+
+                {/* Indicadores */}
+                <div className="flex justify-center gap-2 mt-3">
+                    {images.map((_, index) => (
+                        <button
+                            key={index}
+                            onClick={() => setCurrentImage(index)}
+                            className={`w-2.5 h-2.5 rounded-full transition ${currentImage === index
+                                ? "bg-eia-azul-claro"
+                                : "bg-gray-300"
+                                }`}
+                        />
+                    ))}
+                </div>
             </div>
 
             {/* Info principal */}

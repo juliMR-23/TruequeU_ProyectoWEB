@@ -10,24 +10,52 @@ export enum Estado { Disponible = "Disponible", Reservado = "Reservado", Interca
 export enum Categoria { Libros = "Libros", Utiles = "Utiles", Tecnologia = "Tecnologia", Accesorios = "Accesorios", Otro = "Otro" }
 export enum Ubicacion { SedePalmas = "SedePalmas", SedeZuniga = "SedeZuniga" }
 
-export interface Listing {
-    idListing: string;
+export interface CreateListingDTO {
     titulo: string;
     descripcion: string;
+    condicion: Condicion;
+    categoria: Categoria;
+    precio: number;
+    ubicacion: Ubicacion;
+    imageUrls: string[];
+}
+export interface ListingCardDTO {
+    idListing: string;
+    titulo: string;
     condicion: Condicion;
     estado: Estado;
     categoria: Categoria;
     precio: number;
+
+    ownerName: string;
+    previewImageUrl?: string;
+}
+// export interface Listing {
+//     idListing: string;
+//     titulo: string;
+//     descripcion: string;
+//     condicion: Condicion;
+//     estado: Estado;
+//     categoria: Categoria;
+//     precio: number;
+//     ubicacion: Ubicacion;
+//     isActive: boolean;
+//     ownerId: string;
+//     previewImageUrl?: string;
+// }
+export interface ListingDetailDTO extends ListingCardDTO {
+    descripcion: string;
     ubicacion: Ubicacion;
-    isActive: boolean;
     ownerId: string;
+
+    allImagesUrls: string[];
 }
 
-export interface ListingImage {
-    id: number;
-    url: string;
-    order: number;
-}
+// export interface ListingImage {
+//     id: number;
+//     url: string;
+//     order: number;
+// }
 
 export interface AuthUser {
     email: string;

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FiPlusCircle, FiType, FiFileText, FiPlus, FiTrash2 } from "react-icons/fi";
+import { FiPlusCircle, FiType, FiFileText, FiPlus, FiTrash2, FiImage } from "react-icons/fi";
 import { BsPersonSlash } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/ui/Button";
@@ -29,7 +29,7 @@ export default function AddListingPage() {
     };
 
     // Estado independiente para las imágenes, son lista dinámica
-    //const [imageUrls, setImageUrls] = useState<string[]>([""]);
+    const [imageUrls, setImageUrls] = useState<string[]>([""]);
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [submitting, setSubmitting] = useState(false);
 
@@ -64,32 +64,32 @@ export default function AddListingPage() {
             newErrors.precio = "El precio supera el tope (max:10.000.000)";
 
         // trim para que no acepte vacío ni solo espacios
-        // const validImages = imageUrls.filter(url => url.trim() !== "");
-        // if (validImages.length < 3)
-        //     newErrors.images = "Debes agregar al menos 3 imágenes del objeto";
-        // if (validImages.length > 8)
-        //     newErrors.images = "No puedes agregar más de 8 imágenes del objeto";
+        const validImages = imageUrls.filter(url => url.trim() !== "");
+        if (validImages.length < 3)
+            newErrors.images = "Debes agregar al menos 3 imágenes del objeto";
+        if (validImages.length > 8)
+            newErrors.images = "No puedes agregar más de 8 imágenes del objeto";
 
         return newErrors;
     };
 
     // Se usa (...) para crear una copia del array (no borra lo de antes) y añadir un nuevo elemento
-    //const addImageField = () => setImageUrls([...imageUrls, ""]);
+    const addImageField = () => setImageUrls([...imageUrls, ""]);
 
     //(prev) para garantizar que es el estado más reciente
     // .map() crea un array nuevo y reemplaza el índice modificado.
-    // const updateImageUrl = (index: number, value: string) => {
-    //     setImageUrls((prev) =>
-    //         prev.map((url, i) => (i === index ? value : url))
-    //     );
-    // };
+    const updateImageUrl = (index: number, value: string) => {
+        setImageUrls((prev) =>
+            prev.map((url, i) => (i === index ? value : url))
+        );
+    };
 
     // //filter() genera un nuevo array excluyendo el elemento del índice seleccionado
-    // const removeImageField = (index: number) => {
-    //     if (imageUrls.length > 1) {
-    //         setImageUrls(imageUrls.filter((_, i) => i !== index));
-    //     }
-    // };
+    const removeImageField = (index: number) => {
+        if (imageUrls.length > 1) {
+            setImageUrls(imageUrls.filter((_, i) => i !== index));
+        }
+    };
 
     async function onSubmit(e: React.FormEvent) {
         e.preventDefault();//evita que la página refresque
@@ -109,6 +109,7 @@ export default function AddListingPage() {
                 condicion: formData.condicion,
                 precio: formData.precio,
                 ubicacion: formData.ubicacion,
+                imageUrls: imageUrls.filter(url => url.trim() !== "")
             });
             navigate("/publicaciones");
         } catch (err) {
@@ -190,7 +191,7 @@ export default function AddListingPage() {
 
                         <div className="md:col-span-2 flex flex-col gap-3">
                             <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">IMÁGENES DEL OBJETO (MÍNIMO 3)</span>
-                            {/* <div className="grid grid-cols-1 gap-3">
+                            <div className="grid grid-cols-1 gap-3">
                                 {imageUrls.map((url, index) => (
                                     <div key={index} className="flex gap-2">
                                         <div className="relative flex-grow">
@@ -212,11 +213,11 @@ export default function AddListingPage() {
                                         )}
                                     </div>
                                 ))}
-                            </div> */}
-                            {/* <button type="button" onClick={addImageField} className="flex items-center gap-2 text-eia-azul font-bold text-sm mt-2 hover:opacity-70">
+                            </div>
+                            <button type="button" onClick={addImageField} className="flex items-center gap-2 text-eia-azul font-bold text-sm mt-2 hover:opacity-70">
                                 <FiPlus /> Agregar otra imagen
                             </button>
-                            {errors.images && <span className="text-danger text-xs font-bold ml-1">{errors.images}</span>} */}
+                            {errors.images && <span className="text-danger text-xs font-bold ml-1">{errors.images}</span>}
                         </div>
 
                         <label className="flex flex-col gap-1.5 md:col-span-2">
@@ -268,8 +269,14 @@ export default function AddListingPage() {
                             </select>
                         </label>
                         <div className="flex flex-col md:flex-row md:col-span-2 gap-4 justify-center items-center border-t pt-8 border-eia-fondo">
-                            <Button type="submit" variant="primary" className="w-full max-w-xs">Publicar Objeto</Button>
-                            {/* navigate(-1) es cosa de react-router, para volver a la pág anterior */}
+                            <Button
+                                type="submit"
+                                variant="primary"
+                                className="w-full max-w-xs"
+                                disabled={submitting}
+                            >
+                                {submitting ? "Publicando..." : "Publicar Objeto"}
+                            </Button>
                             <Button type="button" variant="outline" className="w-full max-w-xs" onClick={() => navigate(-1)}>Cancelar</Button>
                         </div>
                     </form>

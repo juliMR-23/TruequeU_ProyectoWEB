@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { ListingStatusEnum, type Listing } from "../../types";
+import { ListingStatusEnum, type ListingCardDTO } from "../../types";
 import Badge from "../ui/Badge";
 import Button from "../ui/Button";
 import FavoriteButton from "../ui/FavoriteButton";
@@ -8,7 +8,7 @@ import { FiTrash2 } from "react-icons/fi";
 
 
 type Props = {
-    listing: Listing;
+    listing: ListingCardDTO;
     isFavorite: boolean;
     onToggle: (id: string) => void;
     onDelete?: (id: string) => void;
@@ -19,7 +19,7 @@ export default function ListingCard({ listing, isFavorite, onToggle, onDelete }:
     const isReserved: boolean = listing.estado.toUpperCase() === ListingStatusEnum.reserved
     const navigate = useNavigate();
     // toma la primera imagen de la clase Listing, para poderla mostrar
-    //const coverImage = listing.images.find(img => img.order === 0) ?? listing.images[0];
+    const coverImage = listing.previewImageUrl || "/placeholder.png";
 
     return (
         <article className={`
@@ -27,15 +27,12 @@ export default function ListingCard({ listing, isFavorite, onToggle, onDelete }:
             ${isSold ? " opacity-75" : "transition-all duration-200 hover:shadow-lg hover:-translate-y-3"}
         `}>
             <div className="relative mb-4">
-                {/* <img
-                    src={coverImage.url}
+                <img
+                    src={coverImage}
                     alt={listing.titulo}
                     className="w-full h-48 object-cover rounded-2xl"
-                /> */}
-                {/* TEMPORAL */}
-                <div className="w-full h-48 bg-eia-fondo rounded-2xl flex items-center justify-center text-eia-gris text-sm">
-                    Sin imagen
-                </div>
+                />
+                
                 <div className="absolute top-2 right-2">
                     <Badge variant={
                         isSold
