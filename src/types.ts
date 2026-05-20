@@ -104,3 +104,12 @@ export interface Report {
     status: string;
     createdAt: string;
 }
+export interface ModerationLog {
+    logId: string;
+    userId: string;
+    userEmail: string;
+    userRole: string;
+    action: string;
+    resultCode: number;
+    createdAt: string;
+}

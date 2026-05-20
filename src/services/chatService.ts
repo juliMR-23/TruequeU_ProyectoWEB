@@ -21,6 +21,6 @@ export const chatService = {
     },
 
     sendMessage: async (chatId: string, content: string): Promise<Message> => {
-        return await api.post(`/chats/${chatId}/messages`, JSON.stringify(content));
-    }
+    return await api.post(`/chats/${chatId}/messages`, content);
+}
 };

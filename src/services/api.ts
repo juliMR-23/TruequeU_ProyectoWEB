@@ -1,8 +1,7 @@
 const BASE_URL = import.meta.env.VITE_API_URL;
 
-const getHeaders = () => ({
-    "Content-Type": "application/json",
-    // Si no hay token manda string vacío, no "Bearer null"
+const getHeaders = (includeContentType = true) => ({
+    ...(includeContentType ? { "Content-Type": "application/json" } : {}),
     ...(localStorage.getItem("eia_token")
         ? { "Authorization": `Bearer ${localStorage.getItem("eia_token")}` }
         : {})
@@ -11,9 +10,13 @@ const getHeaders = () => ({
 export const api = {
     get: async (endpoint: string) => {
         const response = await fetch(`${BASE_URL}${endpoint}`, {
-            headers: getHeaders()
+            headers: getHeaders(false) // ← sin Content-Type en GET
         });
-        if (!response.ok) throw new Error(`Error ${response.status}`);
+        if (!response.ok) {
+            const errorBody = await response.text();
+            console.error("Error del back:", errorBody);
+            throw new Error(`Error ${response.status}`);
+        }
         return response.json();
     },
 
