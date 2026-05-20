@@ -13,15 +13,6 @@ export default function NotFoundPage() {
         actionText="Volver al inicio"
         onAction={() => navigate("/")}
       />
-      
-      <div className="mt-6 text-center">
-        <Link 
-          to="/" 
-          className="text-sm text-eia-azul-claro font-medium hover:underline hover:text-eia-azul transition-colors"
-        >
-          Regresar a TruequeU
-        </Link>
-      </div>
     </main>
   );
 }

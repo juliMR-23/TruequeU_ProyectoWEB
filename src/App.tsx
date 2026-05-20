@@ -13,6 +13,7 @@ import FavoritesPage from './pages/favoritePage'
 import ListingDetailPage from './pages/listingDetails'
 import ProfilePage from './pages/profilePage'
 import ChatPage from './pages/chatPage'
+import CreateReportPage from './pages/createReportPage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -31,6 +32,8 @@ function App() {
           <Route path="/details/:id" element={<ListingDetailPage/>}/>
           <Route path="/perfil" element={<ProfilePage/>}/>
           <Route path="/chat/:id" element={<ChatPage/>}/>
+          <Route path="/reportListing/:id" element={<CreateReportPage/>}/>
+          <Route path="/reportUser/:id" element={<CreateReportPage/>}/>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>

@@ -22,7 +22,10 @@ export default function ListingCard({ listing, isFavorite, onToggle, onDelete }:
     //const coverImage = listing.images.find(img => img.order === 0) ?? listing.images[0];
 
     return (
-        <article className="rounded-card border border-border bg-white p-4 shadow-card rounded-2xl flex flex-col transition-all duration-200 hover:shadow-lg hover:-translate-y-3">
+        <article className={`
+            rounded-card border border-border bg-white p-4 shadow-card rounded-2xl flex flex-col
+            ${isSold ? " opacity-75" : "transition-all duration-200 hover:shadow-lg hover:-translate-y-3"}
+        `}>
             <div className="relative mb-4">
                 {/* <img
                     src={coverImage.url}
@@ -75,7 +78,7 @@ export default function ListingCard({ listing, isFavorite, onToggle, onDelete }:
                     : (
                         <button
                             onClick={(e) => {
-                                e.preventDefault(); // evita comportamientos extraños o refresh
+                                e.preventDefault();//evita comportamientos extraños o refresh
                                 e.stopPropagation(); //evita que interrumpa al otro boton (fav)
                                 navigate(`/report/${listing.idListing}`);
                             }}
