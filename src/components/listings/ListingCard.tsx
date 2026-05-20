@@ -80,7 +80,7 @@ export default function ListingCard({ listing, isFavorite, onToggle, onDelete }:
                             onClick={(e) => {
                                 e.preventDefault();//evita comportamientos extraños o refresh
                                 e.stopPropagation(); //evita que interrumpa al otro boton (fav)
-                                navigate(`/report/${listing.idListing}`);
+                                navigate(`/reportListing/${listing.idListing}`)
                             }}
                             className="ml-auto text-eia-gris hover:text-red-500 hover:cursor-pointer transition px-2 py-1 rounded-lg"
                             title="Denunciar publicación"

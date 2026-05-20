@@ -20,6 +20,7 @@ import AdminPage from "./pages/adminPage";
 
 
 
+
 function App() {
   const [count, setCount] = useState(0)
 
@@ -59,6 +60,16 @@ function App() {
           <Route path="/chats" element={
             <ProtectedRoute>
               <ChatsPage />
+            </ProtectedRoute>
+          } />
+          <Route path="/reportListing/:id" element={
+            <ProtectedRoute>
+              <CreateReportPage />
+            </ProtectedRoute>
+          } />
+          <Route path="/reportUser/:id" element={
+            <ProtectedRoute>
+              <CreateReportPage />
             </ProtectedRoute>
           } />
 
