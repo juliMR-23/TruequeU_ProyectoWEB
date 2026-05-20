@@ -53,10 +53,10 @@ export default function SignUpPage() {
             return;
         }
         try {
-            await register({ name, email, major, password });
-            navigate("/");
+            await register( email, password, name, major );
+            navigate("/login");
         } catch (err: any) {
-            setErrors({ email: err || "El correo ya está registrado o hubo un error." });
+            setErrors({ email: err?.message || "El correo ya está registrado o hubo un error." });
         } finally {
             setIsSubmitting(false);
         }

@@ -1,34 +1,42 @@
 import { useState, useEffect } from "react";
-// Importamos useAuth para saber quién está logueado
-import { useAuth } from "./useAuth"; 
+import { useAuth } from "./useAuth";
+import { listingService } from "../services/listingService";
 
 export function useFavorites() {
-  const { user } = useAuth();
-  
-  // La llave depende de usuario (id)
-  const STORAGE_KEY = user ? `fav_${user.id}`: "";
+    const { user } = useAuth();
+    const [favoriteIds, setFavoriteIds] = useState<string[]>([]);
 
-  const [favorites, setFavorites] = useState<number[]>([]);
+    // Carga los favoritos al iniciar
+    useEffect(() => {
+    if (!user) {
+        setFavoriteIds([]);
+        return;
+    }
 
-  // Sincronizar cuando el usuario cambie
-  useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    setFavorites(stored ? JSON.parse(stored) : []);
-  }, [STORAGE_KEY]); //lanza cada vez que el STORAGE_KEY cambia (login/logout)
+    listingService.getFavorites()
+        .then((data) => setFavoriteIds(data.map(l => l.idListing)))
+        .catch(() => setFavoriteIds([]));
+}, [user]);
 
-  const toggle = (id: number) => {
-  if (!user) return;
+    const toggle = async (listingId: string) => {
+        if (!user) return;
 
-  setFavorites((prev) => {
-    const updated = prev.includes(id)
-      ? prev.filter((fid) => fid !== id)
-      : [...prev, id];
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-    return updated;
-  });
-};
+        try {
+            await listingService.toggleFavorite(listingId);
+            // Actualiza el estado local optimístamente
+            setFavoriteIds((prev) =>
+                prev.includes(listingId)
+                    ? prev.filter((id) => id !== listingId)
+                    : [...prev, listingId]
+            );
+        } catch (err) {
+            console.error("Error al togglear favorito:", err);
+        }
+    };
 
-  const isFavorite = (id: number) => favorites.includes(id);
+    // Un solo parámetro — busca en el estado interno
+    const isFavorite = (listingId: string): boolean =>
+        favoriteIds.includes(listingId);
 
-  return { favorites, toggle, isFavorite };
+    return { favoriteIds, toggle, isFavorite };
 }

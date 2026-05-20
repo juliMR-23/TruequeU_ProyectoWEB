@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { FiPlusCircle, FiType, FiFileText, FiImage, FiPlus, FiTrash2 } from "react-icons/fi";
+import { FiPlusCircle, FiType, FiFileText, FiPlus, FiTrash2 } from "react-icons/fi";
 import { BsPersonSlash } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/ui/Button";
-import { ListingStatusEnum, type Listing, type ListingImage } from "../types";
+import { Categoria, Condicion, Estado, Ubicacion } from "../types";
 import { useAuth } from "../hooks/useAuth";
 import StateMessage from "../components/ui/StateMessage";
+import { listingService } from "../services/listingService"
 
 
 export default function AddListingPage() {
@@ -14,17 +15,23 @@ export default function AddListingPage() {
 
     // agrupando los campos, menos imágenes que es más complejo
     const [formData, setFormData] = useState({
-        title: "",
-        category: "Libros",
-        condition: "Nuevo",
-        description: "",
-        price: 0,
-        location: "Sede Las Palmas",
+        titulo: "",
+        categoria: Categoria.Libros,
+        condicion: Condicion.Nuevo,
+        descripcion: "",
+        precio: 0,
+        ubicacion: Ubicacion.SedePalmas,
     });
 
+    const ubicacionLabels: Record<Ubicacion, string> = {
+        [Ubicacion.SedePalmas]: "Sede Las Palmas",
+        [Ubicacion.SedeZuniga]: "Sede Zúñiga"
+    };
+
     // Estado independiente para las imágenes, son lista dinámica
-    const [imageUrls, setImageUrls] = useState<string[]>([""]);
+    //const [imageUrls, setImageUrls] = useState<string[]>([""]);
     const [errors, setErrors] = useState<Record<string, string>>({});
+    const [submitting, setSubmitting] = useState(false);
 
     if (loading) return (
         <div className="py-20">
@@ -47,44 +54,44 @@ export default function AddListingPage() {
 
     const validate = () => {
         const newErrors: Record<string, string> = {};
-        if (formData.title.trim().length < 8 || formData.title.trim().length > 40)
-            newErrors.title = "El título debe tener entre 8 y 40 caracteres";
-        if (formData.description.trim().length < 20 || formData.description.trim().length > 500)
-            newErrors.description = "La descripción debe tener entre 20 y 500 caracteres";
-        if (formData.price < 0)
-            newErrors.price = "El precio no puede ser negativo";
-        else if (formData.price > 10000000)
-            newErrors.price = "El precio supera el tope (max:10.000.000)";
+        if (formData.titulo.trim().length < 8 || formData.titulo.trim().length > 40)
+            newErrors.titulo = "El título debe tener entre 8 y 40 caracteres";
+        if (formData.descripcion.trim().length < 20 || formData.descripcion.trim().length > 500)
+            newErrors.descripcion = "La descripción debe tener entre 20 y 500 caracteres";
+        if (formData.precio < 0)
+            newErrors.precio = "El precio no puede ser negativo";
+        else if (formData.precio > 10000000)
+            newErrors.precio = "El precio supera el tope (max:10.000.000)";
 
         // trim para que no acepte vacío ni solo espacios
-        const validImages = imageUrls.filter(url => url.trim() !== "");
-        if (validImages.length < 3)
-            newErrors.images = "Debes agregar al menos 3 imágenes del objeto";
-        if (validImages.length > 8)
-            newErrors.images = "No puedes agregar más de 8 imágenes del objeto";
+        // const validImages = imageUrls.filter(url => url.trim() !== "");
+        // if (validImages.length < 3)
+        //     newErrors.images = "Debes agregar al menos 3 imágenes del objeto";
+        // if (validImages.length > 8)
+        //     newErrors.images = "No puedes agregar más de 8 imágenes del objeto";
 
         return newErrors;
     };
 
     // Se usa (...) para crear una copia del array (no borra lo de antes) y añadir un nuevo elemento
-    const addImageField = () => setImageUrls([...imageUrls, ""]);
+    //const addImageField = () => setImageUrls([...imageUrls, ""]);
 
     //(prev) para garantizar que es el estado más reciente
     // .map() crea un array nuevo y reemplaza el índice modificado.
-    const updateImageUrl = (index: number, value: string) => {
-        setImageUrls((prev) =>
-            prev.map((url, i) => (i === index ? value : url))
-        );
-    };
+    // const updateImageUrl = (index: number, value: string) => {
+    //     setImageUrls((prev) =>
+    //         prev.map((url, i) => (i === index ? value : url))
+    //     );
+    // };
 
-    //filter() genera un nuevo array excluyendo el elemento del índice seleccionado
-    const removeImageField = (index: number) => {
-        if (imageUrls.length > 1) {
-            setImageUrls(imageUrls.filter((_, i) => i !== index));
-        }
-    };
+    // //filter() genera un nuevo array excluyendo el elemento del índice seleccionado
+    // const removeImageField = (index: number) => {
+    //     if (imageUrls.length > 1) {
+    //         setImageUrls(imageUrls.filter((_, i) => i !== index));
+    //     }
+    // };
 
-    function onSubmit(e: React.FormEvent) {
+    async function onSubmit(e: React.FormEvent) {
         e.preventDefault();//evita que la página refresque
         const validationErrors = validate();
 
@@ -93,34 +100,22 @@ export default function AddListingPage() {
             setErrors(validationErrors);
             return;
         }
-        // Mapear las strings de URLs al formato de la interfaz ListingImage
-        const validImages: ListingImage[] = imageUrls
-            .filter(url => url.trim() !== "")
-            .map((url, index) => ({
-                id: Date.now() + index, // ID único para cada imagen
-                url: url,
-                order: index
-            }));
-
-        // Crear el objeto Listing 
-        const newListing: Listing = {
-            id: Date.now(),
-            title: formData.title,
-            description: formData.description,
-            category: formData.category,
-            condition: formData.condition,
-            price: formData.price,
-            location: formData.location,
-            status: ListingStatusEnum.available, // Usando Enum de types.ts
-            ownerId: user!.id, //id del usuario logueado, no va a ser null porque arriba se maneja emptyState
-            images: validImages
-        };
-
-        // Persistencia
-        const listings = JSON.parse(localStorage.getItem("eia_listings") || "[]");
-        localStorage.setItem("eia_listings", JSON.stringify([newListing, ...listings]));
-
-        navigate("/publicaciones");
+        try {
+            setSubmitting(true);
+            await listingService.create({
+                titulo: formData.titulo,
+                descripcion: formData.descripcion,
+                categoria: formData.categoria,
+                condicion: formData.condicion,
+                precio: formData.precio,
+                ubicacion: formData.ubicacion,
+            });
+            navigate("/publicaciones");
+        } catch (err) {
+            setErrors({ general: "Error al crear la publicación. Intenta de nuevo." });
+        } finally {
+            setSubmitting(false);
+        }
     }
 
     return (
@@ -135,6 +130,9 @@ export default function AddListingPage() {
                     {/* grid-cols-1 md:grid-cols-2 maneja el diseño responsivo (móvil/escritorio) */}
                     <form className="grid grid-cols-1 md:grid-cols-2 gap-8" onSubmit={onSubmit}>
 
+                        {errors.general && (
+                            <p className="md:col-span-2 text-danger text-sm font-bold">{errors.general}</p>
+                        )}
                         {/* md:col-span-2 hace que el campo ocupe el ancho completo en pantallas grandes */}
                         <label className="flex flex-col gap-1.5 md:col-span-2">
                             <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">TÍTULO DEL OBJETO</span>
@@ -142,28 +140,26 @@ export default function AddListingPage() {
                                 {/* posición absoluta para que "flote" */}
                                 <FiType className="absolute left-4 top-4 text-eia-gris" />
                                 <input
-                                    className={`w-full rounded-xl border-2 bg-eia-fondo px-12 py-3 text-md outline-none transition-all ${errors.title ? 'border-danger' : 'border-eia-fondo'}`}
+                                    className={`w-full rounded-xl border-2 bg-eia-fondo px-12 py-3 text-md outline-none transition-all ${errors.titulo ? 'border-danger' : 'border-eia-fondo'}`}
                                     type="text" placeholder="Ej. Libro de Cálculo de Stewart"
-                                    value={formData.title}
+                                    value={formData.titulo}
                                     // Sincronización
-                                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                                    onChange={(e) => setFormData({ ...formData, titulo: e.target.value })}
                                 />
                             </div>
-                            {errors.title && <span className="text-danger text-xs font-bold ml-1">{errors.title}</span>}
+                            {errors.titulo && <span className="text-danger text-xs font-bold ml-1">{errors.titulo}</span>}
                         </label>
 
                         <label className="flex flex-col gap-1.5">
                             <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">CATEGORÍA</span>
                             <select
                                 className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-4 py-3 text-md outline-none"
-                                value={formData.category}
-                                onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                                value={formData.categoria}
+                                onChange={(e) => setFormData({ ...formData, categoria: e.target.value as Categoria })}
                             >
-                                <option value="Libros">Libros</option>
-                                <option value="Útiles">Útiles</option>
-                                <option value="Tecnología">Tecnología</option>
-                                <option value="Accesorios">Accesorios</option>
-                                <option value="Otro">Otro</option>
+                                {Object.values(Categoria).map(c => (
+                                    <option key={c} value={c}>{c}</option>
+                                ))}
                             </select>
                         </label>
 
@@ -171,17 +167,18 @@ export default function AddListingPage() {
                             <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">ESTADO</span>
                             <select
                                 className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-4 py-3 text-md outline-none"
-                                value={formData.condition}
-                                onChange={(e) => setFormData({ ...formData, condition: e.target.value })}
+                                value={formData.condicion}
+                                onChange={(e) => setFormData({ ...formData, condicion: e.target.value as Condicion })}
                             >
-                                <option value="Nuevo">Nuevo</option>
-                                <option value="Usado">Usado</option>
+                                {Object.values(Condicion).map(c => (
+                                    <option key={c} value={c}>{c}</option>
+                                ))}
                             </select>
                         </label>
 
                         <div className="md:col-span-2 flex flex-col gap-3">
                             <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">IMÁGENES DEL OBJETO (MÍNIMO 3)</span>
-                            <div className="grid grid-cols-1 gap-3">
+                            {/* <div className="grid grid-cols-1 gap-3">
                                 {imageUrls.map((url, index) => (
                                     <div key={index} className="flex gap-2">
                                         <div className="relative flex-grow">
@@ -199,11 +196,11 @@ export default function AddListingPage() {
                                         )}
                                     </div>
                                 ))}
-                            </div>
-                            <button type="button" onClick={addImageField} className="flex items-center gap-2 text-eia-azul font-bold text-sm mt-2 hover:opacity-70">
+                            </div> */}
+                            {/* <button type="button" onClick={addImageField} className="flex items-center gap-2 text-eia-azul font-bold text-sm mt-2 hover:opacity-70">
                                 <FiPlus /> Agregar otra imagen
                             </button>
-                            {errors.images && <span className="text-danger text-xs font-bold ml-1">{errors.images}</span>}
+                            {errors.images && <span className="text-danger text-xs font-bold ml-1">{errors.images}</span>} */}
                         </div>
 
                         <label className="flex flex-col gap-1.5 md:col-span-2">
@@ -211,13 +208,13 @@ export default function AddListingPage() {
                             <div className="relative">
                                 <FiFileText className="absolute left-4 top-4 text-eia-gris" />
                                 <textarea
-                                    className={`w-full rounded-xl border-2 bg-eia-fondo px-12 py-3 text-md outline-none transition-all min-h-[120px] ${errors.description ? 'border-danger' : 'border-eia-fondo'}`}
+                                    className={`w-full rounded-xl border-2 bg-eia-fondo px-12 py-3 text-md outline-none transition-all min-h-[120px] ${errors.descripcion ? 'border-danger' : 'border-eia-fondo'}`}
                                     placeholder="Describe detalles, marcas de uso o especificaciones..."
-                                    value={formData.description}
-                                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                                    value={formData.descripcion}
+                                    onChange={(e) => setFormData({ ...formData, descripcion: e.target.value })}
                                 />
                             </div>
-                            {errors.description && <span className="text-danger text-xs font-bold ml-1">{errors.description}</span>}
+                            {errors.descripcion && <span className="text-danger text-xs font-bold ml-1">{errors.descripcion}</span>}
                         </label>
 
                         <label className="flex flex-col gap-1.5">
@@ -225,12 +222,12 @@ export default function AddListingPage() {
                             <div className="relative">
                                 <span className="absolute left-4 top-3 text-eia-gris font-bold">$</span>
                                 <input
-                                    className={`w-full rounded-xl border-2 bg-eia-fondo px-10 py-3 text-md outline-none transition-all ${errors.price ? 'border-danger' : 'border-eia-fondo'}`}
+                                    className={`w-full rounded-xl border-2 bg-eia-fondo px-10 py-3 text-md outline-none transition-all ${errors.precio ? 'border-danger' : 'border-eia-fondo'}`}
                                     type="number"
                                     placeholder="000"
-                                    onChange={(e) => setFormData({ ...formData, price: Number(e.target.value) })}
+                                    onChange={(e) => setFormData({ ...formData, precio: Number(e.target.value) })}
                                 />
-                                {errors.price && (<span className="text-danger text-xs font-bold ml-1">{errors.price}</span>)}
+                                {errors.precio && (<span className="text-danger text-xs font-bold ml-1">{errors.precio}</span>)}
                             </div>
                         </label>
 
@@ -239,11 +236,13 @@ export default function AddListingPage() {
                             <span className="text-xs font-bold uppercase tracking-wider text-eia-azul-claro ml-1">SEDE / CAMPUS</span>
                             <select
                                 className="w-full rounded-xl border-2 border-eia-fondo bg-eia-fondo px-4 py-3 text-md outline-none focus:border-eia-azul-claro/30 transition-all"
-                                value={formData.location}
-                                onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+
+                                value={formData.ubicacion}
+                                onChange={(e) => setFormData({ ...formData, ubicacion: e.target.value as Ubicacion })}
                             >
-                                <option value="Sede Las Palmas">Sede Las Palmas</option>
-                                <option value="Sede Zúñiga">Sede Zúñiga</option>
+                                {Object.values(Ubicacion).map(u => (
+                                    <option key={u} value={u}>{ubicacionLabels[u]}</option>
+                                ))}
                             </select>
                         </label>
                         <div className="md:col-span-2 mt-8 flex flex-col md:flex-row gap-4 justify-center border-t pt-8 border-eia-fondo">

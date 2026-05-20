@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ListingList from "../components/listings/ListingList";
-import { type Listing } from "../types";
-import listings from "../data/listings.json";
+import type { Listing } from "../types";
 import Button from "../components/ui/Button";
 import StateMessage from "../components/ui/StateMessage";
 import { useFavorites } from "../hooks/useFavorites";
 import FilterBar from "../components/ui/FilterBar";
 import { useFilters } from "../hooks/useFilters";
+import { listingService } from "../services/listingService";
 
 
 export default function PublicationPage() {
@@ -17,18 +17,20 @@ export default function PublicationPage() {
   const { isFavorite, toggle } = useFavorites();
   // Filtros
   const { filters, setFilter, clearFilters, hasActiveFilters, filtered } = useFilters(allListings);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // 1. Cargar los datos de prueba (JSON)
-    const baseListings = listings as Listing[];
-
-    // 2. Cargar los datos del LocalStorage
-    const storedData = localStorage.getItem("eia_listings");
-    const userListings: Listing[] = storedData ? JSON.parse(storedData) : [];
-
-    // 3. Combinar ambos (los del usuario primero para que salgan arriba)
-    setAllListings([...userListings, ...baseListings]);
+    listingService.getAll()
+      .then((data) => setAllListings(data))
+      .catch(() => setAllListings([]))
+      .finally(() => setLoading(false));
   }, []);
+
+  if (loading) return (
+    <div className="py-20">
+      <StateMessage type="loading" title="Cargando publicaciones" />
+    </div>
+  );
 
   if (allListings.length === 0) return (
     <main className="mx-auto max-w-2xl px-6 py-24">
@@ -53,11 +55,11 @@ export default function PublicationPage() {
       {/* Barra de filtros */}
       <FilterBar
         search={filters.search}
-        status={filters.status}
-        condition={filters.condition}
+        status={filters.estado}
+        condition={filters.condicion}
         onSearchChange={(v) => setFilter("search", v)}
-        onStatusChange={(v) => setFilter("status", v)}
-        onConditionChange={(v) => setFilter("condition", v)}
+        onStatusChange={(v) => setFilter("estado", v)}
+        onConditionChange={(v) => setFilter("condicion", v)}
         onClear={clearFilters}
         hasActiveFilters={hasActiveFilters}
       />
