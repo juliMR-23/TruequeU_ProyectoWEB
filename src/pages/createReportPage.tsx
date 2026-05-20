@@ -5,6 +5,8 @@ import { useAuth } from "../hooks/useAuth";
 import Button from "../components/ui/Button";
 import StateMessage from "../components/ui/StateMessage";
 import { BsPersonSlash } from "react-icons/bs";
+import { reportService } from "../services/reportService";
+
 
 //mapeo local que funciona como enum
 const ReportReasonMap = [//para el select de motivo
@@ -67,24 +69,17 @@ export default function CreateReportPage() {
             return;
         }
 
-        //estructura del reporte en LocalStorage
-        const newReport = {
-            reportId: Date.now(), //Simula el id
-            reportedBy: user.id,
-            reportedUserId: isListingReport ? null : targetId,//uno queda nulo segun tipo de report
-            reportedListingId: isListingReport ? targetId : null,
-            reason: reason,// el número entero del enum, mapeado con los labels para UX
-            comment: comment.trim(),
-            createdAt: new Date().toISOString(),
-            status: 0,// 0 = Pendiente (ReportStatus), por defecto hasta que un admin revise
-            isActive: true
-        };
-
-        // persistencia local
-        const existingReports = JSON.parse(localStorage.getItem("eia_reports") || "[]");
-        localStorage.setItem("eia_reports", JSON.stringify([newReport, ...existingReports]));
-
-        setIsSuccess(true);
+        try {
+            await reportService.createReport({
+                reportedUserId: isListingReport ? undefined : targetId,
+                reportedListingId: isListingReport ? targetId : undefined,
+                reason: reason,
+                comment: comment.trim()
+            });
+            setIsSuccess(true);
+        } catch (err: any) {
+            setFormError(err?.message || "Error al enviar el reporte. Intenta de nuevo.");
+        }
     };
 
     return (

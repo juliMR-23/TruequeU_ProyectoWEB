@@ -1,39 +1,62 @@
-import data from "../data/listings.json";
 import type { Listing } from "../types";
+import { api } from "./api"
 
-// Función auxiliar para combinar JSON + LocalStorage
-const _mergeData = (): Listing[] => {
-  const baseListings = data as Listing[];
-  const storedData = localStorage.getItem("eia_listings");
-  const userListings: Listing[] = storedData ? JSON.parse(storedData) : [];
-  
-  // Retornamos ambos. userListings primero para que aparezcan de primero en la lista
-  return [...userListings, ...baseListings];
-};
+
 
 export const listingService = {
-  // Trae todos los listings (JSON + LocalStorage)
-  getAll: () => {
-    const all = _mergeData();
-    return Promise.resolve(all);
+
+  // GET /api/Listing — catálogo público
+  getAll: async (): Promise<Listing[]> => {
+    return await api.get("/Listing");
   },
 
-  // Trae un listing por su id buscando en ambas fuentes
-  getById: (id: number) => {
-    const all = _mergeData();
-    return Promise.resolve(all.find(l => Number(l.id) === Number(id)));
+  // GET /api/Listing/{id} — detalle público
+  getById: async (id: string): Promise<Listing> => {
+    return await api.get(`/Listing/${id}`);
   },
+
+  // GET /api/Listing/owner/{ownerId} — listings de un usuario
+  getByOwnerId: async (ownerId: string): Promise<Listing[]> => {
+    return await api.get(`/Listing/owner/${ownerId}`);
+  },
+
+  // POST /api/Listing — crear listing
+  create: async (listing: Partial<Listing>): Promise<Listing> => {
+    console.log("Mandando al back:", listing);
+    return await api.post("/Listing", listing);
+  },
+
+  // PUT /api/Listing/changeStatus — cambiar estado
+  changeStatus: async (listingId: string, nuevoEstado: string): Promise<void> => {
+    return await api.put("/Listing/changeStatus", { listingId, nuevoEstado });
+  },
+
+  // PATCH /api/Listing/{id}/softDelete — eliminar
+  softDelete: async (id: string): Promise<void> => {
+    return await api.delete(`/Listing/${id}/softDelete`);
+  },
+
+  // POST /api/Listing/{id}/favorite — toggle favorito
+  toggleFavorite: async (id: string): Promise<void> => {
+    return await api.post(`/Listing/${id}/favorite`);
+  },
+  getFavorites: async (): Promise<Listing[]> => {
+    return await api.get("/Listing/favorites");
+  },
+
+
+  //ANTERIORES DEL FRONT (falta el de favoritos que se le olvidó a Julian en el controller)
 
   // Trae varios listings por sus ids (Vital para FavoritesPage)
-  getByIds: (ids: number[]) => {
-    const all = _mergeData();
-    // Forzamos comparación numérica por si acaso
-    return Promise.resolve(all.filter(l => ids.includes(Number(l.id))));
-  },
+  // getByIds: (ids: number[]) => {
+  //   const all = _mergeData();
+  //   // Forzamos comparación numérica por si acaso
+  //   return Promise.resolve(all.filter(l => ids.includes(Number(l.idListing))));
+  // },
 
-  // Trae solo los listings de un estado específico (ej. "AVAILABLE")
-  getByStatus: (status: string) => {
-    const all = _mergeData();
-    return Promise.resolve(all.filter(l => l.status === status));
-  },
+  // // Trae solo los listings de un estado específico (ej. "AVAILABLE")
+  // getByStatus: (status: string) => {
+  //   const all = _mergeData();
+  //   return Promise.resolve(all.filter(l => l.estado === status));
+  // },
 };

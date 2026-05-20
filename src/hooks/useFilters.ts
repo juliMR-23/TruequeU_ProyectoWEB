@@ -3,14 +3,14 @@ import type { Listing } from "../types";
 
 interface Filters {
   search: string;
-  status: string;
-  condition: string;
+  estado: string;
+  condicion: string;
 }
 
 const INITIAL_FILTERS: Filters = {
   search: "",
-  status: "",
-  condition: "",
+  estado: "",
+  condicion: "",
 };
 
 export function useFilters(listings: Listing[]) {
@@ -25,9 +25,9 @@ export function useFilters(listings: Listing[]) {
   const hasActiveFilters = Object.values(filters).some((v) => v !== "");
 
   const filtered = listings.filter((l) => {
-    const matchSearch = l.title.toLowerCase().includes(filters.search.toLowerCase());
-    const matchStatus = filters.status === "" || l.status === filters.status;
-    const matchCondition = filters.condition === "" || l.condition === filters.condition;
+    const matchSearch = l.titulo.toLowerCase().includes(filters.search.toLowerCase());
+    const matchStatus = filters.estado === "" || l.estado === filters.estado;
+    const matchCondition = filters.condicion === "" || l.condicion === filters.condicion;
     return matchSearch && matchStatus && matchCondition;
   });
 

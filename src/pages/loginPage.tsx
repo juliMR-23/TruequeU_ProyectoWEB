@@ -49,7 +49,7 @@ export default function LoginPage() {
         } catch (err: any) {
             // Error de "backend" (credenciales incorrectas)
             // Lo asignamos al password o creamos un error general
-            setErrors({ password: err || "Credenciales no válidas." });
+            setErrors({ password: err?.message || "Credenciales no válidas." });
         } finally {
             setIsSubmitting(false);
         }

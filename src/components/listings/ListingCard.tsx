@@ -10,16 +10,16 @@ import { FiTrash2 } from "react-icons/fi";
 type Props = {
     listing: Listing;
     isFavorite: boolean;
-    onToggle: (id: number) => void;
-    onDelete?: (id: number) => void;
+    onToggle: (id: string) => void;
+    onDelete?: (id: string) => void;
 }
 
 export default function ListingCard({ listing, isFavorite, onToggle, onDelete }: Props) {
-    const isSold: boolean = listing.status.toUpperCase() === ListingStatusEnum.sold;
-    const isReserved: boolean = listing.status.toUpperCase() === ListingStatusEnum.reserved
+    const isSold: boolean = listing.estado.toUpperCase() === ListingStatusEnum.sold;
+    const isReserved: boolean = listing.estado.toUpperCase() === ListingStatusEnum.reserved
     const navigate = useNavigate();
     // toma la primera imagen de la clase Listing, para poderla mostrar
-    const coverImage = listing.images.find(img => img.order === 0) ?? listing.images[0];
+    //const coverImage = listing.images.find(img => img.order === 0) ?? listing.images[0];
 
     return (
         <article className={`
@@ -27,17 +27,15 @@ export default function ListingCard({ listing, isFavorite, onToggle, onDelete }:
             ${isSold ? " opacity-75" : "transition-all duration-200 hover:shadow-lg hover:-translate-y-3"}
         `}>
             <div className="relative mb-4">
-                <img
+                {/* <img
                     src={coverImage.url}
-                    alt={listing.title}
-                    className={`
-                        w-full h-48 object-cover rounded-2xl
-                        ${isSold ? "grayscale brightness-75" : ""}
-                    `}
-                />
-                {isSold && (
-                    <div className="absolute inset-0 bg-black/20 rounded-2xl" />
-                )}
+                    alt={listing.titulo}
+                    className="w-full h-48 object-cover rounded-2xl"
+                /> */}
+                {/* TEMPORAL */}
+                <div className="w-full h-48 bg-eia-fondo rounded-2xl flex items-center justify-center text-eia-gris text-sm">
+                    Sin imagen
+                </div>
                 <div className="absolute top-2 right-2">
                     <Badge variant={
                         isSold
@@ -46,7 +44,7 @@ export default function ListingCard({ listing, isFavorite, onToggle, onDelete }:
                                 ? "info"
                                 : "success"
                     }>
-                        {listing.status.toUpperCase()}
+                        {listing.estado.toUpperCase()}
                     </Badge>
                 </div>
             </div>
@@ -54,23 +52,23 @@ export default function ListingCard({ listing, isFavorite, onToggle, onDelete }:
             <div className="flex items-start justify-between gap-3">
                 <div>
                     {/* Titulo */}
-                    <h3 className="m-0 font-bold text-lg">{listing.title}</h3>
+                    <h3 className="m-0 font-bold text-lg">{listing.titulo}</h3>
                     {/* Categoria */}
-                    <span className="mt-1 uppercase tracking-widest text-xs text-eia-gris">{listing.category}</span>
+                    <span className="mt-1 uppercase tracking-widest text-xs text-eia-gris">{listing.categoria}</span>
                 </div>
             </div>
             <div className="flex justify-between my-3">
                 <div className="flex items-center gap-2 text-sm font-semibold text-eia-gris">
-                    <p className={`text-lg ${isSold?"":"text-eia-azul-claro"}`}> {listing.price==0? "Gratis": `$${listing.price.toLocaleString("es-CO")}`}</p>
+                    <p className="text-lg text-eia-azul-claro"> ${listing.precio.toLocaleString("es-CO")}</p>
                     <p>|</p>
-                    <p>{listing.condition}</p>
+                    <p>{listing.condicion}</p>
                 </div>
                 {/* Botón de eliminar (onDelete cuando está desde perfil), sino, pone botón de report */}
                 {onDelete
                     ? <button
                         onClick={(e) => {
                             e.preventDefault();
-                            onDelete(listing.id);
+                            onDelete(listing.idListing);
                         }}
                         className="ml-auto px-2 text-eia-gris hover:text-danger hover:cursor-pointer transition-colors"
                         title="Eliminar publicación"
@@ -82,7 +80,7 @@ export default function ListingCard({ listing, isFavorite, onToggle, onDelete }:
                             onClick={(e) => {
                                 e.preventDefault();//evita comportamientos extraños o refresh
                                 e.stopPropagation(); //evita que interrumpa al otro boton (fav)
-                                navigate(`/reportListing/${listing.id}`);//ir a reporte de publicación
+                                navigate(`/reportListing/${listing.idListing}`)
                             }}
                             className="ml-auto text-eia-gris hover:text-red-500 hover:cursor-pointer transition px-2 py-1 rounded-lg"
                             title="Denunciar publicación"
@@ -93,7 +91,7 @@ export default function ListingCard({ listing, isFavorite, onToggle, onDelete }:
                 }
 
                 <FavoriteButton
-                    listingId={listing.id}
+                    listingId={listing.idListing}
                     isFavorite={isFavorite}
                     onToggle={onToggle}
                 />
@@ -101,7 +99,7 @@ export default function ListingCard({ listing, isFavorite, onToggle, onDelete }:
             </div>
             {/* Ir a detalles */}
             <div className="my-2 w-full">
-                <Link to={`/details/${listing.id}`}>
+                <Link to={`/details/${listing.idListing}`}>
                     <Button variant="outline" className="w-full">Ver detalles</Button>
                 </Link>
             </div>

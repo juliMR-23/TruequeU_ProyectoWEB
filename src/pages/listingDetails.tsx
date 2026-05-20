@@ -1,19 +1,20 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaMapMarkerAlt, FaTag, FaBox } from "react-icons/fa";
-import { ListingStatusEnum } from "../types";
+import { Estado } from "../types";
 import { useListingDetail } from "../hooks/useListingDetail";
 import { useFavorites } from "../hooks/useFavorites";
 import FavoriteButton from "../components/ui/FavoriteButton";
 import Badge from "../components/ui/Badge";
-import ImageCarousel from "../components/ui/ImageCarousel";
 import StateMessage from "../components/ui/StateMessage";
+import { chatService } from "../services/chatService";
+import { useAuth } from "../hooks/useAuth";
 
 export default function ListingDetailPage() {
     const { id } = useParams();
     const navigate = useNavigate();
-    const { listing, loading, notFound } = useListingDetail(Number(id));
+    const { listing, loading, notFound } = useListingDetail(id ?? "");
     const { isFavorite, toggle } = useFavorites();
-
+    const { user } = useAuth();
 
     if (loading)
         return (
@@ -33,8 +34,23 @@ export default function ListingDetailPage() {
         </main>
     );
 
-    const isSold = listing.status.toUpperCase() === ListingStatusEnum.sold;
-    const isReserved = listing.status.toUpperCase() === ListingStatusEnum.reserved;
+    const isOwner = user?.clientId === listing.ownerId;
+    const isSold = listing.estado === Estado.Intercambiado;
+    const isReserved = listing.estado === Estado.Reservado;
+
+    const handleContactSeller = async () => {
+        if (!user) {
+            navigate("/login");
+            return;
+        }
+        try {
+            // Crea o recupera el chat con el owner del listing
+            const chat = await chatService.CreateChat(listing.ownerId);
+            navigate(`/chat/${chat.chatId}`);
+        } catch (err) {
+            console.error("Error al iniciar chat:", err);
+        }
+    };
 
     return (
         <main className="max-w-2xl mx-auto px-4 py-8">
@@ -49,77 +65,77 @@ export default function ListingDetailPage() {
                     Volver
                 </button>
                 <FavoriteButton
-                    listingId={listing.id}
-                    isFavorite={isFavorite(listing.id)}
+                    listingId={listing.idListing}
+                    isFavorite={isFavorite(listing.idListing)}
                     onToggle={toggle}
                 />
             </div>
 
             {/* Carrusel */}
-            <ImageCarousel images={listing.images} />
+            {/* <ImageCarousel images={listing.images} /> */}
+            {/* Placeholder imagen */}
+            <div className="w-full h-64 bg-eia-fondo rounded-2xl flex items-center justify-center text-eia-gris text-sm mb-6">
+                Sin imagen
+            </div>
 
             {/* Info principal */}
             <div className="mt-6 flex items-start justify-between gap-4">
-                <h1 className="text-2xl font-bold text-text">{listing.title}</h1>
-                <Badge variant={
-                    isSold
-                        ? "danger"
-                        : isReserved
-                            ? "info"
-                            : "success"
-                }>
-                    {listing.status.toUpperCase()}
+                <h1 className="text-2xl font-bold text-text">{listing.titulo}</h1>
+                <Badge variant={isSold ? "danger" : isReserved ? "info" : "success"}>
+                    {listing.estado}
                 </Badge>
             </div>
             {/* Precio */}
             <p className="mt-1 text-3xl font-bold text-eia-azul-claro">
-                ${listing.price.toLocaleString("es-CO")}
+                ${listing.precio.toLocaleString("es-CO")}
             </p>
 
             {/* Detalles */}
             <div className="mt-4 flex flex-wrap gap-3">
                 <span className="flex items-center gap-1 text-sm text-muted bg-surface border border-border px-3 py-1 rounded-full">
-                    <FaTag className="w-3 h-3" /> {listing.category}
+                    <FaTag className="w-3 h-3" /> {listing.categoria}
                 </span>
                 <span className="flex items-center gap-1 text-sm text-muted bg-surface border border-border px-3 py-1 rounded-full">
-                    <FaBox className="w-3 h-3" /> {listing.condition}
+                    <FaBox className="w-3 h-3" /> {listing.condicion}
                 </span>
                 <span className="flex items-center gap-1 text-sm text-muted bg-surface border border-border px-3 py-1 rounded-full">
-                    <FaMapMarkerAlt className="w-3 h-3" /> {listing.location}
+                    <FaMapMarkerAlt className="w-3 h-3" /> {listing.ubicacion}
                 </span>
             </div>
 
             {/* Descripción */}
             <div className="mt-6">
                 <h2 className="text-base font-semibold text-text mb-2">Descripción</h2>
-                <p className="text-sm text-muted leading-relaxed">{listing.description}</p>
+                <p className="text-sm text-muted leading-relaxed">{listing.descripcion}</p>
             </div>
 
-            {/* Botón contactar y denunciar */}
-            <div className="mt-8 flex gap-1">
-                <button
-                    disabled={isSold || isReserved}
-                    onClick={() => navigate(`/chat/${listing.ownerId}`)}
-                    className="flex-2 py-3 rounded-2xl font-semibold text-white bg-eia-azul-claro hover:opacity-90 cursor-pointer transition disabled:opacity-40 disabled:cursor-not-allowed"
-                >
-                    {isSold
-                        ? "No disponible"
-                        : isReserved
-                            ? "Espera a que el producto vuelva a estar disponible o sea vendido"
-                            : "Contacta al vendedor"}
-                </button>
-                <button
-                    onClick={(e) => {
-                        e.preventDefault(); // evita comportamientos extraños o refresh
-                        e.stopPropagation(); //evita que interrumpa al otro boton (contactar)
-                        navigate(`/reportListing/${listing.id}`);
-                    }}
-                    className="flex-1 py-3 rounded-2xl font-semibold text-white bg-danger hover:opacity-90 cursor-pointer transition disabled:opacity-40"
-                    title="Denunciar publicación"
-                >
-                    Denunciar publicación
-                </button>
-            </div>
+            {/* Botones — solo si no eres el dueño */}
+            {!isOwner ? (
+                <div className="mt-8 flex gap-1">
+                    <button
+                        disabled={isSold || isReserved}
+                        onClick={handleContactSeller}
+                        className="flex-2 py-3 rounded-2xl font-semibold text-white bg-eia-azul-claro hover:opacity-90 cursor-pointer transition disabled:opacity-40 disabled:cursor-not-allowed"
+                    >
+                        {isSold ? "No disponible"
+                            : isReserved ? "No disponible temporalmente"
+                                : "Contacta al vendedor"}
+                    </button>
+                    <button
+                        onClick={() => navigate(`/reportListing/${listing.idListing}`)}
+                        className="flex-1 py-3 rounded-2xl font-semibold text-white bg-danger hover:opacity-90 cursor-pointer transition"
+                    >
+                        Denunciar
+                    </button>
+                </div>
+            ) : (
+                // Mensaje si eres el dueño
+                <div className="mt-8 p-4 bg-eia-fondo rounded-2xl text-center">
+                    <p className="text-eia-gris text-sm font-medium">
+                        Esta es tu publicación
+                    </p>
+                </div>
+            )}
 
         </main>
     );

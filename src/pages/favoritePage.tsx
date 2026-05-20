@@ -14,7 +14,6 @@ export default function FavoritesPage() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const { isFavorite, toggle } = useFavorites();
-  const favoritedListings = listings.filter(l => isFavorite(l.id));
 
 
 
@@ -46,9 +45,10 @@ export default function FavoritesPage() {
     <main className="max-w-6xl mx-auto px-4 py-8">
       <h1 className="text-2xl text-eia-azul font-bold mb-2">Mis favoritos</h1>
       <p className="text-eia-gris text-sm mb-6">
-        {favoritedListings.length} {favoritedListings.length === 1 ? "publicación guardada" : "publicaciones guardadas"}      </p>
+        {listings.length} {listings.length === 1 ? "publicación guardada" : "publicaciones guardadas"}
+      </p>
 
-      {favoritedListings.length === 0
+      {listings.length === 0
         ? <main className="mx-auto max-w-2xl px-6 py-2">
           <StateMessage
             type="empty"
@@ -61,11 +61,11 @@ export default function FavoritesPage() {
         </main>
         : (
           <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {favoritedListings.map((l) => (
+            {listings.map((l) => (
               <ListingCard
-                key={l.id}
+                key={l.idListing}
                 listing={l}
-                isFavorite={isFavorite(l.id)}
+                isFavorite={isFavorite(l.idListing)}
                 onToggle={toggle}
               />
             ))}
